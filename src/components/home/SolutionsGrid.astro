@@ -1,0 +1,160 @@
+---
+const solutions = [
+  {
+    number: "01",
+    title: "AI Dashcam Systems",
+    description:
+      "Intelligent camera technology that supports driver awareness and safer fleet operations.",
+    href: "/solutions/ai-dashcam",
+    tags: ["AI detection", "Driver awareness"],
+  },
+  {
+    number: "02",
+    title: "Wireless Boom Tip Cameras",
+    description:
+      "Improve visibility at critical lifting points without complex cable installation.",
+    href: "/solutions/wireless-boom-tip-camera",
+    tags: ["Wireless", "Lifting visibility"],
+  },
+  {
+    number: "03",
+    title: "Wired Camera Systems",
+    description:
+      "Reliable camera coverage designed for demanding industrial equipment and work sites.",
+    href: "/solutions/wired-camera-systems",
+    tags: ["Reliable coverage", "Heavy equipment"],
+  },
+  {
+    number: "04",
+    title: "Wireless Camera Systems",
+    description:
+      "Flexible visibility systems that can adapt to mobile equipment and operational needs.",
+    href: "/solutions/wireless-camera-systems",
+    tags: ["Flexible setup", "Mobile equipment"],
+  },
+  {
+    number: "05",
+    title: "77GHz Radar Detection",
+    description:
+      "Proximity detection technology that helps operators identify hazards around equipment.",
+    href: "/solutions/77ghz-radar-detection",
+    tags: ["Proximity alerts", "Object detection"],
+  },
+  {
+    number: "06",
+    title: "360° Around View",
+    description:
+      "A clearer surrounding view to reduce blind spots during complex manoeuvres.",
+    href: "/solutions/360-around-view",
+    tags: ["Blind-spot coverage", "Surround view"],
+  },
+];
+---
+
+<section
+  class="bg-surface py-[clamp(88px,11vw,152px)] max-[600px]:py-20"
+  aria-labelledby="solutions-heading"
+>
+  <div class="mx-auto w-[min(calc(100%-40px),80rem)]">
+    <div
+      class="grid max-w-175 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] lg:max-w-none lg:items-end lg:gap-[clamp(52px,9vw,132px)]"
+    >
+      <div>
+        <p
+          class="mb-4 text-xs font-extrabold uppercase tracking-[0.12em] text-brand-600"
+        >
+          Explore our solutions
+        </p>
+
+        <h2
+          id="solutions-heading"
+          class="m-0 max-w-140 text-[clamp(2.25rem,4.1vw,4rem)] leading-[1.06] font-bold tracking-[-0.045em] text-ink"
+        >
+          Technology built to improve visibility where it matters most.
+        </h2>
+      </div>
+
+      <p class="max-w-137.5 text-[1.0625rem] leading-[1.75] text-copy lg:pb-1">
+        Explore practical safety systems for cranes, heavy equipment,
+        construction operations and industrial fleets.
+      </p>
+    </div>
+
+    <ul
+      class="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-5"
+    >
+      {
+        solutions.map((solution) => (
+          <li class="h-full">
+            <a
+              href={solution.href}
+              class="group flex h-full min-h-78.75 flex-col rounded-card border border-line-light bg-surface p-7 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-[rgba(47,111,159,0.26)] hover:shadow-raised sm:p-8"
+            >
+              <div class="flex items-start justify-between gap-5">
+                <span class="text-xs font-extrabold tracking-widest text-brand-500">
+                  {solution.number}
+                </span>
+
+                <span
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-surface-brand text-brand-600 transition duration-300 group-hover:bg-brand-600 group-hover:text-white"
+                  aria-hidden="true"
+                >
+                  <svg
+                    class="h-4.5 w-4.5 transition duration-300 group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M5 12h14M13 6l6 6-6 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+
+              <div class="mt-11">
+                <h3 class="text-2xl font-bold leading-tight tracking-[-0.03em] text-ink">
+                  {solution.title}
+                </h3>
+
+                <p class="mt-4 text-[0.9375rem] leading-7 text-copy">
+                  {solution.description}
+                </p>
+              </div>
+
+              <div class="mt-auto flex flex-wrap gap-2 pt-8">
+                {solution.tags.map((tag) => (
+                  <span class="rounded-full bg-[rgba(47,111,159,0.07)] px-3 py-1.5 text-xs font-bold text-brand-600">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-10 flex justify-center sm:mt-12">
+      <a
+        href="/solutions"
+        class="inline-flex min-h-12 items-center gap-2 rounded-pill border border-line-medium bg-surface px-6 text-sm font-bold text-brand-600 shadow-soft transition duration-300 hover:border-brand-500 hover:text-brand-700"
+      >
+        Explore all solutions
+
+        <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M5 12h14M13 6l6 6-6 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

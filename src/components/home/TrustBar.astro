@@ -1,0 +1,62 @@
+---
+const operationTypes = [
+  "Cranes & lifting",
+  "Heavy equipment",
+  "Construction sites",
+  "Industrial fleets",
+];
+---
+
+<section
+  class="relative z-2 border-y border-line-light bg-surface"
+  aria-label="Operations supported by VisionSure Technologies"
+>
+  <div class="mx-auto w-[min(calc(100%-40px),80rem)]">
+    <div
+      class="grid min-h-33 grid-cols-[minmax(230px,0.78fr)_minmax(0,1.22fr)] items-center gap-10 max-[1023px]:grid-cols-1 max-[1023px]:gap-0 max-[700px]:min-h-0"
+    >
+      <div class="py-5.5 max-[1023px]:pb-4 max-[700px]:pt-7">
+        <span
+          class="inline-flex items-center gap-2.25 text-xs font-extrabold tracking-[0.075em] text-brand-600 uppercase"
+        >
+          <span
+            class="h-2 w-2 rounded-full bg-brand-500 shadow-[0_0_0_4px_rgba(47,111,159,0.12)]"
+            aria-hidden="true"></span>
+          Built for demanding operations
+        </span>
+
+        <p class="mt-2.5 text-[0.9375rem] leading-[1.55] text-copy">
+          Visibility technology designed for high-risk work zones.
+        </p>
+      </div>
+
+      <ul
+        class="m-0 grid list-none grid-cols-4 p-0 max-[1023px]:pb-5.5 max-[700px]:grid-cols-2 max-[700px]:gap-y-2.5 max-[420px]:grid-cols-1"
+      >
+        {
+          operationTypes.map((operation) => (
+            <li class="flex min-h-13.5 items-center gap-2.5 border-l border-line-light px-4.5 py-2 text-sm leading-[1.35] font-bold text-ink first:max-[1023px]:border-l-0 max-[700px]:min-h-12 max-[700px]:px-3 max-[700px]:py-1.75 max-[700px]:text-[0.8125rem] max-[700px]:odd:border-l-0 max-[420px]:border-t max-[420px]:border-l-0 max-[420px]:first:border-t-0">
+              <span
+                class="inline-flex h-5.75 w-5.75 shrink-0 items-center justify-center rounded-full bg-surface-brand text-brand-600"
+                aria-hidden="true"
+              >
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24">
+                  <path
+                    d="M4 12.5 9.5 18 20 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+
+              {operation}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
