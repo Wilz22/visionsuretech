@@ -1,0 +1,75 @@
+---
+import { homeContent } from '../../data/home';
+
+const { whyVisionSure } = homeContent;
+---
+
+<section
+  class="bg-[var(--color-background)] py-20 sm:py-24 lg:py-32"
+  aria-labelledby="why-visionsure-heading"
+>
+  <div class="container">
+    <div
+      class="grid gap-12 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start lg:gap-20"
+    >
+      <div class="max-w-xl lg:sticky lg:top-28">
+        <p
+          class="mb-4 text-xs font-extrabold uppercase tracking-[0.12em] text-[var(--color-brand-600)]"
+        >
+          {whyVisionSure.eyebrow}
+        </p>
+
+        <h2
+          id="why-visionsure-heading"
+          class="text-4xl font-bold leading-[1.06] tracking-[-0.045em] text-[var(--color-text-primary)] sm:text-5xl lg:text-6xl"
+        >
+          {whyVisionSure.title}
+        </h2>
+
+        <p
+          class="mt-6 max-w-lg text-base leading-7 text-[var(--color-text-secondary)] sm:text-[1.0625rem]"
+        >
+          {whyVisionSure.description}
+        </p>
+
+        <div
+          class="mt-8 h-px w-20 bg-[var(--color-brand-500)]"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      <ol class="grid gap-4 sm:gap-5">
+        {
+          whyVisionSure.benefits.map((benefit, index) => (
+            <li>
+              <article
+                class="group grid gap-6 rounded-[var(--radius-xl)] border border-[var(--color-border-light)] bg-white p-7 shadow-[var(--shadow-sm)] transition duration-300 hover:-translate-y-1 hover:border-[rgba(47,111,159,0.25)] hover:shadow-[var(--shadow-md)] motion-reduce:transform-none motion-reduce:transition-none sm:grid-cols-[64px_1fr] sm:items-start sm:p-8"
+              >
+                <span
+                  class="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-surface-brand)] text-sm font-extrabold tracking-[0.08em] text-[var(--color-brand-600)]"
+                  aria-hidden="true"
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+
+                <div class="pt-1">
+                  <h3
+                    class="text-2xl font-bold leading-tight tracking-[-0.03em] text-[var(--color-text-primary)]"
+                  >
+                    {benefit.title}
+                  </h3>
+
+                  <p
+                    class="mt-3 max-w-xl text-[0.9375rem] leading-7 text-[var(--color-text-secondary)]"
+                  >
+                    {benefit.description}
+                  </p>
+                </div>
+              </article>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
