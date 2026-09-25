@@ -1,0 +1,121 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SystemVisual from '../../components/solutions/SystemVisual.astro';
+import SystemCard from '../../components/solutions/SystemCard.astro';
+import { getPublishedSolutions } from '../../lib/solutions';
+import { getSolutionCategory } from '../../data/solutionCategories';
+
+export const getStaticPaths = (async () => {
+  const solutions = await getPublishedSolutions();
+  return solutions.map((solution) => ({ params: { slug: solution.data.slug }, props: { solution } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { solution } = Astro.props;
+const { data } = solution;
+const category = getSolutionCategory(data.category);
+const { Content } = await render(solution);
+const related = (await getPublishedSolutions()).filter((item) => item.data.category === data.category && item.data.systemCode !== data.systemCode);
+const availabilityLabels = { included: 'Included', choice: 'Choose one', optional: 'Optional' };
+const quoteUrl = `/contact?system=${encodeURIComponent(data.systemCode)}#quote`;
+const productSchema = {
+  '@context': 'https://schema.org', '@type': 'Product',
+  name: `${data.title} ${data.systemCode}`, sku: data.systemCode,
+  description: data.summary, category: category.title,
+  brand: { '@type': 'Brand', name: 'VisionSure Technologies' },
+  url: new URL(`/solutions/${data.slug}`, Astro.site).href,
+  ...(data.image ? { image: new URL(data.image.src, Astro.site).href } : {}),
+  additionalProperty: data.specifications.map((spec) => ({ '@type': 'PropertyValue', name: spec.label, value: spec.value })),
+};
+const breadcrumbs = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+    { '@type': 'ListItem', position: 2, name: 'Solutions', item: new URL('/solutions', Astro.site).href },
+    { '@type': 'ListItem', position: 3, name: data.title, item: productSchema.url },
+  ],
+};
+---
+
+<BaseLayout title={data.seo.title} description={data.seo.description} image={data.image?.src ?? '/images/home/hero-industrial-visibility.webp'}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(productSchema).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs).replace(/</g, '\\u003c')} />
+  </Fragment>
+  <section class="border-b border-line-light bg-page pt-10 pb-16 sm:pb-20">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="mb-10 text-sm text-copy"><ol class="flex flex-wrap gap-x-3 gap-y-2"><li><a href="/" class="hover:text-brand-600">Home</a></li><li aria-hidden="true">/</li><li><a href="/solutions" class="hover:text-brand-600">Solutions</a></li><li aria-hidden="true">/</li><li aria-current="page">{data.title}</li></ol></nav>
+      <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <a href={`/solutions#${category.id}`} class="inline-flex rounded-pill px-4 py-1.5 text-xs font-extrabold tracking-widest text-white" style={{ backgroundColor: category.color }}>{category.name} · {category.title}</a>
+          <p class="mt-7 text-sm font-bold tracking-widest text-brand-600">{data.systemCode}</p>
+          <h1 class="mt-4 text-4xl leading-[1.05] font-bold tracking-[-0.04em] text-ink sm:text-5xl xl:text-6xl">{data.title}</h1>
+          <p class="mt-6 max-w-xl text-lg leading-8 text-copy">{data.summary}</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href={quoteUrl} class="inline-flex min-h-12 items-center justify-center rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600">Request a Quote <span class="ml-4" aria-hidden="true">→</span></a>
+            <a href="#specifications" class="inline-flex min-h-12 items-center justify-center rounded-pill border border-line-medium bg-white px-6 py-3 text-sm font-bold text-brand-600 hover:border-brand-500">View specifications</a>
+          </div>
+        </div>
+        <figure class="overflow-hidden rounded-panel border border-line-light bg-white shadow-soft">
+          <div class="h-72 sm:h-96"><SystemVisual solution={solution} eager /></div>
+          <figcaption class="border-t border-line-light px-6 py-4 text-xs leading-6 text-copy">{data.image ? `${data.systemCode} system illustration. See the component list for included items and options.` : 'Connected fleet monitoring with WiFi, GPS and 4G.'}</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="grid gap-10 border-b border-line-light py-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20" aria-labelledby="overview-heading">
+      <div>
+        <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">The system at a glance</p>
+        <h2 id="overview-heading" class="mt-4 text-3xl font-bold tracking-tight text-ink">Built around the task.</h2>
+        <div class="description mt-5 leading-8 text-copy"><Content /></div>
+      </div>
+      <ul class="grid gap-4 sm:grid-cols-2">
+        {data.features.map((feature) => <li class="rounded-card border border-line-light bg-white p-6 text-sm leading-7 text-copy"><span class="mb-3 block text-brand-600" aria-hidden="true">✓</span>{feature}</li>)}
+      </ul>
+    </section>
+
+    <section id="specifications" class="scroll-mt-28 grid gap-10 border-b border-line-light py-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20" aria-labelledby="specifications-heading">
+      <div>
+        <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Technical details</p>
+        <h2 id="specifications-heading" class="mt-4 text-3xl font-bold tracking-tight text-ink">System specifications.</h2>
+        {data.notes.length > 0 && <ul class="mt-6 space-y-3 text-sm leading-7 text-copy">{data.notes.map((note) => <li>{note}</li>)}</ul>}
+      </div>
+      <dl class="overflow-hidden rounded-card border border-line-light bg-white">
+        {data.specifications.map((spec) => <div class="grid gap-2 border-b border-line-light px-6 py-5 last:border-0 sm:grid-cols-[0.8fr_1.2fr] sm:gap-6"><dt class="text-sm font-bold text-ink">{spec.label}</dt><dd class="text-sm leading-6 text-copy">{spec.value}</dd></div>)}
+      </dl>
+    </section>
+
+    <section class="py-16" aria-labelledby="components-heading">
+      <div class="max-w-2xl">
+        <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">System configuration</p>
+        <h2 id="components-heading" class="mt-4 text-3xl font-bold tracking-tight text-ink">Components & options.</h2>
+        <p class="mt-5 leading-7 text-copy">Explore the equipment in the {data.systemCode} configuration. Optional accessories and control choices are marked below.</p>
+      </div>
+      <ul class="mt-8 grid gap-4 md:grid-cols-2">
+        {data.components.map((component) => <li class="min-w-0 rounded-card border border-line-light bg-white p-6 sm:p-7">
+          <div class="flex flex-wrap items-start justify-between gap-3"><h3 class="text-sm font-extrabold text-brand-600">{component.code}</h3><span class:list={['rounded-pill px-3 py-1 text-xs font-bold', component.availability === 'included' ? 'bg-surface-soft text-copy' : 'bg-brand-100 text-brand-800']}>{availabilityLabels[component.availability]}</span></div>
+          <p class="mt-4 text-sm leading-7 text-copy">{component.description}</p>
+        </li>)}
+      </ul>
+    </section>
+
+    <section class="mb-16 rounded-panel bg-surface-brand p-7 sm:p-10" aria-labelledby="applications-heading">
+      <h2 id="applications-heading" class="text-2xl font-bold tracking-tight text-ink">Where it fits.</h2>
+      <ul class="mt-6 grid gap-5 sm:grid-cols-2">{data.applications.map((application) => <li class="border-l-2 border-brand-400 pl-5 text-sm leading-7 text-copy">{application}</li>)}</ul>
+    </section>
+
+    {related.length > 0 && <section class="border-t border-line-light py-16" aria-labelledby="related-heading">
+      <h2 id="related-heading" class="text-3xl font-bold tracking-tight text-ink">Compare another {category.name} system.</h2>
+      <div class="mt-8 grid max-w-xl gap-6">{related.map((item) => <SystemCard solution={item} />)}</div>
+    </section>}
+    <a href="/solutions" class="mb-10 inline-flex items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800"><span aria-hidden="true">←</span> Explore all systems</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .description :global(p + p) { margin-top: 1rem; }
+</style>

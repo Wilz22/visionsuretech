@@ -1,0 +1,216 @@
+---
+const industries = [
+  {
+    number: "01",
+    title: "Cranes",
+    description:
+      "Visibility solutions for lifting operations, boom tips and complex manoeuvres.",
+    label: "Lifting operations",
+    href: "/industries",
+    gradient: "from-brand-100 via-surface to-surface-brand",
+    orb: "bg-brand-500/15",
+    icon: "text-brand-500",
+  },
+  {
+    number: "02",
+    title: "Mining",
+    description:
+      "Reliable operator awareness for demanding sites, haul roads and heavy fleets.",
+    label: "Demanding sites",
+    href: "/industries",
+    gradient: "from-surface-soft via-surface to-brand-100",
+    orb: "bg-brand-600/15",
+    icon: "text-brand-600",
+  },
+  {
+    number: "03",
+    title: "Construction",
+    description:
+      "Camera and detection systems that help reduce blind spots on active jobsites.",
+    label: "Active jobsites",
+    href: "/industries",
+    gradient: "from-brand-50 via-surface to-brand-200",
+    orb: "bg-brand-700/10",
+    icon: "text-brand-700",
+  },
+  {
+    number: "04",
+    title: "Ports & Material Handling",
+    description:
+      "Clearer visibility around equipment, cargo movement and high-traffic areas.",
+    label: "Material movement",
+    href: "/industries",
+    gradient: "from-surface-brand via-surface to-brand-100",
+    orb: "bg-brand-400/15",
+    icon: "text-brand-500",
+  },
+  {
+    number: "05",
+    title: "Heavy Equipment",
+    description:
+      "Integrated safety technology for equipment operating in difficult environments.",
+    label: "Equipment safety",
+    href: "/industries",
+    gradient: "from-brand-100 via-surface to-surface-soft",
+    orb: "bg-brand-600/15",
+    icon: "text-brand-600",
+  },
+  {
+    number: "06",
+    title: "Commercial Fleets",
+    description:
+      "Driver awareness and fleet visibility systems designed for daily operations.",
+    label: "Fleet awareness",
+    href: "/industries",
+    gradient: "from-surface-soft via-surface to-surface-brand",
+    orb: "bg-brand-500/15",
+    icon: "text-brand-700",
+  },
+];
+---
+
+<section
+  class="bg-surface py-20 sm:py-24 lg:py-32"
+  aria-labelledby="industries-heading"
+>
+  <div class="container">
+    <div
+      class="grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.72fr)] lg:items-end"
+    >
+      <div>
+        <p
+          class="mb-4 text-xs font-extrabold uppercase tracking-[0.12em] text-brand-600"
+        >
+          Industries
+        </p>
+
+        <h2
+          id="industries-heading"
+          class="max-w-3xl text-4xl font-bold leading-[1.06] tracking-[-0.045em] text-ink sm:text-5xl lg:text-6xl"
+        >
+          Solutions across demanding industries.
+        </h2>
+      </div>
+
+      <p class="max-w-xl text-base leading-7 text-copy lg:justify-self-end">
+        VisionSure systems are adapted to the equipment, environment and
+        operational risks of each industry.
+      </p>
+    </div>
+
+    <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3">
+      {
+        industries.map((industry) => (
+          <li>
+            <a
+              href={industry.href}
+              class="group block overflow-hidden rounded-panel border border-line-light bg-surface shadow-soft transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-line-brand hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              <div
+                class:list={[
+                  "relative min-h-40 overflow-hidden border-b border-line-light bg-linear-to-br",
+                  industry.gradient,
+                ]}
+              >
+                <div
+                  class:list={[
+                    "absolute -right-8 -top-10 h-44 w-44 rounded-full",
+                    industry.orb,
+                  ]}
+                  aria-hidden="true"
+                />
+
+                <span class="absolute left-6 top-5 text-xs font-extrabold tracking-widest text-brand-600">
+                  {industry.number}
+                </span>
+
+                <svg
+                  class:list={[
+                    "absolute bottom-5 right-6 h-20 w-20",
+                    industry.icon,
+                  ]}
+                  viewBox="0 0 96 96"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M18 72h60M26 72V48h44v24M34 48V34h28v14M44 34V22h8v12"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="34"
+                    cy="76"
+                    r="5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                  <circle
+                    cx="64"
+                    cy="76"
+                    r="5"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  />
+                </svg>
+
+                <span class="absolute bottom-5 left-6 rounded-pill bg-surface px-3 py-1.5 text-[0.6875rem] font-extrabold tracking-[0.08em] text-brand-700 shadow-soft">
+                  {industry.label}
+                </span>
+              </div>
+
+              <div class="p-7 sm:p-8">
+                <div class="flex items-start justify-between gap-5">
+                  <h3 class="text-2xl font-bold leading-tight tracking-[-0.03em] text-ink">
+                    {industry.title}
+                  </h3>
+
+                  <span
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-surface-brand text-brand-600 transition-[background-color,color,transform] duration-300 group-hover:translate-x-0.5 group-hover:bg-brand-600 group-hover:text-inverse"
+                    aria-hidden="true"
+                  >
+                    <svg class="h-4.5 w-4.5" viewBox="0 0 24 24">
+                      <path
+                        d="M5 12h14M13 6l6 6-6 6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </div>
+
+                <p class="mt-4 text-[0.9375rem] leading-7 text-copy">
+                  {industry.description}
+                </p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-10 flex justify-center sm:mt-12">
+      <a
+        href="/industries"
+        class="inline-flex min-h-12 items-center gap-2 rounded-pill border border-line-medium bg-surface px-6 text-sm font-bold text-brand-600 shadow-soft transition-[border-color,color,box-shadow] duration-300 hover:border-brand-500 hover:text-brand-700 hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500"
+      >
+        Explore all industries
+
+        <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M5 12h14M13 6l6 6-6 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

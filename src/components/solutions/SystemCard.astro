@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SystemVisual from './SystemVisual.astro';
+import { getSolutionCategory } from '../../data/solutionCategories';
+
+interface Props { solution: CollectionEntry<'solutions'>; }
+const { solution } = Astro.props;
+const { data } = solution;
+const category = getSolutionCategory(data.category);
+---
+
+<article class="flex h-full flex-col overflow-hidden rounded-panel border border-line-light bg-surface shadow-soft">
+  <div class="relative border-b border-line-light">
+    <div class="h-64"><SystemVisual solution={solution} /></div>
+    <span class="absolute top-4 left-4 rounded-pill px-3 py-1.5 text-xs font-bold text-white" style={{ backgroundColor: category.color }}>{category.name}</span>
+  </div>
+  <div class="flex flex-1 flex-col p-6 sm:p-8">
+    <p class="text-xs font-extrabold tracking-widest text-brand-600">{data.systemCode}</p>
+    <h3 class="mt-3 text-2xl leading-tight font-bold tracking-tight text-ink"><a href={`/solutions/${data.slug}`} class="hover:text-brand-600">{data.title}</a></h3>
+    <p class="mt-4 text-[0.9375rem] leading-7 text-copy">{data.summary}</p>
+    <ul class="mt-5 flex flex-wrap gap-2" aria-label="Highlights">
+      {data.cardTags.map((tag) => <li class="rounded-pill bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-600">{tag}</li>)}
+    </ul>
+    <a href={`/solutions/${data.slug}`} aria-label={`Explore ${data.title} ${data.systemCode}`} class="mt-auto flex items-center justify-between gap-3 pt-8 text-sm font-bold text-brand-600 hover:text-brand-800">
+      Explore system <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>

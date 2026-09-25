@@ -46,7 +46,7 @@ const mobileNavLinkClasses =
   class="sticky top-0 z-100 border-b border-transparent bg-[rgba(247,247,245,0.94)] backdrop-blur-lg transition-[background-color,border-color,box-shadow] duration-250 [&.scrolled]:border-line-light [&.scrolled]:bg-white/96 [&.scrolled]:shadow-[0_4px_20px_rgba(24,32,39,0.04)] motion-reduce:transition-none"
   data-header
 >
-  <div class="mx-auto w-[min(calc(100%-40px),80rem)]">
+  <div class="container">
     <div
       class="flex min-h-21.5 items-center gap-8 max-[1023px]:min-h-19 max-[480px]:min-h-17.5"
     >
@@ -56,7 +56,7 @@ const mobileNavLinkClasses =
         aria-label="VisionSure Technologies - Home"
       >
         <img
-          class="h-16.25 w-52.5 object-contain max-[1023px]:h-10.5 max-[480px]:h-9.25"
+          class="h-18.5 w-60 object-contain max-[1023px]:h-12.5 max-[480px]:h-10.75 max-[480px]:w-44"
           src="/images/brand/visionsure-logo.svg"
           alt="VisionSure Technologies"
           loading="eager"
@@ -149,7 +149,7 @@ const mobileNavLinkClasses =
     class="hidden max-h-0 overflow-hidden bg-surface opacity-0 transition-[max-height,opacity] duration-350 [&.open]:max-h-175 [&.open]:opacity-100 max-[1023px]:block motion-reduce:transition-none"
     data-mobile-menu
   >
-    <div class="mx-auto w-[min(calc(100%-40px),80rem)]">
+    <div class="container">
       <nav aria-label="Mobile navigation">
         <ul class="m-0 flex list-none flex-col gap-0 pt-3.5 pb-5">
           {
