@@ -1,0 +1,53 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectImage from '../../components/projects/ProjectImage.astro';
+import IndustrySystemLink from '../../components/industries/IndustrySystemLink.astro';
+import { getVisibleProjects, type Project } from '../../lib/projects';
+
+export const getStaticPaths = (async () => (await getVisibleProjects()).map((project) => ({ params: { slug: project.entry.data.slug }, props: { project } }))) satisfies GetStaticPaths;
+interface Props { project: Project; }
+const { project: { entry: { data }, industry, systems } } = Astro.props;
+const reference = data.status === 'reference';
+const facts = [
+  { label: 'Client', value: data.client },
+  { label: 'Location', value: data.location },
+  { label: 'Equipment', value: data.equipment },
+  { label: 'Completed', value: data.completed },
+].filter(({ value }) => reference || value);
+---
+
+<BaseLayout title={`${reference ? 'Reference: ' : ''}${data.title}`} description={data.summary} image={data.photos[0]?.src} noindex={reference}>
+  <section class="bg-page pt-10 pb-14">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="text-sm text-copy"><ol class="flex flex-wrap gap-3"><li><a href="/" class="hover:text-brand-600">Home</a></li><li aria-hidden="true">/</li><li><a href="/projects" class="hover:text-brand-600">Projects</a></li><li aria-hidden="true">/</li><li aria-current="page">{data.title}</li></ol></nav>
+      <div class="mt-10 flex flex-wrap items-center gap-3 text-xs font-bold"><a href={`/industries#${industry.id}`} class="tracking-widest text-brand-600 uppercase hover:underline">{industry.title}</a>{reference && <span class="rounded-pill border border-line-brand bg-surface-brand px-3 py-2 text-brand-700">Reference example</span>}</div>
+      <h1 class="mt-5 max-w-4xl text-4xl leading-[1.08] font-bold tracking-[-0.04em] text-ink sm:text-5xl lg:text-6xl">{data.title}</h1>
+      <p class="mt-6 max-w-3xl text-lg leading-8 text-copy">{data.summary}</p>
+      {reference && <aside class="mt-8 max-w-3xl border-l-2 border-brand-500 pl-5 text-sm leading-7 text-copy"><strong class="font-bold text-ink">Illustrative content — not a completed installation.</strong> Client information, photographs, final configuration and results are pending confirmation.</aside>}
+    </div>
+  </section>
+  <div class="container pb-16 sm:pb-20">
+    <div class="grid items-start gap-8 lg:grid-cols-[1.4fr_0.6fr]">
+      <figure class="overflow-hidden rounded-panel border border-line-light"><ProjectImage photo={data.photos[0]} industry={industry.id} eager /><figcaption class="bg-white px-6 py-4 text-sm leading-6 text-copy">{data.photos[0]?.caption ?? 'Photo pending: equipment overview and installed system.'}</figcaption></figure>
+      <aside class="rounded-panel border border-line-light bg-white p-7" aria-label="Project overview">
+        <h2 class="text-xl font-bold tracking-tight text-ink">Project overview</h2>
+        <dl class="mt-5 divide-y divide-line-light"><div class="py-4"><dt class="text-xs font-bold tracking-wide text-brand-600 uppercase">Industry</dt><dd class="mt-2 text-sm text-ink"><a href={`/industries#${industry.id}`} class="hover:underline">{industry.title}</a></dd></div>{facts.map(({ label, value }) => <div class="py-4"><dt class="text-xs font-bold tracking-wide text-brand-600 uppercase">{label}</dt><dd class="mt-2 text-sm text-copy">{value ?? 'Pending client information'}</dd></div>)}</dl>
+      </aside>
+    </div>
+    <div class="mt-16 grid gap-12 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
+      <div class="space-y-12">
+        <section aria-labelledby="challenge-heading"><p class="text-xs font-bold tracking-widest text-brand-600">01 / CONTEXT</p><h2 id="challenge-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">The challenge</h2><p class="mt-5 leading-8 text-copy">{data.challenge}</p></section>
+        <section aria-labelledby="approach-heading"><p class="text-xs font-bold tracking-widest text-brand-600">02 / CONFIGURATION</p><h2 id="approach-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">{reference ? 'The reference approach' : 'The solution'}</h2><p class="mt-5 leading-8 text-copy">{data.approach}</p></section>
+        <section aria-labelledby="installation-heading"><p class="text-xs font-bold tracking-widest text-brand-600">03 / INSTALLATION</p><h2 id="installation-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">Installation details</h2><ul class="mt-5 space-y-4">{data.installation.map((item) => <li class="flex gap-3 leading-8 text-copy"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true" />{item}</li>)}</ul></section>
+        <section aria-labelledby="results-heading" class="rounded-panel border border-line-light bg-surface-brand p-7 sm:p-8"><p class="text-xs font-bold tracking-widest text-brand-600">04 / OUTCOME</p><h2 id="results-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">{reference ? 'Results pending verification' : 'Results'}</h2><ul class="mt-5 space-y-4">{data.results.map((item) => <li class="flex gap-3 leading-8 text-copy"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true" />{item}</li>)}</ul></section>
+      </div>
+      <aside aria-labelledby="systems-heading"><h2 id="systems-heading" class="text-xl font-bold tracking-tight text-ink">{reference ? 'Systems in this reference' : 'Systems used'}</h2><ul class="mt-5 grid gap-5">{systems.map(({ solution, note }) => <li><IndustrySystemLink solution={solution} reason={note} /></li>)}</ul></aside>
+    </div>
+    {(reference || data.photos.length > 1) && <section class="mt-16 border-t border-line-light pt-12" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" class="text-3xl font-bold tracking-tight text-ink">Installation gallery</h2>
+      {data.photos.length > 1 ? <div class="mt-7 grid gap-6 sm:grid-cols-2">{data.photos.slice(1).map((photo) => <figure class="overflow-hidden rounded-card border border-line-light"><ProjectImage photo={photo} industry={industry.id} /><figcaption class="p-5 text-sm leading-7 text-copy">{photo.caption}</figcaption></figure>)}</div> : <div class="mt-7 grid gap-6 sm:grid-cols-2">{['Camera and sensor mounting', 'Operator display and controls'].map((label) => <div class="overflow-hidden rounded-card border border-line-light"><ProjectImage industry={industry.id} label={`Photo pending: ${label}`} /></div>)}</div>}
+    </section>}
+    <a href="/projects" class="mt-12 inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium px-6 text-sm font-bold text-brand-600 hover:border-brand-500"><span aria-hidden="true">←</span> Back to all projects</a>
+  </div>
+</BaseLayout>

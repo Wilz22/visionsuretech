@@ -6,6 +6,7 @@ import SystemVisual from '../../components/solutions/SystemVisual.astro';
 import SystemCard from '../../components/solutions/SystemCard.astro';
 import { getPublishedSolutions } from '../../lib/solutions';
 import { getSolutionCategory } from '../../data/solutionCategories';
+import { getIndustriesForSystem } from '../../data/industries';
 
 export const getStaticPaths = (async () => {
   const solutions = await getPublishedSolutions();
@@ -16,6 +17,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { solution } = Astro.props;
 const { data } = solution;
 const category = getSolutionCategory(data.category);
+const industries = getIndustriesForSystem(data.systemCode);
 const { Content } = await render(solution);
 const related = (await getPublishedSolutions()).filter((item) => item.data.category === data.category && item.data.systemCode !== data.systemCode);
 const availabilityLabels = { included: 'Included', choice: 'Choose one', optional: 'Optional' };
@@ -106,6 +108,10 @@ const breadcrumbs = {
     <section class="mb-16 rounded-panel bg-surface-brand p-7 sm:p-10" aria-labelledby="applications-heading">
       <h2 id="applications-heading" class="text-2xl font-bold tracking-tight text-ink">Where it fits.</h2>
       <ul class="mt-6 grid gap-5 sm:grid-cols-2">{data.applications.map((application) => <li class="border-l-2 border-brand-400 pl-5 text-sm leading-7 text-copy">{application}</li>)}</ul>
+      {industries.length > 0 && <nav aria-label="Explore industry applications" class="mt-8 border-t border-line-brand pt-6">
+        <p class="text-sm font-bold text-ink">Explore by industry</p>
+        <ul class="mt-3 flex flex-wrap gap-3">{industries.map((industry) => <li><a href={`/industries#${industry.id}`} class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-line-brand bg-white px-4 py-2 text-sm font-semibold text-brand-600 hover:border-brand-500 hover:text-brand-800">{industry.title}<span aria-hidden="true">→</span></a></li>)}</ul>
+      </nav>}
     </section>
 
     {related.length > 0 && <section class="border-t border-line-light py-16" aria-labelledby="related-heading">

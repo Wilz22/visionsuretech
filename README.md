@@ -1,4 +1,8 @@
-# Astro Starter Kit: Basics
+# VisionSure Technologies
+
+El alcance acordado, la arquitectura y el avance del desarrollo están documentados en [docs/PROJECT_CONTEXT.md](docs/PROJECT_CONTEXT.md). Consultar ese documento y `AGENTS.md` antes de continuar con una nueva sección.
+
+## Astro starter reference
 
 ```sh
 npm create astro@latest -- --template basics

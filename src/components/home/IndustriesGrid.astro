@@ -1,72 +1,6 @@
 ---
-const industries = [
-  {
-    number: "01",
-    title: "Cranes",
-    description:
-      "Visibility solutions for lifting operations, boom tips and complex manoeuvres.",
-    label: "Lifting operations",
-    href: "/industries",
-    gradient: "from-brand-100 via-surface to-surface-brand",
-    orb: "bg-brand-500/15",
-    icon: "text-brand-500",
-  },
-  {
-    number: "02",
-    title: "Mining",
-    description:
-      "Reliable operator awareness for demanding sites, haul roads and heavy fleets.",
-    label: "Demanding sites",
-    href: "/industries",
-    gradient: "from-surface-soft via-surface to-brand-100",
-    orb: "bg-brand-600/15",
-    icon: "text-brand-600",
-  },
-  {
-    number: "03",
-    title: "Construction",
-    description:
-      "Camera and detection systems that help reduce blind spots on active jobsites.",
-    label: "Active jobsites",
-    href: "/industries",
-    gradient: "from-brand-50 via-surface to-brand-200",
-    orb: "bg-brand-700/10",
-    icon: "text-brand-700",
-  },
-  {
-    number: "04",
-    title: "Ports & Material Handling",
-    description:
-      "Clearer visibility around equipment, cargo movement and high-traffic areas.",
-    label: "Material movement",
-    href: "/industries",
-    gradient: "from-surface-brand via-surface to-brand-100",
-    orb: "bg-brand-400/15",
-    icon: "text-brand-500",
-  },
-  {
-    number: "05",
-    title: "Heavy Equipment",
-    description:
-      "Integrated safety technology for equipment operating in difficult environments.",
-    label: "Equipment safety",
-    href: "/industries",
-    gradient: "from-brand-100 via-surface to-surface-soft",
-    orb: "bg-brand-600/15",
-    icon: "text-brand-600",
-  },
-  {
-    number: "06",
-    title: "Commercial Fleets",
-    description:
-      "Driver awareness and fleet visibility systems designed for daily operations.",
-    label: "Fleet awareness",
-    href: "/industries",
-    gradient: "from-surface-soft via-surface to-surface-brand",
-    orb: "bg-brand-500/15",
-    icon: "text-brand-700",
-  },
-];
+import { industries } from '../../data/industries';
+import IndustryIcon from '../industries/IndustryIcon.astro';
 ---
 
 <section
@@ -93,8 +27,8 @@ const industries = [
       </div>
 
       <p class="max-w-xl text-base leading-7 text-copy lg:justify-self-end">
-        VisionSure systems are adapted to the equipment, environment and
-        operational risks of each industry.
+        Explore camera, recording and detection systems by industry, then match
+        their capabilities to your equipment and operational needs.
       </p>
     </div>
 
@@ -103,8 +37,8 @@ const industries = [
         industries.map((industry) => (
           <li>
             <a
-              href={industry.href}
-              class="group block overflow-hidden rounded-panel border border-line-light bg-surface shadow-soft transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-line-brand hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 motion-reduce:transform-none motion-reduce:transition-none"
+              href={`/industries#${industry.id}`}
+              class="group block h-full overflow-hidden rounded-panel border border-line-light bg-surface shadow-soft transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-line-brand hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 motion-reduce:transform-none motion-reduce:transition-none"
             >
               <div
                 class:list={[
@@ -124,37 +58,10 @@ const industries = [
                   {industry.number}
                 </span>
 
-                <svg
-                  class:list={[
-                    "absolute bottom-5 right-6 h-20 w-20",
-                    industry.icon,
-                  ]}
-                  viewBox="0 0 96 96"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M18 72h60M26 72V48h44v24M34 48V34h28v14M44 34V22h8v12"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <circle
-                    cx="34"
-                    cy="76"
-                    r="5"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                  <circle
-                    cx="64"
-                    cy="76"
-                    r="5"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                </svg>
+                <IndustryIcon
+                  industry={industry.id}
+                  class={`absolute bottom-5 right-6 h-20 w-20 ${industry.icon}`}
+                />
 
                 <span class="absolute bottom-5 left-6 rounded-pill bg-surface px-3 py-1.5 text-[0.6875rem] font-extrabold tracking-[0.08em] text-brand-700 shadow-soft">
                   {industry.label}

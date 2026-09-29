@@ -1,0 +1,20 @@
+---
+import type { Project } from '../../lib/projects';
+import ProjectImage from './ProjectImage.astro';
+interface Props { project: Project; }
+const { project: { entry: { data }, industry } } = Astro.props;
+const reference = data.status === 'reference';
+---
+
+<article class="flex h-full flex-col overflow-hidden rounded-panel border border-line-light bg-white shadow-soft">
+  <ProjectImage photo={data.photos[0]} industry={industry.id} />
+  <div class="flex flex-1 flex-col p-7">
+    <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+      <span class="text-brand-600">{industry.title}</span>
+      {reference && <span class="rounded-pill border border-line-brand bg-surface-brand px-3 py-1 text-brand-700">Reference example</span>}
+    </div>
+    <h3 class="mt-5 text-2xl leading-tight font-bold tracking-tight text-ink"><a href={`/projects/${data.slug}`} class="hover:text-brand-600">{data.title}</a></h3>
+    <p class="mt-4 flex-1 text-sm leading-7 text-copy">{data.summary}</p>
+    <a href={`/projects/${data.slug}`} class="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800" aria-label={`${reference ? 'View reference' : 'Read case study'}: ${data.title}`}>{reference ? 'View reference' : 'Read case study'} <span aria-hidden="true">→</span></a>
+  </div>
+</article>

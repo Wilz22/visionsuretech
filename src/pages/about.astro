@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { company } from '../data/company';
+import { homeContent } from '../data/home';
+import { industries } from '../data/industries';
+import { solutionCategories } from '../data/solutionCategories';
+import { getPublishedSolutions } from '../lib/solutions';
+import SystemVisual from '../components/solutions/SystemVisual.astro';
+import IndustryIcon from '../components/industries/IndustryIcon.astro';
+const solutions = await getPublishedSolutions();
+const featured = solutions.find(({ data }) => data.systemCode === 'VST-S6301');
+const planningSteps = [
+  { title: 'Understand the operation', description: 'Identify the equipment, work environment and areas the operator needs to see.' },
+  { title: 'Define the function', description: 'Decide which tasks call for live visibility, recording, detection or remote access.' },
+  { title: 'Review the configuration', description: 'Consider camera positions, power, mounting, cable routing and connectivity.' },
+];
+const schema = {
+  '@context': 'https://schema.org', '@type': 'AboutPage',
+  name: `About ${company.name}`, url: new URL('/about', Astro.site).href,
+  about: { '@type': 'Organization', name: company.name, url: company.canonicalUrl },
+};
+---
+
+<BaseLayout title="About VisionSure Technologies" description="Get to know VisionSure Technologies and its focus on camera, recording, radar and remote monitoring systems for industrial equipment." image="/images/solutions/vst-s6301.jpg">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  <section class="border-b border-line-light bg-page pt-10 pb-16 sm:pb-20">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="text-sm text-copy"><ol class="flex gap-3"><li><a href="/" class="hover:text-brand-600">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">About Us</li></ol></nav>
+      <div class="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">About VisionSure Technologies</p>
+          <h1 class="mt-5 text-4xl leading-[1.05] font-bold tracking-[-0.045em] text-ink sm:text-6xl">A clearer view.<br />A practical purpose.</h1>
+          {homeContent.about.paragraphs.map((paragraph) => <p class="mt-6 max-w-xl text-lg leading-8 text-copy">{paragraph}</p>)}
+          <a href="/solutions" class="mt-8 inline-flex min-h-12 items-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600">Discover our systems <span aria-hidden="true">→</span></a>
+        </div>
+        {featured && <figure class="overflow-hidden rounded-panel border border-line-light bg-white shadow-soft"><div class="aspect-[4/3]"><SystemVisual solution={featured} eager /></div><figcaption class="border-t border-line-light px-6 py-5"><p class="text-xs font-bold tracking-wide text-brand-600">{featured.data.systemCode} / SURROUND</p><a href={`/solutions/${featured.data.slug}`} class="mt-2 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-ink hover:text-brand-600">Six camera views. One surrounding perspective. <span aria-hidden="true">→</span></a></figcaption></figure>}
+      </div>
+    </div>
+  </section>
+  <section class="container py-16 sm:py-20" aria-labelledby="focus-heading">
+    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16"><div><p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Our focus</p><h2 id="focus-heading" class="mt-4 max-w-xl text-3xl leading-tight font-bold tracking-tight text-ink sm:text-4xl">Visibility that starts with the operation.</h2></div><p class="max-w-xl leading-8 text-copy">A live view, a recorded event and an obstacle alert answer different operational needs. VisionSure brings these technology options together in a catalog designed to help teams explore the functions that matter for their equipment.</p></div>
+    <ul class="mt-10 grid gap-5 md:grid-cols-3">{homeContent.whyVisionSure.benefits.map((benefit, index) => <li class="rounded-panel border border-line-light bg-white p-7"><p class="text-xs font-bold tracking-widest text-brand-600">0{index + 1}</p><h3 class="mt-5 text-xl font-bold leading-tight tracking-tight text-ink">{benefit.title}</h3><p class="mt-4 text-sm leading-7 text-copy">{benefit.description}</p></li>)}</ul>
+  </section>
+  <section class="bg-surface-soft py-16 sm:py-20" aria-labelledby="offering-heading"><div class="container">
+    <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">What we offer</p><h2 id="offering-heading" class="mt-4 text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">Six families of visibility technology.</h2>
+    <ul class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{solutionCategories.map((category) => <li><a href={`/solutions#${category.id}`} class="group block h-full rounded-panel border border-line-light bg-white p-7 hover:border-brand-400"><p class="text-xs font-extrabold tracking-widest text-brand-600">{category.name}</p><h3 class="mt-3 flex items-center justify-between gap-4 text-xl font-bold tracking-tight text-ink">{category.title}<span aria-hidden="true" class="text-brand-600">→</span></h3><p class="mt-4 text-sm leading-7 text-copy">{category.description}</p></a></li>)}</ul>
+  </div></section>
+  <section class="container py-16 sm:py-20" aria-labelledby="operations-heading"><div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+    <div><p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Industries & applications</p><h2 id="operations-heading" class="mt-4 text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">Different equipment.<br />A shared need to see.</h2><p class="mt-5 leading-8 text-copy">Explore applications across lifting, heavy machinery, material movement and commercial vehicles. Each sector connects to relevant systems and the capabilities to consider.</p></div>
+    <ul class="grid gap-3 sm:grid-cols-2">{industries.map((industry) => <li><a href={`/industries#${industry.id}`} class="flex h-full min-h-24 items-center gap-4 rounded-card border border-line-light bg-white p-5 text-sm font-bold text-ink hover:border-brand-400"><IndustryIcon industry={industry.id} class="h-12 w-12 shrink-0 text-brand-600" />{industry.title}</a></li>)}</ul>
+  </div></section>
+  <section class="bg-surface-brand py-16 sm:py-20" aria-labelledby="planning-heading"><div class="container">
+    <div class="max-w-2xl"><p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Planning a configuration</p><h2 id="planning-heading" class="mt-4 text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl">Start with the right questions.</h2><p class="mt-5 leading-8 text-copy">The system is one part of the installation. Equipment details help establish which components, options and arrangements need to be considered.</p></div>
+    <ol class="mt-8 grid gap-5 md:grid-cols-3">{planningSteps.map((step, index) => <li class="rounded-card bg-white p-7"><p class="text-xs font-bold text-brand-600">0{index + 1}</p><h3 class="mt-3 text-lg font-bold text-ink">{step.title}</h3><p class="mt-3 text-sm leading-7 text-copy">{step.description}</p></li>)}</ol>
+    <a href="/faq#planning-your-project" class="mt-8 inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium bg-white px-6 py-3 text-sm font-bold text-brand-600 hover:border-brand-500">Prepare for your project <span aria-hidden="true">→</span></a>
+  </div></section>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import FaqAccordion from '../faq/FaqAccordion.astro';
+import { getFaqGroups } from '../../lib/faq';
+const items = (await getFaqGroups()).flatMap((group) => group.items).filter((item) => item.featured);
+---
+
+<section class="border-t border-line-light bg-surface-soft py-20 sm:py-24" aria-labelledby="home-faq-heading">
+  <div class="container grid items-start gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+    <div>
+      <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Frequently asked questions</p>
+      <h2 id="home-faq-heading" class="mt-4 text-4xl leading-tight font-bold tracking-[-0.04em] text-ink sm:text-5xl">A clearer starting point.</h2>
+      <p class="mt-5 max-w-lg leading-8 text-copy">Find answers about system selection, recording and the information to prepare for your project.</p>
+      <a href="/faq" class="mt-6 inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium bg-white px-6 text-sm font-bold text-brand-600 hover:border-brand-500">View all FAQs <span aria-hidden="true">→</span></a>
+    </div>
+    <FaqAccordion items={items} prefix="home-faq" />
+  </div>
+</section>
