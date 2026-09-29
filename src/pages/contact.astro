@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteForm from '../components/contact/QuoteForm.astro';
+import { company, contactPlaceholders } from '../data/company';
+const { email, phone, address } = company.contact;
+const addressLines = address ? [address.streetAddress, address.locality, address.region, address.postalCode, address.country].filter(Boolean) : [];
+const schema = { '@context': 'https://schema.org', '@type': 'ContactPage', name: `Contact ${company.name}`, url: new URL('/contact', Astro.site).href };
+---
+
+<BaseLayout title="Contact & Request a Quote" description="Prepare your VisionSure quote request with equipment details, system selection and visibility requirements." image="/images/solutions/vst-s6301.jpg">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  <section class="border-b border-line-light bg-page pt-10 pb-14 sm:pb-16">
+    <div class="container">
+      <nav aria-label="Breadcrumb" class="text-sm text-copy"><ol class="flex gap-3"><li><a href="/" class="hover:text-brand-600">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Contact</li></ol></nav>
+      <div class="mt-12 grid items-end gap-7 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16"><div><p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Contact & request a quote</p><h1 class="mt-5 text-4xl leading-[1.05] font-bold tracking-[-0.045em] text-ink sm:text-6xl">Start with your equipment.<br />Build a clearer view.</h1></div><p class="max-w-xl text-lg leading-8 text-copy">Share the operation, the visibility challenge and the functions you are considering. These details help define the starting point for your system configuration.</p></div>
+    </div>
+  </section>
+  <div class="container grid items-start gap-10 py-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-14 sm:py-16">
+    <aside class="order-2 space-y-7 lg:order-1" aria-label="Contact information and preparation">
+      <section class="rounded-panel border border-line-light bg-surface-brand p-7">
+        <h2 class="text-2xl font-bold tracking-tight text-ink">Contact VisionSure</h2>
+        {(!email || !phone || !address) && <p class="mt-4 text-xs font-bold text-brand-700">Reference details · Pending confirmation</p>}
+        <dl class="mt-5 space-y-5 text-sm leading-7">
+          <div><dt class="font-bold text-brand-600">Email</dt><dd>{email ? <a href={`mailto:${email}`} class="break-words text-copy hover:underline">{email}</a> : <span class="text-copy">{contactPlaceholders.email}</span>}</dd></div>
+          <div><dt class="font-bold text-brand-600">Phone</dt><dd>{phone ? <a href={`tel:${phone.replace(/[^+\d]/g, '')}`} class="text-copy hover:underline">{phone}</a> : <span class="text-copy">{contactPlaceholders.phone}</span>}</dd></div>
+          <div><dt class="font-bold text-brand-600">Address</dt><dd class="text-copy">{address ? addressLines.join(', ') : contactPlaceholders.address}</dd></div>
+        </dl>
+      </section>
+      <section class="rounded-panel border border-line-light bg-white p-7">
+        <h2 class="text-xl font-bold tracking-tight text-ink">Useful details to have ready</h2>
+        <ul class="mt-5 space-y-4 text-sm leading-7 text-copy">{['Equipment make, model and operating location.', 'Blind spots, manoeuvres and work areas to monitor.', 'Recording, detection or remote access requirements.', 'Available power and possible mounting positions.'].map((item) => <li class="flex gap-3"><span aria-hidden="true" class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />{item}</li>)}</ul>
+        <a href="/faq#planning-your-project" class="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800">Read the planning FAQs <span aria-hidden="true">→</span></a>
+      </section>
+      <section class="px-2"><h2 class="text-xl font-bold tracking-tight text-ink">Still exploring?</h2><p class="mt-3 text-sm leading-7 text-copy">Compare all eight systems and review the components and options before choosing.</p><a href="/solutions" class="mt-3 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800">Explore solutions <span aria-hidden="true">→</span></a></section>
+    </aside>
+    <section id="quote" class="order-1 min-w-0 scroll-mt-28 lg:order-2" aria-labelledby="quote-heading"><QuoteForm /></section>
+  </div>
+</BaseLayout>

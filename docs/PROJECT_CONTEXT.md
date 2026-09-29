@@ -27,6 +27,9 @@ Astro 7, TypeScript estricto y Tailwind CSS 4. Salida estática, sitemap y compo
 - `src/pages/projects/index.astro` y `[slug].astro`: listado y fichas; `ProjectsPreview.astro` muestra los tres primeros casos visibles en Home. Guía de edición en `docs/PROJECTS_CONTENT_GUIDE.md`.
 - `src/pages/about.astro`: presentación de VisionSure, enfoque, familias de soluciones, sectores y criterios para preparar una configuración. Comparte textos con `src/data/home.ts` y datos de catálogo/industrias.
 - `src/data/faq.ts`: doce preguntas en cuatro temas y selección de cuatro para Home. `src/lib/faq.ts` resuelve los códigos de sistemas a sus fichas; `FaqAccordion.astro` usa `details`/`summary` nativos sin JavaScript. `/faq` incluye datos estructurados con las mismas respuestas visibles.
+- `src/pages/contact.astro`, `QuoteForm.astro` y `src/scripts/quote-form.ts`: contacto con resumen local predeterminado e integración configurable con Formspree. `src/data/quote.ts` y `src/lib/quote-delivery.ts` leen configuración pública de compilación y gestionan aceptación, rechazo y recepción incierta. Sin formulario real configurado no transmite datos. Guía en `docs/CONTACT_SETUP.md`.
+- `src/data/legal.ts` y `src/components/legal/LegalDocument.astro`: `/privacy-policy` y `/terms`, actualmente borradores con campos pendientes, índice de secciones y `noindex`. Guía en `docs/LEGAL_CONTENT_GUIDE.md`.
+- `src/pages/404.astro`: página de error personalizada, genera `404.html`; falta verificar configuración en el hosting definitivo.
 - `src/styles/global.css`: identidad visual y contenedor con márgenes responsive.
 
 ## Catálogo confirmado
@@ -50,10 +53,16 @@ Conservar las condiciones de las cifras de grabación: 1.192 y 596 horas corresp
 2. **Implementado:** Industries (Cranes, Mining, Construction, Ports & Material Handling, Heavy Equipment, Commercial Fleets), necesidades por sector, sistemas relacionados y navegación bidireccional con sus fichas.
 3. **Estructura implementada:** Projects / Case Studies, tres ejemplos de referencia (grúas, minería y flotas), listado, fichas, galería con espacios para fotos y bloque en Home. El usuario autorizó texto de referencia mientras recibe material del cliente. Todos los ejemplos están identificados y sus fichas llevan `noindex`; quedan pendientes las fotos y datos reales para convertirlos a `published`.
 4. **Implementado con información disponible:** About Us y FAQ, navegación desde Home/header/footer y cuatro preguntas destacadas en Home. Las respuestas técnicas se basan en el catálogo. Instalación, entrega, soporte y garantías se indican como condiciones a confirmar; no hay duración de garantía ni plazos inventados. Historia, equipo humano, certificaciones y datos corporativos adicionales requieren información del cliente.
-5. **Siguiente:** Contact / Request a Quote, datos de contacto y procesamiento del formulario. Las fichas ya enlazan a `/contact?system=VST-S…#quote`; esa página y su envío aún no existen. Correo, teléfono y dirección siguen sin completar en `src/data/company.ts`.
-6. **Pendiente:** páginas legales y 404 personalizada; no existen rutas legales en el código revisado.
-7. **Pendiente en Home:** experiencia/estadísticas, testimonios y contacto según el material del cliente. Ya existen Hero, TrustBar, AboutIntro, SolutionsGrid, WhyVisionSure, IndustriesGrid, ProjectsPreview, FaqPreview y Footer; ProjectsPreview muestra referencias hasta tener casos reales.
-8. **Pendiente para publicación:** completar contenido, verificar responsive, rendimiento, accesibilidad, SEO, formulario y despliegue. No hay proveedor de envío, backend, CMS ni hosting de producción configurados en el código revisado.
+5. **Integración implementada; activación pendiente:** Contact / Request a Quote. Las ocho fichas preseleccionan su sistema en `/contact?system=VST-S…#quote`. Formspree se activa con `PUBLIC_QUOTE_SEND_ENABLED` y `PUBLIC_FORMSPREE_FORM_ID`; incluye consentimiento, espera, errores y confirmación del proveedor. Faltan cuenta/formulario, destinatario y prueba de recepción real. El modo predeterminado mantiene el resumen local marcado como no enviado. Correo, teléfono y dirección siguen nulos en `src/data/company.ts`, con texto referencial visible. El usuario pidió continuar con marcadores mientras obtiene la información.
+6. **Implementado con referencias:** Privacy Policy y Terms of Use con ocho secciones cada uno, campos por completar, aviso de borrador y `noindex`; 404 personalizada con enlaces de recuperación. Los datos y textos definitivos requieren revisión del cliente. No se han supuesto condiciones jurídicas o plazos.
+7. **Pendiente en Home:** experiencia/estadísticas y testimonios según el material del cliente. Ya existen Hero, TrustBar, AboutIntro, SolutionsGrid, WhyVisionSure, IndustriesGrid, ProjectsPreview, FaqPreview y el CTA de contacto del Footer; ProjectsPreview muestra referencias hasta tener casos reales.
+8. **Siguiente bloque técnico:** imagen social predeterminada, sitemap y revisión global de responsive, accesibilidad y SEO. Para publicar faltan contenido definitivo, activación/prueba real del formulario y despliegue. Formspree está preparado, pero sin cuenta activa configurada; no hay backend propio, CMS ni hosting de producción configurados.
+
+La lista detallada y las dependencias del cliente están en `docs/PENDING_WORK.md`. Se detectó además que la imagen social predeterminada de `SEO.astro` apunta a un archivo inexistente; corregirla en el cierre de SEO.
+
+## Validación del bloque Contact / legal
+
+El 2026-09-29, `npm run build` generó 21 páginas y `npm test` pasó seis pruebas de transporte con respuestas simuladas, sin envíos externos. Se revisaron Privacy Policy, Terms y 404 en navegador, presentación móvil a 390 px, un enlace del índice legal y recuperación desde la 404 a Contact. El resumen local se genera correctamente y se oculta al editar. Las rutas legales responden 200 con `noindex`; una ruta inexistente responde 404 con la página personalizada en desarrollo. La recepción real y el comportamiento del hosting de producción siguen pendientes.
 
 ## Criterios para continuar
 

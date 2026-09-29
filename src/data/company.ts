@@ -46,3 +46,10 @@ export const routes = {
   privacy: '/privacy-policy',
   terms: '/terms',
 } as const;
+
+// Reference labels only. Keep actual values null until supplied by the client.
+export const contactPlaceholders = {
+  email: 'Email address to be supplied',
+  phone: 'Phone number to be supplied',
+  address: 'Business address to be supplied',
+};
