@@ -1,4 +1,5 @@
 ---
+import TablerIcon from "../ui/TablerIcon.astro";
 import type { CollectionEntry } from 'astro:content';
 import type {IndustrySystemCopy} from '../../i18n/project-types';
 import {formatMessage} from '../../i18n/format';
@@ -21,5 +22,5 @@ const { data } = solution;
     </div>
   </div>
   <p class="mt-5 text-sm leading-7 text-copy">{reason}</p>
-  <a href={href} aria-label={formatMessage(copy.detailsFor,{model:data.systemCode})} class="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800">{copy.details} <span aria-hidden="true">→</span></a>
+  <a href={href} aria-label={formatMessage(copy.detailsFor,{model:data.systemCode})} class="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800">{copy.details} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle" /></a>
 </article>

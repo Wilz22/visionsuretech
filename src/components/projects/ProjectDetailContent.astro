@@ -1,4 +1,5 @@
 ---
+import TablerIcon from "../ui/TablerIcon.astro";
 import ProjectImage from './ProjectImage.astro';
 import IndustrySystemLink from '../industries/IndustrySystemLink.astro';
 import type {ProjectDetailModel} from '../../lib/project-models';
@@ -38,5 +39,5 @@ const copy=messages.projectUi;
       <h2 id="gallery-heading" class="text-3xl font-bold tracking-tight text-ink">{copy.gallery}</h2>
       {data.photos.length > 1 ? <div class="mt-7 grid gap-6 sm:grid-cols-2">{data.photos.slice(1).map((photo) => <figure class="overflow-hidden rounded-card border border-line-light"><ProjectImage photo={photo} industry={industry.id} label={copy.photoPending} /><figcaption class="p-5 text-sm leading-7 text-copy">{photo.caption}</figcaption></figure>)}</div> : <div class="mt-7 grid gap-6 sm:grid-cols-2">{galleryPlaceholders.map((label) => <div class="overflow-hidden rounded-card border border-line-light"><ProjectImage industry={industry.id} label={label} /></div>)}</div>}
     </section>}
-    <a href={projectsHref} class="mt-12 inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium px-6 text-sm font-bold text-brand-600 hover:border-brand-500"><span aria-hidden="true">←</span> {copy.back}</a>
+    <a href={projectsHref} class="mt-12 inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium px-6 text-sm font-bold text-brand-600 hover:border-brand-500"><TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle rotate-180" /> {copy.back}</a>
   </div>

@@ -1,5 +1,6 @@
 ---
 import QuoteLink from '../ui/QuoteLink.astro';
+import TablerIcon from '../ui/TablerIcon.astro';
 import type {HomeCopy} from '../../i18n/home-types';
 interface Props { copy:HomeCopy['hero']; quoteHref:string; productsHref:string; imageSrc:string; }
 const {copy:hero,quoteHref,productsHref,imageSrc}=Astro.props;
@@ -54,10 +55,7 @@ const {copy:hero,quoteHref,productsHref,imageSrc}=Astro.props;
             class="group inline-flex min-h-11.5 items-center gap-2 text-[0.975rem] font-bold text-brand-600 hover:text-brand-700 max-[600px]:justify-center"
           >
             {hero.secondaryCta.label}
-            <span
-              class="transition-transform duration-250 group-hover:translate-x-1 motion-reduce:transition-none"
-              aria-hidden="true">&rarr;</span
-            >
+            <TablerIcon name="chevronRight" class="h-4 w-4 shrink-0 transition-transform duration-250 group-hover:translate-x-1 motion-reduce:transition-none" />
           </a>
         </div>
 

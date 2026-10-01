@@ -59,8 +59,8 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
                 >
                   <span>{item.label}</span>
                   <TablerIcon
-                    name="chevronDown"
-                    class="h-4 w-4 shrink-0 transition-transform group-aria-expanded:rotate-180 motion-reduce:transition-none"
+                    name="chevronRight"
+                    class="h-4 w-4 shrink-0 rotate-90 transition-transform group-aria-expanded:-rotate-90 motion-reduce:transition-none"
                   />
                 </button>
               ) : (
@@ -89,7 +89,7 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
                     >
                       <span>{formatMessage(copy.explore,{section:item.label})}</span>
                       <TablerIcon
-                        name="arrowRight"
+                        name="chevronRight"
                         class="mt-0.5 h-5 w-5 shrink-0"
                       />
                     </a>
@@ -130,8 +130,8 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
         class="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-control px-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
       >
         <TablerIcon name="world" class="h-5 w-5" /><span>{selectedLanguage.code.toUpperCase()}</span><TablerIcon
-          name="chevronDown"
-          class="hidden h-3.5 w-3.5 sm:block"
+          name="chevronRight"
+          class="hidden h-3.5 w-3.5 rotate-90 sm:block"
         />
       </button>
       <button

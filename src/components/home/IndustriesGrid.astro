@@ -1,4 +1,5 @@
 ---
+import TablerIcon from "../ui/TablerIcon.astro";
 import { industries } from '../../data/industries';
 import IndustryIcon from '../industries/IndustryIcon.astro';
 ---
@@ -75,19 +76,10 @@ import IndustryIcon from '../industries/IndustryIcon.astro';
                   </h3>
 
                   <span
-                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-surface-brand text-brand-600 transition-[background-color,color,transform] duration-300 group-hover:translate-x-0.5 group-hover:bg-brand-600 group-hover:text-inverse"
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-pill bg-surface-brand text-brand-600 transition-[background-color,color,transform] duration-300 group-hover:translate-x-0.5 group-hover:bg-brand-600 group-hover:text-inverse gap-2"
                     aria-hidden="true"
                   >
-                    <svg class="h-4.5 w-4.5" viewBox="0 0 24 24">
-                      <path
-                        d="M5 12h14M13 6l6 6-6 6"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
+                    <TablerIcon name="chevronRight" class="h-4.5 w-4.5" />
                   </span>
                 </div>
 
@@ -108,15 +100,7 @@ import IndustryIcon from '../industries/IndustryIcon.astro';
       >
         Explore all industries
 
-        <svg class="h-4.5 w-4.5" viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M5 12h14M13 6l6 6-6 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"></path>
-        </svg>
+        <TablerIcon name="chevronRight" class="h-4.5 w-4.5" />
       </a>
     </div>
   </div>

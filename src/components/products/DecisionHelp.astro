@@ -1,4 +1,5 @@
 ---
+import TablerIcon from "../ui/TablerIcon.astro";
 import type { DecisionHelpCopy } from '../../i18n/types';
 interface Props { content: DecisionHelpCopy; resourceHref: string; }
 const { content, resourceHref } = Astro.props;
@@ -9,5 +10,5 @@ const { content, resourceHref } = Astro.props;
   <div class="mt-6 grid gap-6 md:grid-cols-2">
     {content.considerations.map(item => <div class="rounded-card bg-surface-soft p-5"><h3 class="text-lg font-bold text-ink">{item.title}</h3><p class="mt-3 text-sm leading-7 text-copy">{item.text}</p></div>)}
   </div>
-  <a href={resourceHref} class="mt-5 inline-flex min-h-11 items-center font-bold text-brand-600">{content.resourceLabel} <span aria-hidden="true" class="ml-2">→</span></a>
+  <a href={resourceHref} class="mt-5 inline-flex min-h-11 items-center font-bold text-brand-600 gap-2">{content.resourceLabel} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle ml-2" /></a>
 </section>
