@@ -1,0 +1,9 @@
+---
+import IndustryIcon from './IndustryIcon.astro';
+import QuoteCta from '../ui/QuoteCta.astro';
+import type {IndustryLink} from '../../lib/listing-models';
+import type {Messages} from '../../i18n/types';
+interface Props {industries:IndustryLink[];messages:Messages;quoteHref:string;}
+const {industries,messages,quoteHref}=Astro.props;
+---
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{industries.map(industry=><a href={industry.href} class="rounded-panel border border-line-light bg-white p-7 hover:border-brand-500"><IndustryIcon industry={industry.id} class="h-16 w-16 text-brand-600"/><h2 class="mt-5 text-xl font-bold text-ink">{industry.title}</h2><p class="mt-4 text-sm leading-7 text-copy">{industry.description}</p><span class="mt-5 inline-flex min-h-11 items-center text-sm font-bold text-brand-600">{messages.industryOverview.explore} <span aria-hidden="true">→</span></span></a>)}</div><QuoteCta copy={messages.quoteCta} label={messages.common.quote} href={quoteHref}/>

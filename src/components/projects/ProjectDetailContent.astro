@@ -1,0 +1,42 @@
+---
+import ProjectImage from './ProjectImage.astro';
+import IndustrySystemLink from '../industries/IndustrySystemLink.astro';
+import type {ProjectDetailModel} from '../../lib/project-models';
+import type {Messages} from '../../i18n/types';
+interface Props {model:ProjectDetailModel;messages:Messages;}
+const {model,messages}=Astro.props;
+const {data,industry,reference,facts,approachTitle,resultsTitle,systemsTitle,homeHref,projectsHref,industryHref,systems,galleryPlaceholders}=model;
+const copy=messages.projectUi;
+---
+  <section class="bg-page pt-10 pb-14">
+    <div class="container">
+      <nav aria-label={messages.common.breadcrumb} class="text-sm text-copy"><ol class="flex flex-wrap gap-3"><li><a href={homeHref} class="hover:text-brand-600">{messages.navigation.labels.home}</a></li><li aria-hidden="true">/</li><li><a href={projectsHref} class="hover:text-brand-600">{messages.navigation.labels.projects}</a></li><li aria-hidden="true">/</li><li aria-current="page">{data.title}</li></ol></nav>
+      <div class="mt-10 flex flex-wrap items-center gap-3 text-xs font-bold"><a href={industryHref} class="tracking-widest text-brand-600 uppercase hover:underline">{industry.title}</a>{reference && <span class="rounded-pill border border-line-brand bg-surface-brand px-3 py-2 text-brand-700">{copy.reference}</span>}</div>
+      <h1 class="mt-5 max-w-4xl text-4xl leading-[1.08] font-bold tracking-[-0.04em] text-ink sm:text-5xl lg:text-6xl">{data.title}</h1>
+      <p class="mt-6 max-w-3xl text-lg leading-8 text-copy">{data.summary}</p>
+      {reference && <aside class="mt-8 max-w-3xl border-l-2 border-brand-500 pl-5 text-sm leading-7 text-copy"><strong class="font-bold text-ink">{copy.noticeHeading}</strong> {copy.noticeText}</aside>}
+    </div>
+  </section>
+  <div class="container pb-16 sm:pb-20">
+    <div class="grid items-start gap-8 lg:grid-cols-[1.4fr_0.6fr]">
+      <figure class="overflow-hidden rounded-panel border border-line-light"><ProjectImage photo={data.photos[0]} industry={industry.id} label={copy.photoPending} eager /><figcaption class="bg-white px-6 py-4 text-sm leading-6 text-copy">{data.photos[0]?.caption ?? copy.photoCaptionPending}</figcaption></figure>
+      <aside class="rounded-panel border border-line-light bg-white p-7" aria-label={copy.overview}>
+        <h2 class="text-xl font-bold tracking-tight text-ink">{copy.overview}</h2>
+        <dl class="mt-5 divide-y divide-line-light"><div class="py-4"><dt class="text-xs font-bold tracking-wide text-brand-600 uppercase">{copy.industry}</dt><dd class="mt-2 text-sm text-ink"><a href={industryHref} class="hover:underline">{industry.title}</a></dd></div>{facts.map(({ label, value }) => <div class="py-4"><dt class="text-xs font-bold tracking-wide text-brand-600 uppercase">{label}</dt><dd class="mt-2 text-sm text-copy">{value}</dd></div>)}</dl>
+      </aside>
+    </div>
+    <div class="mt-16 grid gap-12 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16">
+      <div class="space-y-12">
+        <section aria-labelledby="challenge-heading"><p class="text-xs font-bold tracking-widest text-brand-600">{copy.context}</p><h2 id="challenge-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">{copy.challenge}</h2><p class="mt-5 leading-8 text-copy">{data.challenge}</p></section>
+        <section aria-labelledby="approach-heading"><p class="text-xs font-bold tracking-widest text-brand-600">{copy.configuration}</p><h2 id="approach-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">{approachTitle}</h2><p class="mt-5 leading-8 text-copy">{data.approach}</p></section>
+        <section aria-labelledby="installation-heading"><p class="text-xs font-bold tracking-widest text-brand-600">{copy.installation}</p><h2 id="installation-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">{copy.installationHeading}</h2><ul class="mt-5 space-y-4">{data.installation.map((item) => <li class="flex gap-3 leading-8 text-copy"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true" />{item}</li>)}</ul></section>
+        <section aria-labelledby="results-heading" class="rounded-panel border border-line-light bg-surface-brand p-7 sm:p-8"><p class="text-xs font-bold tracking-widest text-brand-600">{copy.outcome}</p><h2 id="results-heading" class="mt-3 text-3xl font-bold tracking-tight text-ink">{resultsTitle}</h2><ul class="mt-5 space-y-4">{data.results.map((item) => <li class="flex gap-3 leading-8 text-copy"><span class="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" aria-hidden="true" />{item}</li>)}</ul></section>
+      </div>
+      <aside aria-labelledby="systems-heading"><h2 id="systems-heading" class="text-xl font-bold tracking-tight text-ink">{systemsTitle}</h2><ul class="mt-5 grid gap-5">{systems.map(({ solution, note,categoryName,href }) => <li><IndustrySystemLink solution={solution} reason={note} categoryName={categoryName} href={href} copy={messages.industrySystem} /></li>)}</ul></aside>
+    </div>
+    {(reference || data.photos.length > 1) && <section class="mt-16 border-t border-line-light pt-12" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading" class="text-3xl font-bold tracking-tight text-ink">{copy.gallery}</h2>
+      {data.photos.length > 1 ? <div class="mt-7 grid gap-6 sm:grid-cols-2">{data.photos.slice(1).map((photo) => <figure class="overflow-hidden rounded-card border border-line-light"><ProjectImage photo={photo} industry={industry.id} label={copy.photoPending} /><figcaption class="p-5 text-sm leading-7 text-copy">{photo.caption}</figcaption></figure>)}</div> : <div class="mt-7 grid gap-6 sm:grid-cols-2">{galleryPlaceholders.map((label) => <div class="overflow-hidden rounded-card border border-line-light"><ProjectImage industry={industry.id} label={label} /></div>)}</div>}
+    </section>}
+    <a href={projectsHref} class="mt-12 inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium px-6 text-sm font-bold text-brand-600 hover:border-brand-500"><span aria-hidden="true">←</span> {copy.back}</a>
+  </div>

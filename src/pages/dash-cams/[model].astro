@@ -1,0 +1,15 @@
+---
+import {dashCamDefinitions} from '../../data/dashCamDefinitions';
+import {resolveDashCams} from '../../lib/dash-cam-content';
+import {company} from '../../data/company';
+import {getMessages} from '../../i18n';
+import {buildPersonalDetail} from '../../lib/detail-models';
+import PersonalProductDetail from '../../components/dash-cams/PersonalProductDetail.astro';
+export function getStaticPaths(){return dashCamDefinitions.map(model=>({params:{model:model.slug}}));}
+const messages=getMessages();
+const dashCams=resolveDashCams(messages.dashCamEditorial);
+const model=dashCams.find(model=>model.slug===Astro.params.model);
+if(!model) throw new Error(`Unknown dash cam configuration: ${Astro.params.model}`);
+const view=buildPersonalDetail(model,dashCams,messages);
+---
+<PersonalProductDetail view={view} messages={messages} whatsappHref={`https://wa.me/${company.contact.whatsappNumber}`}/>

@@ -1,0 +1,10 @@
+---
+interface Props {message:string;links:Record<string,{label:string;href:string}>;}
+const {message,links}=Astro.props;
+const segments=message.split(/(\{[a-zA-Z][a-zA-Z0-9]*\})/g).map(text=>{
+  const key=/^\{([a-zA-Z][a-zA-Z0-9]*)\}$/.exec(text)?.[1];
+  if(key&&!Object.hasOwn(links,key))throw new Error(`Missing message link: ${key}`);
+  return key?{link:links[key]}:{text};
+});
+---
+{segments.map(segment=>segment.link?<a href={segment.link.href} class="font-bold text-brand-600 underline underline-offset-4">{segment.link.label}</a>:segment.text)}

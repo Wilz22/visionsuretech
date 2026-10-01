@@ -1,7 +1,8 @@
 ---
 import type { FaqEntry } from '../../lib/faq';
-interface Props { items: FaqEntry[]; prefix: string; }
-const { items, prefix } = Astro.props;
+import {getMessages} from '../../i18n';
+interface Props {relatedLabel?:string; items: FaqEntry[]; prefix: string; }
+const { items, prefix,relatedLabel=getMessages().faqPage.relatedSystems } = Astro.props;
 ---
 
 <div class="divide-y divide-line-light overflow-hidden rounded-panel border border-line-light bg-white">
@@ -15,7 +16,7 @@ const { items, prefix } = Astro.props;
       </summary>
       <div class="px-6 pb-7 sm:px-8">
         <p class="max-w-3xl text-sm leading-7 text-copy">{item.answer}</p>
-        {item.links.length > 0 && <ul class="mt-5 flex flex-wrap gap-2" aria-label="Related systems">
+        {item.links.length > 0 && <ul class="mt-5 flex flex-wrap gap-2" aria-label={relatedLabel}>
           {item.links.map((link) => <li><a href={link.href} class="inline-flex min-h-11 items-center rounded-control border border-line-brand bg-white px-3 py-2 text-xs leading-5 font-bold text-brand-600 hover:border-brand-500">{link.label}</a></li>)}
         </ul>}
       </div>

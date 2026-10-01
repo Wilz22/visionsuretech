@@ -1,0 +1,15 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import ProductGrid from './ProductGrid.astro';
+import DecisionHelp from './DecisionHelp.astro';
+import QuoteCta from '../ui/QuoteCta.astro';
+import type {CategoryListingModel} from '../../lib/listing-models';
+import type {Messages} from '../../i18n/types';
+interface Props {model:CategoryListingModel;messages:Messages;productHref:(product:CollectionEntry<'products'>)=>string;locale:string;}
+const {model,messages,productHref,locale}=Astro.props;
+const {category,products,components,relatedIndustries,decisionHelp,resourcesHref,quoteHref}=model;
+const copy=messages.categoryListing;
+---
+ {category.mode!=='systems'?<section><h2 class="text-2xl font-bold text-ink">{copy.componentsHeading}</h2><p class="mt-4 text-sm leading-7 text-copy">{copy.componentsNotice}</p><div class="mt-6 overflow-x-auto rounded-card border border-line-light"><table class="w-full text-left text-sm"><thead class="bg-surface-soft"><tr><th scope="col" class="p-4">{copy.component}</th><th scope="col" class="p-4">{copy.description}</th><th scope="col" class="p-4">{copy.system}</th></tr></thead><tbody>{components.map(c=><tr class="border-t border-line-light bg-white"><th scope="row" class="p-4 align-top text-brand-600">{c.code}</th><td class="p-4 leading-7 text-copy">{c.description}</td><td class="p-4 align-top"><a href={c.href} class="font-bold text-brand-600 underline">{c.product.data.systemCode}</a></td></tr>)}</tbody></table></div></section>:<ProductGrid products={products} copy={messages.catalogGrid} cardCopy={messages.productCard} visualCopy={messages.productVisual} productHref={productHref} locale={locale}/>}
+ <DecisionHelp content={decisionHelp} resourceHref={resourcesHref}/>
+ {relatedIndustries.length>0&&<section><h2 class="text-2xl font-bold text-ink">{copy.relatedIndustries}</h2><div class="mt-5 flex flex-wrap gap-3">{relatedIndustries.map(i=><a href={i.href} class="inline-flex min-h-11 items-center rounded-pill border border-line-medium px-5 text-sm font-bold text-brand-600">{i.title}</a>)}</div></section>}<QuoteCta copy={messages.quoteCta} label={messages.common.quote} href={quoteHref}/>

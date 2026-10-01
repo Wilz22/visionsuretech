@@ -4,8 +4,14 @@ import "../styles/global.css";
 import SEO from "../components/seo/SEO.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import WhatsAppButton from '../components/ui/WhatsAppButton.astro';
+import OrganizationSchema from '../components/seo/OrganizationSchema.astro';
+import {buildPageShell} from '../lib/page-shell';
+import {defaultLocale,type Locale} from '../i18n/config';
 
 interface Props {
+  locale?:Locale;
+  resolveHref?:(href:string)=>string;
   title: string;
   description: string;
   image?: string;
@@ -15,6 +21,8 @@ interface Props {
 }
 
 const {
+  locale=defaultLocale,
+  resolveHref,
   title,
   description,
   image,
@@ -22,10 +30,11 @@ const {
   noindex = false,
   type = "website",
 } = Astro.props;
+const shell=buildPageShell(locale,resolveHref);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={shell.metadata.htmlLang}>
   <head>
     <meta charset="UTF-8" />
 
@@ -34,6 +43,7 @@ const {
     <meta name="generator" content={Astro.generator} />
 
     <SEO
+      openGraphLocale={shell.metadata.openGraph}
       title={title}
       description={description}
       image={image}
@@ -49,14 +59,16 @@ const {
     <meta name="theme-color" content="#F7F7F5" />
 
     <slot name="head" />
+    <OrganizationSchema />
   </head>
 
   <body>
-    <Header />
+    <Header locale={locale} copy={shell.messages.navigation} navigation={shell.navigation.main} homeLabel={shell.homeLabel} homeHref={shell.homeHref}/>
 
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} navigation={shell.navigation} copy={shell.messages.footer} common={shell.messages.common}/>
+    <WhatsAppButton copy={shell.messages.common}/>
   </body>
 </html>

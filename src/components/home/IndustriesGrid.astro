@@ -37,7 +37,7 @@ import IndustryIcon from '../industries/IndustryIcon.astro';
         industries.map((industry) => (
           <li>
             <a
-              href={`/industries#${industry.id}`}
+              href={`/solutions/${industry.id}/`}
               class="group block h-full overflow-hidden rounded-panel border border-line-light bg-surface shadow-soft transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-line-brand hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 motion-reduce:transform-none motion-reduce:transition-none"
             >
               <div
@@ -103,7 +103,7 @@ import IndustryIcon from '../industries/IndustryIcon.astro';
 
     <div class="mt-10 flex justify-center sm:mt-12">
       <a
-        href="/industries"
+        href="/solutions/"
         class="inline-flex min-h-12 items-center gap-2 rounded-pill border border-line-medium bg-surface px-6 text-sm font-bold text-brand-600 shadow-soft transition-[border-color,color,box-shadow] duration-300 hover:border-brand-500 hover:text-brand-700 hover:shadow-raised focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500"
       >
         Explore all industries

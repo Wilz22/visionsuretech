@@ -1,0 +1,6 @@
+---
+import {company} from '../../data/company';
+interface Props {class?:string;phone?:string|null;phoneE164?:string}
+const {phone=company.contact.phone,phoneE164=company.contact.phoneE164,class:className='inline-flex min-h-11 items-center font-bold text-brand-600'}=Astro.props;
+---
+{phone&&<a href={`tel:${phoneE164}`} class={className}>{phone}</a>}

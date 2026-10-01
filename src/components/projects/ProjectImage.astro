@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import {getMessages} from '../../i18n';
 import IndustryIcon from '../industries/IndustryIcon.astro';
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   label?: string;
   eager?: boolean;
 }
-const { photo, industry, label = 'Installation photograph pending', eager = false } = Astro.props;
+const { photo, industry, label = getMessages().projectUi.photoPending, eager = false } = Astro.props;
 ---
 
 {photo ? (

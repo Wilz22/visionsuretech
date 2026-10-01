@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {defaultLocale,type Locale} from "../../i18n/config";
+interface Props {locale?:Locale;resolveHref?:(href:string)=>string;title:string;description:string}
+const locale=Astro.props.locale??defaultLocale;
+const {title,description}=Astro.props;
+---
+<BaseLayout locale={locale} resolveHref={Astro.props.resolveHref} title={title} description={description}><slot/></BaseLayout>

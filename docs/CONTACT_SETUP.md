@@ -1,10 +1,10 @@
 # Contact / Request a Quote
 
-Actualizado: 2026-09-29.
+Actualizado: 2026-09-30.
 
 ## Estado actual
 
-`/contact` existe y los enlaces de cotización de las ocho fichas llegan a `/contact?system=VST-S…#quote`. El sistema se preselecciona únicamente si su código coincide con una opción del catálogo. Los valores desconocidos muestran un aviso y nunca se usan como HTML ni como URL de destino.
+`/quote/` contiene el formulario dedicado. Las fichas enlazan a `/quote/?product=vst-s6301`; se admiten los ocho slugs industriales y seis configuraciones de dash cams. `?system=VST-S6301` sigue resolviendo códigos antiguos. Valores desconocidos muestran un aviso y nunca se usan como HTML ni como URL. `/contact/` mantiene los canales directos y un enlace al formulario.
 
 La integración con **Formspree está implementada pero desactivada** porque no hay formulario ni destinatario reales. El modo predeterminado valida los campos y prepara un resumen copiable, marcado como **NOT SENT**. No transmite entradas ni las guarda en localStorage. Una edición oculta el resumen anterior.
 
@@ -14,8 +14,8 @@ Los controles se habilitan después de instalar el manejador de envío local. Si
 
 ## Archivos
 
-- `src/pages/contact.astro`: página, instrucciones y datos de contacto condicionales.
-- `src/components/contact/QuoteForm.astro`: campos, ocho opciones del catálogo y panel de resumen.
+- `src/pages/quote/index.astro`: formulario; `src/pages/contact.astro`: canales directos; FormLayout: datos, mapa y horarios pendientes.
+- `src/components/contact/QuoteForm.astro`: campos cortos, detalles adicionales opcionales, catorce opciones de producto y panel de resumen.
 - `src/scripts/quote-form.ts`: preselección, validación, resumen, copia con alternativa manual y limpieza.
 - `src/data/company.ts`: correo, teléfono y dirección reales. Los valores nulos no generan enlaces ficticios. Completar estos datos no activa el envío del formulario.
 - `src/data/quote.ts`, `src/lib/quote-delivery.ts`: configuración y transporte POST a Formspree, tiempo límite y clasificación de respuestas.
@@ -44,3 +44,9 @@ Para volver al resumen local, establecer `PUBLIC_QUOTE_SEND_ENABLED=false` y rec
 ## Contrato consultado
 
 El transporte envía `FormData` con `Accept: application/json`, no sigue redirecciones y acepta una respuesta HTTP exitosa con `next` de tipo texto, sin campos de error. No navega al destino devuelto. Referencias oficiales: [envío AJAX](https://help.formspree.io/articles/building-your-form/submit-forms-with-javascript-ajax), [contrato del cliente Formspree](https://github.com/formspree/formspree-js/blob/main/packages/formspree-core/src/submission.ts).
+
+## Assessment
+
+La modalidad está pendiente de decisión del cliente (última instrucción del usuario). No hay reserva activa. Si aprueba agenda externa, configurar `PUBLIC_ASSESSMENT_BOOKING_URL` con el enlace HTTPS público, confirmar ubicación/zona horaria/duración/disponibilidad y recompilar. No se cargan iframes ni se simulan horarios. Si aprueba solicitud de contacto, adaptar la página y su tratamiento de datos al proveedor elegido.
+
+Formspree es una recomendación, no una contratación. Es apropiado para este sitio estático y permite entrega con notificaciones; revisar requisitos de la cuenta antes de activar. [Referencia oficial](https://formspree.io/blog/ajax-contact-forms/).

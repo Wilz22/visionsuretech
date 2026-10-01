@@ -1,0 +1,22 @@
+---
+import Menu from '@tabler/icons/outline/menu-2.svg';
+import ChevronDown from '@tabler/icons/outline/chevron-down.svg';
+import ArrowRight from '@tabler/icons/outline/arrow-right.svg';
+import WhatsApp from '@tabler/icons/outline/brand-whatsapp.svg';
+import Crane from '@tabler/icons/outline/crane.svg';
+import Backhoe from '@tabler/icons/outline/backhoe.svg';
+import Truck from '@tabler/icons/outline/truck.svg';
+import Mountain from '@tabler/icons/outline/mountain.svg';
+import Ship from '@tabler/icons/outline/ship.svg';
+import Tractor from '@tabler/icons/outline/tractor.svg';
+import Building from '@tabler/icons/outline/building.svg';
+import World from '@tabler/icons/outline/world.svg';
+import Check from '@tabler/icons/outline/check.svg';
+import Close from '@tabler/icons/outline/x.svg';
+
+const icons = { menu: Menu, close: Close, world: World, check: Check, chevronDown: ChevronDown, arrowRight: ArrowRight, whatsapp: WhatsApp, crane: Crane, backhoe: Backhoe, truck: Truck, mountain: Mountain, ship: Ship, tractor: Tractor, building: Building };
+interface Props { name: keyof typeof icons; class?: string; }
+const { name, class: className = 'h-5 w-5' } = Astro.props;
+const Icon = icons[name];
+---
+<Icon class={className} aria-hidden="true" focusable="false" />

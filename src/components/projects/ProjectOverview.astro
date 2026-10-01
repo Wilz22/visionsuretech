@@ -1,0 +1,28 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type {ProjectOverviewModel} from '../../lib/project-models';
+import type {Messages} from '../../i18n/types';
+interface Props {model:ProjectOverviewModel;messages:Messages;homeHref:string;productsHref:string;industriesHref:string;}
+const {model,messages,homeHref,productsHref,industriesHref}=Astro.props;
+const {hasReferences,cards}=model;
+const copy=messages.projectsPage;
+---
+  <section class="border-b border-line-light bg-page pt-10 pb-16 sm:pb-20">
+    <div class="container">
+      <nav aria-label={messages.common.breadcrumb} class="text-sm text-copy"><ol class="flex gap-3"><li><a href={homeHref} class="hover:text-brand-600">{messages.navigation.labels.home}</a></li><li aria-hidden="true">/</li><li aria-current="page">{messages.navigation.labels.projects}</li></ol></nav>
+      <div class="mt-12 grid gap-7 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16">
+        <div><p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.eyebrow}</p><h1 class="mt-5 text-4xl leading-[1.05] font-bold tracking-[-0.045em] text-ink sm:text-6xl">{copy.heading.map((line,index)=><>{index>0&&<br/>}{line}</>)}</h1></div>
+        <p class="max-w-xl text-lg leading-8 text-copy">{copy.introduction}</p>
+      </div>
+      {hasReferences && <aside class="mt-10 max-w-3xl rounded-card border border-line-brand bg-surface-brand p-6"><h2 class="text-sm font-bold text-brand-700">{copy.referenceHeading}</h2><p class="mt-2 text-sm leading-7 text-copy">{copy.referenceText}</p></aside>}
+    </div>
+  </section>
+  <section class="container py-16 sm:py-20" aria-label={copy.stories}>
+    {cards.length ? <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{cards.map(({project,href}) => <li><ProjectCard project={project} href={href} copy={messages.projectUi} /></li>)}</ul> : <p class="text-copy">{copy.empty}</p>}
+  </section>
+  <section class="bg-surface-brand py-14 sm:py-16">
+    <div class="container flex flex-wrap items-center justify-between gap-7">
+      <div class="max-w-xl"><h2 class="text-3xl font-bold tracking-tight text-ink">{copy.catalogHeading}</h2><p class="mt-4 leading-7 text-copy">{copy.catalogText}</p></div>
+      <div class="flex flex-wrap gap-3"><a href={productsHref} class="inline-flex min-h-12 items-center rounded-pill bg-brand-500 px-6 text-sm font-bold text-white hover:bg-brand-600">{copy.products}</a><a href={industriesHref} class="inline-flex min-h-12 items-center rounded-pill border border-line-medium bg-white px-6 text-sm font-bold text-brand-600 hover:border-brand-500">{copy.industries}</a></div>
+    </div>
+  </section>

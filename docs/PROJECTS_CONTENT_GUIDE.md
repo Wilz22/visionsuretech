@@ -4,10 +4,11 @@ La sección está preparada con tres **ejemplos de referencia autorizados por el
 
 ## Dónde editar
 
-- `src/content/projects/crane-boom-visibility.md`: ejemplo de grúas.
-- `src/content/projects/mining-equipment-awareness.md`: ejemplo de minería.
-- `src/content/projects/fleet-video-monitoring.md`: ejemplo de flotas.
-- Para agregar otro caso, copiar uno de estos archivos y asignar un `slug` y un `order` únicos.
+- `src/content/projects/en/crane-boom-visibility.md`: ejemplo de grúas.
+- `src/content/projects/en/mining-equipment-awareness.md`: ejemplo de minería.
+- `src/content/projects/en/fleet-video-monitoring.md`: ejemplo de flotas.
+- `src/data/projectDefinitions.ts`: identidades, orden, estado, industria, sistemas y medios independientes del idioma.
+- Para agregar otro caso, registrar una definición con slug/orden únicos y un archivo editorial con `projectId` coincidente. Las notas de sistemas y alt/captions se vinculan por código/src. El esquema rechaza relaciones faltantes o desconocidas.
 
 El listado `/projects`, las fichas `/projects/<slug>` y las tres tarjetas de Home usan la misma colección. No es necesario editar componentes para reemplazar el contenido.
 
@@ -37,19 +38,15 @@ Todo el contenido se edita dentro del bloque YAML entre `---`. El cuerpo Markdow
 | `systems` | Lista de `code` y `note`; el código debe existir en el catálogo publicado |
 | `photos` | Lista de imágenes; la primera se usa en tarjeta y cabecera, las restantes en galería |
 
-Ejemplo de estructura para fotografías (reemplazar los valores y crear los archivos antes de compilar):
+Ejemplo editorial para fotografías (registrar src/width/height en `projectDefinitions.ts`, reemplazar los valores y crear las imágenes antes de compilar):
 
 ```yaml
 photos:
   - src: /images/projects/nombre-del-proyecto/vista-general.webp
     alt: "Descripción concreta del equipo y sistema que aparecen en la foto"
-    width: 1600
-    height: 1000
     caption: "Pie de foto aprobado por el cliente."
   - src: /images/projects/nombre-del-proyecto/montaje.webp
     alt: "Descripción de la cámara o sensor y su ubicación"
-    width: 1600
-    height: 1000
     caption: "Detalle del montaje real."
 ```
 
@@ -57,8 +54,8 @@ Guardar las imágenes en `public/images/projects/`. Usar sus dimensiones reales;
 
 ## Pasar de referencia a caso real
 
-Reemplazar todo el texto de referencia, completar los sistemas y fotos reales, revisar los datos con el cliente y cambiar `status: reference` a `status: published`. El sitio retirará automáticamente el distintivo y los avisos de referencia de ese caso. Los campos opcionales sin valor se ocultarán. La Home y el listado conservarán su aviso mientras incluyan otros ejemplos.
+Reemplazar todo el texto de referencia, completar sistemas/fotos y revisar los datos con el cliente. Cambiar el estado a `published` en `projectDefinitions.ts` únicamente tras aprobación. El sitio retirará el distintivo y avisos de ese caso; los campos opcionales sin valor se ocultarán. Home y listado conservarán su aviso mientras incluyan otros ejemplos.
 
-Las fichas de referencia llevan `noindex`; el listado también mientras no haya ningún caso publicado. El sitemap general de Astro puede incluir esas rutas, pero su instrucción de no indexar permanece en el HTML.
+Las fichas de referencia llevan `noindex`; el listado también mientras no haya ningún caso publicado. La política actual excluye Projects del sitemap provisional; revisarla cuando haya contenido aprobado, sin incluir páginas de referencia.
 
 Ejecutar `npm run build` y revisar Home, listado, ficha, fotos y enlaces en escritorio y móvil antes de publicar. El esquema valida campos y relaciones del catálogo; no verifica que las afirmaciones hayan sido aprobadas ni que las fotografías existan.

@@ -1,0 +1,966 @@
+{
+  "date": "2026-10-01",
+  "environment": "localhost dev; viewport structural checks, not full visual review or production HTTP test",
+  "results": [
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/404.html",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/about/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/contact/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/2ch-compact/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/3ch-pro/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/4ch-360/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/book-assessment/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/dual-4k/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/front-4k/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/member-offers/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/thermal/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/why-buy-local/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/faq/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/glossary/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/privacy-policy/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/360-camera-systems/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/360-camera-systems/vst-s6301/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/accessories/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/cameras-monitors/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/crane-cameras/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/crane-cameras/vst-s4901/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4101/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4102/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4201/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4202/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s8401/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/radar-detection/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/radar-detection/vst-s8501/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/crane-boom-visibility/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/fleet-video-monitoring/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/mining-equipment-awareness/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/quote/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/resources/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/services/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/agriculture/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/construction/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/cranes/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/mining/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/ports/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/trucks-fleets/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/terms/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/warranty-policy/",
+      "wa": true,
+      "width": 375
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/404.html",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/about/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/contact/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/2ch-compact/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/3ch-pro/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/4ch-360/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/book-assessment/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/dual-4k/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/front-4k/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/member-offers/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/thermal/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/dash-cams/why-buy-local/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/faq/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/glossary/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/privacy-policy/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/360-camera-systems/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/360-camera-systems/vst-s6301/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/accessories/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/cameras-monitors/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/crane-cameras/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/crane-cameras/vst-s4901/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4101/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4102/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4201/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s4202/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/multi-camera-systems/vst-s8401/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/radar-detection/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/products/radar-detection/vst-s8501/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/crane-boom-visibility/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/fleet-video-monitoring/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/projects/mining-equipment-awareness/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/quote/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/resources/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/services/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/agriculture/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/construction/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/cranes/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/mining/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/ports/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/solutions/trucks-fleets/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/terms/",
+      "wa": true,
+      "width": 1440
+    },
+    {
+      "brokenImages": [],
+      "h1": 1,
+      "headerQuote": false,
+      "lang": "en",
+      "overflow": false,
+      "path": "/warranty-policy/",
+      "wa": true,
+      "width": 1440
+    }
+  ]
+}

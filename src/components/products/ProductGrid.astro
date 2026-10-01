@@ -1,0 +1,20 @@
+---
+import type {CollectionEntry} from 'astro:content';
+import ProductCard from './ProductCard.astro';
+import {getMessages} from '../../i18n';
+import {formatCount} from '../../i18n/format';
+import {defaultLocale} from '../../i18n/config';
+import type {CatalogGridCopy} from '../../i18n/catalog-types';
+import type {Messages} from '../../i18n/types';
+import {productUrl} from '../../lib/routes';
+import type {Messages} from "../../i18n/types";
+interface Props {visualCopy?:Messages["productVisual"];products:CollectionEntry<'products'>[];id?:string;copy?:CatalogGridCopy;cardCopy?:Messages['productCard'];locale?:string;productHref?:(product:CollectionEntry<'products'>)=>string}
+const {visualCopy=getMessages().productVisual,products,id='product-grid',copy=getMessages().catalogGrid,cardCopy=getMessages().productCard,locale=defaultLocale,productHref=(product:CollectionEntry<'products'>)=>productUrl(product.data)}=Astro.props;
+---
+<div data-catalog id={id} data-locale={locale} data-count-copy={JSON.stringify(copy.count)}>
+  <div class="mb-7 grid gap-4 sm:grid-cols-2"><label class="text-sm font-bold text-ink">{copy.search}<input data-search-input type="search" class="mt-2 block min-h-12 w-full rounded-control border border-line-medium bg-white px-4 font-normal" placeholder={copy.placeholder}/></label><label class="text-sm font-bold text-ink">{copy.catalogClass}<select data-class-input class="mt-2 block min-h-12 w-full rounded-control border border-line-medium bg-white px-4 font-normal"><option value="">{copy.allClasses}</option>{[...new Set(products.map(p=>p.data.catalogClass))].map(value=><option>{value}</option>)}</select></label></div>
+  <p data-count role="status" aria-live="polite" class="mb-5 text-sm text-copy">{formatCount(products.length,copy.count,locale)}</p>
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">{products.map(product=><ProductCard product={product} copy={cardCopy} visualCopy={visualCopy} href={productHref(product)}/>)}</div>
+  <p data-empty hidden class="rounded-card border border-line-light p-7 text-copy">{copy.empty}</p>
+</div>
+<script>import '../../scripts/catalog-grid';</script>

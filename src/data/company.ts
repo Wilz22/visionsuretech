@@ -13,6 +13,9 @@ export type Company = {
   contact: {
     email: string | null;
     phone: string | null;
+    phoneE164: string;
+    whatsappNumber: string;
+    hours: string | null;
     address: CompanyAddress | null;
   };
   social: {
@@ -25,8 +28,11 @@ export const company: Company = {
   canonicalUrl: 'https://www.visionsuretech.ca',
   locale: 'en-CA',
   contact: {
-    email: null,
-    phone: null,
+    email: 'info@visionsuretech.ca',
+    phone: '(604) 710-4450',
+    phoneE164: '+16047104450',
+    whatsappNumber: '16047104450',
+    hours: null,
     address: null,
   },
   social: {
@@ -36,15 +42,21 @@ export const company: Company = {
 
 export const routes = {
   home: '/',
-  about: '/about',
-  contact: '/contact',
-  quote: '/contact#quote',
-  solutions: '/solutions',
-  industries: '/industries',
-  projects: '/projects',
-  faq: '/faq',
-  privacy: '/privacy-policy',
-  terms: '/terms',
+  about: '/about/',
+  contact: '/contact/',
+  quote: '/quote/',
+  products: '/products/',
+  solutions: '/solutions/',
+  industries: '/solutions/',
+  dashCams: '/dash-cams/',
+  services: '/services/',
+  resources: '/resources/',
+  glossary: '/glossary/',
+  warranty: '/warranty-policy/',
+  projects: '/projects/',
+  faq: '/faq/',
+  privacy: '/privacy-policy/',
+  terms: '/terms/',
 } as const;
 
 // Reference labels only. Keep actual values null until supplied by the client.

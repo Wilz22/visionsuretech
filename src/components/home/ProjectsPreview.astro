@@ -1,7 +1,10 @@
 ---
-import { getVisibleProjects } from '../../lib/projects';
+import type {Project} from '../../lib/projects';
+import type {HomeCopy} from '../../i18n/home-types';
 import ProjectCard from '../projects/ProjectCard.astro';
-const projects = (await getVisibleProjects()).slice(0, 3);
+import type {Messages} from '../../i18n/types';
+interface Props {projectCopy:Messages['projectUi'];projectHref:(project:Project)=>string;projects:Project[];copy:HomeCopy['projects'];projectsHref:string;}
+const {projects,copy,projectsHref,projectCopy,projectHref}=Astro.props;
 const hasReferences = projects.some(({ entry }) => entry.data.status === 'reference');
 ---
 
@@ -9,14 +12,14 @@ const hasReferences = projects.some(({ entry }) => entry.data.status === 'refere
   <div class="container">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <div class="max-w-2xl">
-        <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Projects & case studies</p>
-        <h2 id="projects-heading" class="mt-4 text-4xl font-bold leading-tight tracking-[-0.04em] text-ink sm:text-5xl">From the challenge<br />to the configuration.</h2>
+        <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.eyebrow}</p>
+        <h2 id="projects-heading" class="mt-4 text-4xl font-bold leading-tight tracking-[-0.04em] text-ink sm:text-5xl">{copy.title.map((line,index)=><>{index>0 && <br/>}{line}</>)}</h2>
       </div>
-      <a href="/projects" class="inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium px-6 text-sm font-bold text-brand-600 hover:border-brand-500">Explore projects <span aria-hidden="true">→</span></a>
+      <a href={projectsHref} class="inline-flex min-h-12 items-center gap-3 rounded-pill border border-line-medium px-6 text-sm font-bold text-brand-600 hover:border-brand-500">{copy.explore} <span aria-hidden="true">→</span></a>
     </div>
-    {hasReferences && <p class="mt-6 max-w-2xl text-sm leading-7 text-copy">Entries marked “Reference example” are illustrative content. Installation photographs and verified project details are pending.</p>}
+    {hasReferences && <p class="mt-6 max-w-2xl text-sm leading-7 text-copy">{copy.notice}</p>}
     <ul class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {projects.map((project) => <li><ProjectCard project={project} /></li>)}
+      {projects.map((project) => <li><ProjectCard project={project} copy={projectCopy} href={projectHref(project)} /></li>)}
     </ul>
   </div>
 </section>}

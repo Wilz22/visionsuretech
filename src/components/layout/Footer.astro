@@ -1,243 +1,36 @@
 ---
-import { solutionCategories } from '../../data/solutionCategories';
-import { getPublishedSolutions } from '../../lib/solutions';
-
-const currentYear = new Date().getFullYear();
-const solutions = await getPublishedSolutions();
-const solutionLinks = solutionCategories
-  .filter((category) => solutions.some(({ data }) => data.category === category.id))
-  .map((category) => ({ label: category.title, href: `/solutions#${category.id}` }));
-
-const companyLinks = [
-  {
-    label: "About Us",
-    href: "/about",
-  },
-  {
-    label: "Industries",
-    href: "/industries",
-  },
-  {
-    label: "Projects",
-    href: "/projects",
-  },
-  {
-    label: "FAQ",
-    href: "/faq",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-  },
-];
-
-const legalLinks = [
-  {
-    label: "Privacy Policy",
-    href: "/privacy-policy",
-  },
-  {
-    label: "Terms of Use",
-    href: "/terms",
-  },
-];
-
-const buttonClasses =
-  "group inline-flex items-center justify-center gap-[10px] rounded-pill border border-transparent bg-brand-500 py-3 font-bold text-inverse shadow-soft transition-[background-color,color,border-color,transform,box-shadow] duration-[250ms] hover:-translate-y-px hover:bg-brand-600 hover:shadow-raised motion-reduce:transition-none";
-
-const footerLinkClasses =
-  "text-[0.9375rem] leading-normal text-copy transition-colors duration-[250ms] hover:text-brand-600 motion-reduce:transition-none";
+import QuoteLink from '../ui/QuoteLink.astro';
+import {buildNavigation,type NavigationModel} from '../../lib/navigation';
+import {getMessages,formatMessage} from '../../i18n';
+import type {Messages} from '../../i18n/types';
+import {defaultLocale,type Locale} from '../../i18n/config';
+import {company} from '../../data/company';
+import CallLink from '../ui/CallLink.astro';
+interface Props {locale?:Locale;navigation?:NavigationModel;copy?:Messages['footer'];common?:Messages['common'];}
+const {locale=defaultLocale,navigation=buildNavigation(getMessages(locale).navigation),copy=getMessages(locale).footer,common=getMessages(locale).common}=Astro.props;
 ---
-
-<footer class="mt-0">
-  <section
-    class="relative z-2 bg-page pt-12 pb-12 max-[600px]:pt-14 max-[600px]:pb-8"
-  >
-    <div class="container">
-      <div
-        class="relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-12 overflow-hidden rounded-panel border border-brand-500/12 bg-[linear-gradient(135deg,var(--color-surface-brand),#fff)] px-16 py-14 shadow-raised after:pointer-events-none after:absolute after:-top-30 after:-right-25 after:h-70 after:w-70 after:rounded-full after:bg-brand-500/6 after:content-[''] max-[850px]:grid-cols-1 max-[850px]:gap-7.5 max-[850px]:p-12 max-[600px]:rounded-card max-[600px]:px-7 max-[600px]:py-9"
-      >
-        <div class="relative z-1 max-w-162.5">
-          <p
-            class="mb-3.5 text-[0.8125rem] font-bold tracking-[0.12em] text-brand-600 uppercase"
-          >
-            Let&apos;s improve visibility
-          </p>
-
-          <h2
-            class="m-0 max-w-150 text-[clamp(2rem,4vw,3.25rem)] leading-[1.08] font-bold tracking-[-0.035em] text-ink"
-          >
-            Ready to make your operations safer?
-          </h2>
-
-          <p class="mt-5 max-w-147.5 text-[1.0625rem] leading-[1.7] text-copy">
-            Talk with VisionSure Technologies about the right camera, radar or
-            visibility solution for your equipment.
-          </p>
-        </div>
-
-        <a
-          href="/contact#quote"
-          class:list={[
-            buttonClasses,
-            "relative z-1 min-h-13.5 shrink-0 px-6.5 max-[850px]:justify-self-start max-[600px]:w-full",
-          ]}
-        >
-          Request a Quote
-
-          <svg
-            class="h-4.5 w-4.5 transition-transform duration-250 group-hover:translate-x-0.75 motion-reduce:transition-none"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              d="M5 12h14M13 6l6 6-6 6"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-            </path>
-          </svg>
-        </a>
+<footer class="border-t border-line-light bg-surface-soft pt-14 pb-24">
+  <div class="container">
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <a href={navigation.company.find(item=>item.id==='home')!.href} aria-label={formatMessage(common.homeLink,{company:company.name})}><img src="/images/brand/visionsure-logo.svg" alt={company.name} width="210" height="58" class="w-48" loading="lazy"/></a>
+        <p class="mt-5 text-sm leading-7 text-copy">{copy.summary}</p>
+        <CallLink/>
+        <a href={`mailto:${company.contact.email}`} class="block py-3 text-sm font-bold text-brand-600 break-words">{company.contact.email}</a>
+        <p class="text-sm text-copy">{copy.locationNotice}</p>
       </div>
+      {navigation.main.filter(item=>item.children).map(item=><nav aria-label={formatMessage(copy.sectionLabel,{section:item.label})}>
+        <h2 class="text-sm font-extrabold tracking-wide text-ink"><a href={item.href}>{item.label}</a></h2>
+        <ul class="mt-4 space-y-1">{item.children!.map(child=><li><a href={child.href} class="inline-flex min-h-11 items-center text-sm text-copy hover:text-brand-600">{child.label}</a></li>)}</ul>
+      </nav>)}
+      <nav aria-label={copy.companyLabel}>
+        <h2 class="text-sm font-extrabold text-ink">{copy.company}</h2>
+        <ul class="mt-4">{navigation.company.map(item=><li>{item.id==='quote'?<QuoteLink href={item.href} label={item.label} class="inline-flex min-h-11 text-sm text-copy hover:text-brand-600"/>:<a href={item.href} class="inline-flex min-h-11 items-center text-sm text-copy">{item.label}</a>}</li>)}</ul>
+      </nav>
     </div>
-  </section>
-
-  <div
-    class="border-t border-line-light bg-[#eef1f2] pt-20 pb-8 max-[600px]:pt-14"
-  >
-    <div class="container">
-      <div
-        class="grid grid-cols-[1.7fr_1fr_0.8fr_1fr] gap-14 max-[1050px]:grid-cols-[1.4fr_1fr_1fr] max-[1050px]:gap-12 max-[850px]:grid-cols-2 max-[600px]:grid-cols-1 max-[600px]:gap-10.5"
-      >
-        <div
-          class="max-w-97.5 max-[850px]:col-span-full max-[850px]:max-w-135 max-[600px]:col-auto"
-        >
-          <a
-            href="/"
-            class="inline-flex w-full items-center justify-start max-[600px]:justify-center"
-            aria-label="VisionSure Technologies - Home"
-          >
-            <img
-              class="h-auto w-56 max-[1023px]:w-50 max-[480px]:w-46"
-              src="/images/brand/visionsure-logo.svg"
-              alt="VisionSure Technologies"
-              loading="lazy"
-            />
-          </a>
-
-          <p
-            class="mt-6.5 mb-5.5 text-[0.9375rem] leading-[1.75] text-copy text-justify"
-          >
-            Advanced camera, radar and AI-powered safety solutions designed to
-            improve visibility around heavy equipment and industrial operations.
-          </p>
-
-          <a
-            href="/contact"
-            class="group inline-flex items-center gap-2 font-bold text-brand-600 transition-colors duration-250 hover:text-brand-700 motion-reduce:transition-none"
-          >
-            Contact VisionSure
-            <span
-              class="transition-transform duration-250 group-hover:translate-x-1 motion-reduce:transition-none"
-              aria-hidden="true">&rarr;</span
-            >
-          </a>
-        </div>
-
-        <div>
-          <h3
-            class="mt-1.5 mb-5.5 text-sm font-extrabold tracking-[0.07em] text-ink uppercase"
-          >
-            Solutions
-          </h3>
-
-          <ul class="m-0 flex list-none flex-col gap-3 p-0">
-            {
-              solutionLinks.map((item) => (
-                <li class="m-0">
-                  <a href={item.href} class={footerLinkClasses}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div>
-          <h3
-            class="mt-1.5 mb-5.5 text-sm font-extrabold tracking-[0.07em] text-ink uppercase"
-          >
-            Company
-          </h3>
-
-          <ul class="m-0 flex list-none flex-col gap-3 p-0">
-            {
-              companyLinks.map((item) => (
-                <li class="m-0">
-                  <a href={item.href} class={footerLinkClasses}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div
-          class="max-[1050px]:col-[2/-1] max-[850px]:col-auto max-[600px]:col-auto"
-        >
-          <h3
-            class="mt-1.5 mb-5.5 text-sm font-extrabold tracking-[0.07em] text-ink uppercase"
-          >
-            Get in touch
-          </h3>
-
-          <p class="mb-5 text-[0.9375rem] leading-[1.7] text-copy">
-            Have a project or equipment safety requirement? Let&apos;s talk.
-          </p>
-
-          <a
-            href="/contact"
-            class="group inline-flex items-center gap-2 text-[0.9375rem] font-bold text-brand-600 transition-colors duration-250 hover:text-brand-700 motion-reduce:transition-none"
-          >
-            Contact us
-            <span
-              class="transition-transform duration-250 group-hover:translate-x-1 motion-reduce:transition-none"
-              aria-hidden="true"
-            >
-              &rarr;
-            </span>
-          </a>
-        </div>
-      </div>
-
-      <div
-        class="mt-16 flex items-center justify-between gap-6 border-t border-line-medium pt-7 max-[600px]:mt-12 max-[600px]:flex-col max-[600px]:items-start"
-      >
-        <p class="text-[0.8125rem] text-muted">
-          &copy; {currentYear} VisionSure Technologies. All rights reserved.
-        </p>
-
-        <nav
-          class="flex items-center gap-6 max-[600px]:flex-wrap max-[600px]:gap-x-5 max-[600px]:gap-y-2.5"
-          aria-label="Legal navigation"
-        >
-          {
-            legalLinks.map((item) => (
-              <a
-                href={item.href}
-                class="text-[0.8125rem] text-muted transition-colors duration-250 hover:text-brand-600 motion-reduce:transition-none"
-              >
-                {item.label}
-              </a>
-            ))
-          }
-        </nav>
-      </div>
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-5 border-t border-line-light pt-7">
+      <p class="text-xs text-copy">{formatMessage(copy.copyright,{year:String(new Date().getFullYear()),company:company.name})}</p>
+      <nav aria-label={copy.legalLabel} class="flex flex-wrap gap-5">{navigation.legal.map(item=><a href={item.href} class="inline-flex min-h-11 items-center text-xs text-copy hover:text-brand-600">{item.label}</a>)}</nav>
     </div>
   </div>
 </footer>

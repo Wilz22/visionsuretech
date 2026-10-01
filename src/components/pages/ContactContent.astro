@@ -1,0 +1,7 @@
+---
+import QuoteCta from '../ui/QuoteCta.astro';
+import type {Messages} from '../../i18n/types';
+interface Props {copy:Messages['contactPage'];cta:Messages['quoteCta'];quoteLabel:string;quoteHref:string;}
+const {copy,cta,quoteLabel,quoteHref}=Astro.props;
+---
+<section id="quote" class="scroll-mt-48 rounded-panel border border-line-light bg-white p-7"><h2 class="text-2xl font-bold text-ink">{copy.heading}</h2><p class="mt-4 leading-8 text-copy">{copy.introduction}</p><div class="mt-7"><QuoteCta copy={cta} label={quoteLabel} href={quoteHref}/></div></section><p class="mt-6 text-sm leading-7 text-copy">{copy.assessmentPending}</p>

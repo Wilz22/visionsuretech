@@ -1,0 +1,7 @@
+---
+import type {GlossaryTerm} from '../../lib/page-links';
+import type {GlossaryCopy} from '../../i18n/page-types';
+interface Props {copy:GlossaryCopy;terms:GlossaryTerm[];}
+const {copy,terms}=Astro.props;
+---
+<nav aria-label={copy.navigationLabel} class="flex flex-wrap gap-4">{terms.map(term=><a href={`#${term.id}`} class="inline-flex min-h-11 items-center rounded-pill border border-line-medium px-5 font-bold text-brand-600">{term.label}</a>)}</nav>{terms.map(term=><section id={term.id} class="scroll-mt-48 rounded-panel border border-line-light p-7"><h2 class="text-2xl font-bold text-ink">{term.title}</h2><p class="mt-4 leading-8 text-copy">{term.text}</p></section>)}<p class="text-sm leading-7 text-copy">{copy.notice}</p>
