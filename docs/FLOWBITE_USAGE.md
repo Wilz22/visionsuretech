@@ -1,5 +1,7 @@
 # Uso de Flowbite
 
+Actualización del 2026-10-01: las flechas de acciones, tarjetas y navegación usan `chevron-right` de Tabler mediante TablerIcon. Se retiraron flechas de texto y SVG manuales, también de los componentes anteriores. Los controles de regreso y desplegables rotan ese mismo icono para conservar su dirección y estado.
+
 Los enlaces “Request a Quote” usan `QuoteLink.astro` con la flecha de Tabler en Home, fichas industriales/dash cams, About, bloques CTA y Footer. Por petición del usuario del 2026-10-01, el header no incluye este CTA, ni en escritorio ni en el menú móvil. Mantener este componente compartido para conservar el icono en futuras páginas.
 
 Actualización visual del 2026-09-30: header compacto en una fila de escritorio; teléfono retirado del header por petición del usuario. Tabler Icons 3.48.0 aporta SVG para menú, desplegables, WhatsApp, equipos e industrias mediante `TablerIcon.astro`, sin React ni JavaScript de iconos. Fuente: [Tabler Icons](https://tabler.io/icons).
