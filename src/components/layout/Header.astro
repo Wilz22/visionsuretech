@@ -47,11 +47,11 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
                   id={`nav-trigger-${index}`}
                   type="button"
                   class:list={[
-                    "nav-mega-trigger group flex min-h-11 w-full items-center justify-between gap-2 rounded-control px-3 text-sm font-semibold transition-colors xl:w-auto xl:px-2 xl:text-[13px]",
+                    "nav-option nav-mega-trigger group flex min-h-11 w-full items-center justify-between gap-2 rounded-control px-3 text-sm font-semibold transition-colors duration-250 xl:w-auto xl:px-2 xl:text-[13px]",
                     active(item.href) ||
                     item.children.some((child) => active(child.href))
                       ? "bg-brand-50 text-brand-700"
-                      : "text-copy hover:bg-brand-50 hover:text-brand-700",
+                      : "text-copy max-xl:hover:bg-brand-50 hover:text-brand-600",
                   ]}
                   aria-expanded="false"
                   aria-controls={`nav-dropdown-${index}`}
@@ -68,10 +68,10 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
                   href={item.href}
                   aria-current={active(item.href) ? "page" : undefined}
                   class:list={[
-                    "flex min-h-11 items-center rounded-control px-3 text-sm font-semibold transition-colors xl:px-2 xl:text-[13px]",
+                    "nav-option flex min-h-11 items-center rounded-control px-3 text-sm font-semibold transition-colors duration-250 xl:px-2 xl:text-[13px]",
                     active(item.href)
                       ? "bg-brand-50 text-brand-700"
-                      : "text-copy hover:bg-brand-50 hover:text-brand-700",
+                      : "text-copy max-xl:hover:bg-brand-50 hover:text-brand-600",
                   ]}
                 >
                   {item.label}
@@ -170,6 +170,43 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
     </div>
   </div>
 </header>
+<style>
+  @media (min-width: 1280px) {
+    .nav-option {
+      position: relative;
+    }
+
+    .nav-option::after {
+      content: "";
+      position: absolute;
+      bottom: 0.125rem;
+      left: 50%;
+      width: 0;
+      height: 0.125rem;
+      transform: translateX(-50%);
+      border-radius: 9999px;
+      background: var(--color-brand-500);
+      transition: width 250ms;
+    }
+
+    .nav-option:hover,
+    .nav-option:focus-visible {
+      color: var(--color-brand-600);
+    }
+
+    .nav-option:hover::after,
+    .nav-option:focus-visible::after {
+      width: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-option,
+    .nav-option::after {
+      transition: none;
+    }
+  }
+</style>
 <script>
   import Collapse from "flowbite/lib/esm/components/collapse";
   import Dropdown from "flowbite/lib/esm/components/dropdown";
