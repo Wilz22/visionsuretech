@@ -1,35 +1,46 @@
-# Pendientes para publicar VisionSure
+# Pendientes VisionSure
 
-Actualizado: 2026-09-29.
+Actualizado: 2026-10-01. Estado detallado: [PHASE1_ACCEPTANCE.md](PHASE1_ACCEPTANCE.md).
 
-## Implementado
+## Implementado para revisión
 
-Home, catálogo de ocho sistemas con sus características, seis sectores, tres proyectos de referencia, About Us, doce FAQ y Contact con resumen local e integración configurable con Formspree. Privacy Policy y Terms of Use ya existen como borradores de referencia, junto con una 404 personalizada. Se conservan los enlaces entre páginas y la selección del sistema desde sus fichas.
+48 páginas: Products y ocho sistemas completos, seis industrias, diez páginas Dash Cams, Services, Resources, Glossary, About, Quote, Contact, FAQ, Projects, legales y 404. Seis plantillas, menú Flowbite, Home en el orden del cliente, teléfono/WhatsApp, filtros, galerías preparadas y referencias visibles. SEO/sitemap y pruebas técnicas incluidos.
 
-## Próximo bloque de desarrollo
+## Pendientes para cerrar Fase 1
 
-- Corregir la imagen social predeterminada: `SEO.astro` todavía apunta a `/images/og/visionsure-default.jpg`, que no existe. Las páginas que pasan una imagen propia no usan ese archivo.
-- Revisar SEO y sitemap para excluir rutas de referencia con `noindex`, y comprobar navegación, responsive y accesibilidad del conjunto.
-- Activar Contact cuando se confirme proveedor, formulario y destinatario. Por defecto **no se envía**: falta configurar y verificar recepción real, CAPTCHA y reglas del proveedor. Ver `CONTACT_SETUP.md`.
-- Completar `/privacy-policy` y `/terms`, revisar los textos con el cliente y publicar sus versiones definitivas. Ver `LEGAL_CONTENT_GUIDE.md`.
+Revisión de cierre contra el PDF: [PHASE1_CLOSURE_AUDIT.md](PHASE1_CLOSURE_AUDIT.md). Implementación local lista para revisión; 96 comprobaciones estructurales en navegador aprobadas. No hay entrega real de cotización ni aprobación del cliente.
 
-## Información del cliente
+Arquitectura: industrias y Dash Cams separadas en definiciones y contenido inglés. Los ocho productos tienen datos técnicos en `productDefinitions.ts` y textos/Markdown en `content/products/en/`. Datos y cuerpos originales conservados. Las seis plantillas propagan locale; BaseLayout prepara mensajes, navegación y metadatos del idioma. Validación más reciente: 37 pruebas, 48 páginas y auditoría de 42 rutas aprobadas.
 
-- Correo de cotizaciones, teléfono, dirección que se publicará y enlace de LinkedIn si corresponde.
-- Hosting o servicio de formularios, destinatario y acceso de configuración necesarios para recibir solicitudes.
-- Razón social, responsable de privacidad, jurisdicción, retención y condiciones reales para completar los borradores legales.
-- Fotografías y datos de instalaciones para sustituir los tres casos de referencia: equipo, configuración, cliente autorizado, fechas y resultados verificados. Ver `PROJECTS_CONTENT_GUIDE.md`.
-- Historia/equipo de la empresa y cualquier certificación que se quiera mostrar.
-- Cobertura de instalación, entrega, garantías y soporte. Las FAQ actuales indican que estas condiciones deben confirmarse.
-- Estadísticas y testimonios verificables previstos para Home. Si no hay material, acordar su omisión; no inventarlos.
-- Confirmar que las imágenes actuales de Home, los textos y los recursos de marca están aprobados para publicación.
+- [x] Separación de lógica, datos y textos de las vistas actuales: catálogo, industrias, Dash Cams y proyectos tienen definiciones/editorial independientes; layouts y wrappers principales propagan locale. 39 pruebas, 48 páginas y auditoría aprobados. Componentes antiguos no utilizados requieren migración antes de reutilizarlos. Ver [I18N_ARCHITECTURE.md](I18N_ARCHITECTURE.md).
+- [ ] Internacionalización pública futura: traducciones aprobadas, revisión técnica de valores narrativos, wrappers de rutas y SEO localizado. Mantener inglés solamente hasta recibirlas. No forma parte de habilitar idiomas en esta Fase 1.
 
-## Cierre técnico y publicación
+- [ ] Confirmar Formspree (propuesto) o proveedor alternativo, crear/verificar formulario hacia info@visionsuretech.ca y entregar su ID público. Envío actualmente desactivado.
 
-- Definir hosting, conectar dominio y configurar HTTPS.
-- Validar formulario completo, recepción y protección contra spam con la cuenta real. Las pruebas de transporte cubren aceptación, rechazo, fallos, límite y tiempo de espera mediante respuestas simuladas.
-- Revisar navegación completa, enlaces, accesibilidad, responsive, rendimiento, metadatos, imágenes sociales y sitemap.
-- Decidir si los ejemplos de Projects deben ocultarse antes de publicar. Actualmente están marcados como referencia y llevan `noindex`; las rutas pueden estar presentes en el sitemap.
-- Configurar `404.html` en el hosting y comprobar el código HTTP 404 para rutas desconocidas.
-- Retirar avisos provisionales solo cuando se complete la función o el contenido correspondiente.
-- Compilar y hacer una revisión final del sitio publicado. El servidor de desarrollo local no equivale a un despliegue de producción.
+  El usuario pidió expresamente dejar este punto pendiente el 2026-10-01; no crear cuentas ni volver a solicitar configuración durante la migración de datos.
+- [ ] Activar y comprobar una cotización real en dashboard y correo, con spam/CAPTCHA de la cuenta elegida. Las pruebas actuales son simuladas.
+- [ ] Decidir Assessment entre agenda externa y solicitud de contacto. El usuario pidió dejarlo pendiente para consultar al cliente. No hay reserva activa.
+- [ ] Confirmar compra/checkout de Dash Cams; hoy hay cotización y Assessment, sin carrito ni precios ficticios.
+- [ ] Confirmar campos obligatorios y si Contact requiere otro formulario. Hoy Quote tiene nombre, empresa, email y mensaje obligatorios.
+- [ ] Revisar con Jacob/Maria las seis plantillas y registrar aprobación escrita. No marcar la fase como cerrada antes de esto.
+
+## Insumos y decisiones del cliente / Fase 2
+
+- [ ] Product Master Sheet: códigos/nombres, especificaciones, componentes/accesorios, compatibilidad y datos finales de dash cams.
+- [ ] Fotos de producto/instalaciones y PDFs aprobados. Los ocho sistemas mantienen contenido del PDF original pendiente de contraste.
+- [ ] Casos reales, ubicaciones, permisos de clientes y resultados verificables para Projects. Ver PROJECTS_CONTENT_GUIDE.md.
+- [ ] Dirección completa, mapa, horarios, cobertura de instalación y soporte; Langley, teléfono y correo ya cargados.
+- [ ] Historia/equipo y decisión sobre Brands We Carry compatible con no publicar fabricantes.
+- [ ] Servicios, financiación OAC, ofertas para miembros y condiciones de evaluación gratuita. Enlaces aprobados de Crane repair, Joystick repair y OptiNect.
+- [ ] Contenido final para regulaciones, guía de selección, descargas y FAQ; su jerarquía futura de URLs. Hoy son bloques del hub Resources.
+- [ ] Privacy, Terms y Warranty: responsable, tratamiento/retención de datos, condiciones comerciales, cobertura, duración, exclusiones y reclamaciones. Ver LEGAL_CONTENT_GUIDE.md.
+
+## Lanzamiento
+
+- [ ] Hosting, dominio, HTTPS, configuración del proveedor y verificación de HTTP 404.
+- [ ] Decidir redirecciones desde /industries/ y antiguas fichas /solutions/<slug>/.
+- [ ] Sustituir referencias y actualizar noindex/sitemap únicamente tras aprobación del contenido.
+- [ ] QA final en entorno publicado, rendimiento y comprobación de recepción real.
+
+
+Estado de arquitectura actualizado (2026-10-01): 25 pruebas aprobadas; 48 páginas compiladas y auditoría de 42 rutas. Servicios, recursos y About reciben copy/datos/enlaces externos; se conserva el contenido referencial y sus pendientes. Próximo bloque: FAQ, Projects, legales y separación editorial por ID/idioma. Los overviews y categorías ya reciben modelos/mensajes externos; las piezas se clasifican por código, no por palabras inglesas. Contact/Assessment y las páginas auxiliares ya reciben datos y textos externos. Inglés sigue como único idioma público y Formspree continúa pendiente.

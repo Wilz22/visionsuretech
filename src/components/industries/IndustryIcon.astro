@@ -1,16 +1,8 @@
 ---
+import TablerIcon from '../ui/TablerIcon.astro';
 interface Props { industry: string; class?: string; }
 const { industry, class: className } = Astro.props;
-
-const paths: Record<string, string[]> = {
-  cranes: ['M18 78h60M30 78V20h10v58M14 20h66L40 8 14 20M60 20v29m-5 0a5 5 0 1 0 10 0', 'm30 32 10 10-10 10 10 10-10 10'],
-  mining: ['M8 73 36 25l18 27 10-16 24 37H8Z', 'm24 45 12 5 8-13M23 73l14-16 13 16M58 73l9-14 12 14'],
-  construction: ['M15 74h66M23 74V38h32v36M55 50h18v24M30 48h7m7 0h4m-18 10h7m7 0h4M34 74V66h10v8', 'M12 38h55L41 20 12 38M41 20V10'],
-  ports: ['M12 74h72M18 74V18h8v56M26 18h55v8H26M71 26v20M58 46h26v21H58Z', 'M33 52h18v22H33ZM64 52v9m7-9v9m7-9v9'],
-  'heavy-equipment': ['M13 65h42V45H31v20M13 65V53h18M40 45l12-19 24 14-5 8-18-11-5 8M71 48l10 14h8M8 81h53', 'M25 74a7 7 0 1 0-14 0 7 7 0 0 0 14 0M57 74a7 7 0 1 0-14 0 7 7 0 0 0 14 0'],
-  fleets: ['M10 64V29h45v35M55 42h17l12 13v16H68M10 71h8m14 0h22M62 48h9l7 9H62Z', 'M32 71a7 7 0 1 0-14 0 7 7 0 0 0 14 0M68 71a7 7 0 1 0-14 0 7 7 0 0 0 14 0M18 20h29'],
-};
+const icons = { cranes: 'crane', construction: 'building', 'heavy-equipment': 'backhoe', 'trucks-fleets': 'truck', mining: 'mountain', ports: 'ship', agriculture: 'tractor' } as const;
+const name = icons[industry as keyof typeof icons] ?? 'building';
 ---
-<svg class={className} viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-  {(paths[industry] ?? []).map((d) => <path d={d} />)}
-</svg>
+<TablerIcon name={name} class={className} />

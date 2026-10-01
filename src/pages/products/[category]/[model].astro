@@ -1,0 +1,17 @@
+---
+import {render} from 'astro:content';
+import {getPublishedProducts} from '../../../lib/products';
+import {resolveIndustries} from '../../../lib/industry-content';
+import {company} from '../../../data/company';
+import {getMessages} from '../../../i18n';
+import {buildIndustrialDetail,buildProductSchema} from '../../../lib/detail-models';
+import ProductDetail from '../../../components/products/IndustrialProductDetail.astro';
+export async function getStaticPaths(){return (await getPublishedProducts()).map(product=>({params:{category:product.data.category,model:product.data.slug},props:{product}}));}
+const {product}=Astro.props;
+const messages=getMessages();
+const industries=resolveIndustries(messages.industryEditorial);
+const model=buildIndustrialDetail(product,await getPublishedProducts(),industries,messages);
+const {Content}=await render(product);
+const schema=buildProductSchema(product,Astro.site!,company.name);
+---
+<ProductDetail model={model} messages={messages} whatsappHref={`https://wa.me/${company.contact.whatsappNumber}`} schema={schema}><Content/></ProductDetail>

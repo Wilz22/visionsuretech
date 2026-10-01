@@ -1,10 +1,10 @@
 ---
 import { homeContent } from '../../data/home';
-import { getPublishedSolutions } from '../../lib/solutions';
-import { solutionCategories } from '../../data/solutionCategories';
+import { getPublishedProducts } from '../../lib/products';
+import { solutionCategories } from '../../data/productCategories';
 import SystemVisual from '../solutions/SystemVisual.astro';
 
-const solutions = await getPublishedSolutions();
+const solutions = await getPublishedProducts();
 const categories = solutionCategories.filter((category) => solutions.some(({ data }) => data.category === category.id));
 ---
 
@@ -31,7 +31,7 @@ const categories = solutionCategories.filter((category) => solutions.some(({ dat
               <h3 class="text-2xl leading-tight font-bold tracking-[-0.03em] text-ink"><a href={`/solutions#${category.id}`} class="hover:text-brand-600">{category.title}</a></h3>
               <p class="mt-4 text-[0.9375rem] leading-7 text-copy">{category.description}</p>
               <ul class="mt-auto divide-y divide-line-light pt-6">
-                {systems.map(({ data }) => <li><a href={`/solutions/${data.slug}`} class="group flex items-center justify-between gap-3 py-3 text-sm font-semibold text-ink hover:text-brand-600"><span><span class="block text-xs font-bold text-brand-600">{data.systemCode}</span><span class="mt-1 block">{data.title}</span></span><span aria-hidden="true" class="text-brand-600">→</span></a></li>)}
+                {systems.map(({ data }) => <li><a href={`/products/${data.category}/${data.slug}/`} class="group flex items-center justify-between gap-3 py-3 text-sm font-semibold text-ink hover:text-brand-600"><span><span class="block text-xs font-bold text-brand-600">{data.systemCode}</span><span class="mt-1 block">{data.title}</span></span><span aria-hidden="true" class="text-brand-600">→</span></a></li>)}
               </ul>
             </div>
           </li>

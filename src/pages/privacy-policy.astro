@@ -1,5 +1,9 @@
 ---
 import LegalDocument from '../components/legal/LegalDocument.astro';
-import { privacyPolicy } from '../data/legal';
+import {buildLegalDocument} from '../lib/legal-content';
+import {getMessages} from '../i18n';
+import {routes} from '../data/company';
+const messages=getMessages();
+const document=buildLegalDocument('privacy',messages.legalEditorial);
 ---
-<LegalDocument document={privacyPolicy} />
+<LegalDocument document={document} messages={messages} homeHref={routes.home} contactHref={routes.contact}/>

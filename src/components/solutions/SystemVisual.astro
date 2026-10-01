@@ -1,12 +1,16 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import {getMessages} from '../../i18n';
+import type {Messages} from '../../i18n/types';
 
 interface Props {
-  solution: CollectionEntry<'solutions'>;
+  copy?:Messages['productVisual'];
+  solution: CollectionEntry<'products'>;
   eager?: boolean;
 }
-const { solution, eager = false } = Astro.props;
+const { solution, eager = false,copy=getMessages().productVisual } = Astro.props;
 const { image, systemCode } = solution.data;
+const fallback=copy.byModel[systemCode]??{title:copy.fallbackTitle,tags:copy.fallbackTags};
 ---
 
 <div class="flex h-full min-h-0 items-center justify-center bg-white p-6 sm:p-8">
@@ -30,9 +34,9 @@ const { image, systemCode } = solution.data;
         </svg>
       </div>
       <p class="mt-3 text-xs font-bold text-brand-600">{systemCode}</p>
-      <p class="mt-2 text-lg leading-tight font-bold tracking-tight text-ink">8 AI channels. One connected fleet.</p>
+      <p class="mt-2 text-lg leading-tight font-bold tracking-tight text-ink">{fallback.title}</p>
       <div class="mt-3 flex flex-wrap justify-center gap-2">
-        {['WiFi', 'GPS', '4G'].map((label) => <span class="rounded-pill bg-surface-brand px-4 py-1.5 text-xs font-bold text-brand-700">{label}</span>)}
+        {fallback.tags.map((label) => <span class="rounded-pill bg-surface-brand px-4 py-1.5 text-xs font-bold text-brand-700">{label}</span>)}
       </div>
     </div>
   )}

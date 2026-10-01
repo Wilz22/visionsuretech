@@ -28,6 +28,8 @@ test('only explicit provider acceptance produces a success result', async () => 
     return Response.json({ next: '/thanks' });
   });
   assert.equal(response.status, 'accepted');
+  assert.equal(response.code,'accepted');
+  assert.equal('message' in response,false);
   for (const body of [null, {}, { ok: true }, { ok: false, next: '/thanks' }, { next: '/thanks', error: 'Rejected' }, { next: '/thanks', errors: [{ message: 'Rejected' }] }]) {
     assert.notEqual((await sendQuote(endpoint, data(), async () => Response.json(body))).status, 'accepted');
   }
@@ -37,6 +39,8 @@ test('validation errors, rate limits and server failures remain distinguishable'
     assert.equal((await sendQuote(endpoint, data(), async () => new Response('', { status: code }))).status, 'rejected');
   }
   assert.equal((await sendQuote(endpoint, data(), async () => new Response('', { status: 503 }))).status, 'uncertain');
+  assert.equal((await sendQuote(endpoint, data(), async () => new Response('', { status: 429 }))).code,'rateLimit');
+  assert.equal((await sendQuote(endpoint, data(), async () => new Response('', { status: 503 }))).code,'unconfirmed');
 });
 test('network failure and malformed replies never claim receipt', async () => {
   assert.equal((await sendQuote(endpoint, data(), async () => { throw new TypeError('offline'); })).status, 'uncertain');

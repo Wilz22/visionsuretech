@@ -1,12 +1,19 @@
 import { getCollection } from 'astro:content';
-import { industries } from '../data/industries';
-import { getPublishedSolutions } from './solutions';
+import {getMessages} from '../i18n';
+import {defaultLocale,type Locale} from '../i18n/config';
+import {resolveIndustries} from './industry-content';
+import {projectDefinitions} from '../data/projectDefinitions';
+import { getPublishedProducts } from './products';
 
 // Reference entries are intentionally visible for client review; drafts are not.
-export async function getVisibleProjects() {
-  const entries = (await getCollection('projects', ({ data }) => !data.draft))
+export async function getVisibleProjects(locale:Locale=defaultLocale) {
+  const industries=resolveIndustries(getMessages(locale).industryEditorial);
+  const entries = (await getCollection('projects', ({ data }) => !data.draft && data.locale===locale))
     .sort((a, b) => a.data.order - b.data.order);
-  const solutions = await getPublishedSolutions();
+  const solutions = await getPublishedProducts(locale);
+  for(const definition of projectDefinitions.filter(project=>!project.draft)) {
+    if(!entries.some(project=>project.data.slug===definition.slug)) throw new Error(`Missing project translation: ${locale}/${definition.slug}`);
+  }
 
   for (const field of ['slug', 'order'] as const) {
     if (new Set(entries.map(({ data }) => data[field])).size !== entries.length) {

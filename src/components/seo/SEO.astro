@@ -1,5 +1,6 @@
 ---
 interface Props {
+  openGraphLocale?:string;
   title: string;
   description: string;
   image?: string;
@@ -9,9 +10,10 @@ interface Props {
 }
 
 const {
+  openGraphLocale,
   title,
   description,
-  image = "/images/og/visionsure-default.jpg",
+  image = "/images/brand/visionsure-social.png",
   canonical,
   noindex = false,
   type = "website",
@@ -36,10 +38,11 @@ const fullTitle = title.includes("VisionSure")
 
 <link rel="canonical" href={canonicalURL} />
 
-<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+<meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
+{openGraphLocale&&<meta property="og:locale" content={openGraphLocale}/>}
 <meta property="og:site_name" content={siteName} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />

@@ -1,4 +1,8 @@
 import { sendQuote } from '../lib/quote-delivery';
+import { resolvePrefill } from '../lib/quote-prefill';
+import {buildQuoteSummary} from '../lib/quote-summary';
+import {formatMessage} from '../i18n/format';
+import type {QuoteRuntimeCopy} from '../i18n/quote-types';
 
 const form = document.querySelector<HTMLFormElement>('#quote-form');
 const fields = document.querySelector<HTMLFieldSetElement>('#quote-fields');
@@ -14,6 +18,7 @@ const deliveryStatus = document.querySelector<HTMLElement>('#delivery-status');
 const submit = document.querySelector<HTMLButtonElement>('#quote-submit');
 
 if (form && fields && system && systemLink && systemNotice && summary && summaryText && summaryHeading && copy && copyStatus && deliveryStatus && submit) {
+  const messages: QuoteRuntimeCopy = JSON.parse(form.dataset.copy!);
   const endpoint = form.dataset.endpoint;
   const idleLabel = submit.textContent;
   let inFlight = false;
@@ -25,9 +30,9 @@ if (form && fields && system && systemLink && systemNotice && summary && summary
     else systemLink.removeAttribute('href');
   };
   // Only match known catalog options. Never render query text or use it as a URL.
-  const requested = new URLSearchParams(window.location.search).get('system');
-  if (requested) {
-    const option = Array.from(system.options).find((item) => item.value === requested);
+  const requested = resolvePrefill(window.location.search, Array.from(system.options).map(item => ({value:item.value,code:item.dataset.code})));
+  if (requested !== null) {
+    const option = requested ? Array.from(system.options).find((item) => item.value === requested) : undefined;
     if (option) option.defaultSelected = true;
     else systemNotice.hidden = false;
   }
@@ -64,28 +69,28 @@ if (form && fields && system && systemLink && systemNotice && summary && summary
     if (inFlight || accepted) return;
     form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]').forEach((input) => {
       input.value = input.value.trim();
-      input.setCustomValidity(!input.value ? 'Please complete this field.' : input.minLength > 0 && input.value.length < input.minLength ? `Please enter at least ${input.minLength} characters.` : '');
+      input.setCustomValidity(!input.value ? messages.required : input.minLength > 0 && input.value.length < input.minLength ? formatMessage(messages.minimumLength,{count:String(input.minLength)}) : '');
     });
     if (!form.reportValidity()) return;
     const data = new FormData(form);
-    const value = (name: string) => String(data.get(name) ?? '').trim() || 'Not specified';
+    const value = (name: string) => String(data.get(name) ?? '').trim();
     const industry = form.querySelector<HTMLSelectElement>('#quote-industry');
     if (endpoint) {
-      data.set('_subject', 'VisionSure website quote request');
-      data.set('system_label', system.selectedOptions[0].textContent ?? 'Not sure yet');
-      data.set('industry_label', industry?.value ? industry.selectedOptions[0].textContent ?? '' : 'Not specified');
+      data.set('_subject', messages.subject);
+      data.set('system_label', system.selectedOptions[0].textContent ?? messages.notSure);
+      data.set('industry_label', industry?.value ? industry.selectedOptions[0].textContent ?? '' : messages.notSpecified);
       inFlight = true;
       fields.disabled = true;
       submit.disabled = true;
-      submit.textContent = 'Sending…';
+      submit.textContent = messages.sending;
       form.setAttribute('aria-busy', 'true');
       deliveryStatus.hidden = false;
-      deliveryStatus.textContent = 'Sending your request…';
+      deliveryStatus.textContent = messages.sendingStatus;
       try {
         const result = await sendQuote(endpoint, data);
         accepted = result.status === 'accepted';
         deliveryStatus.dataset.state = result.status;
-        deliveryStatus.textContent = result.message;
+        deliveryStatus.textContent = messages.delivery[result.code];
       } finally {
         inFlight = false;
         fields.disabled = false;
@@ -97,17 +102,12 @@ if (form && fields && system && systemLink && systemNotice && summary && summary
       return;
     }
     // Without an enabled endpoint, prepare locally and never transmit entries.
-    summaryText.value = [
-      'VISIONSURE — REQUEST SUMMARY (NOT SENT)', '',
-      `Name: ${value('name')}`, `Company: ${value('company')}`,
-      `Email: ${value('email')}`, `Phone: ${value('phone')}`, '',
-      `Industry: ${industry?.value ? industry.selectedOptions[0].textContent : 'Not specified'}`,
-      `Location: ${value('location')}`, `Equipment: ${value('equipment')}`,
-      `Machines / vehicles: ${value('quantity')}`,
-      `System: ${system.selectedOptions[0].textContent}`,
-      `Preferred timeframe: ${value('timeframe')}`, '',
-      'Requirements:', value('message'),
-    ].join('\n');
+    summaryText.value = buildQuoteSummary({
+      name:value('name'),company:value('company'),email:value('email'),phone:value('phone'),
+      industry:industry?.value?industry.selectedOptions[0].textContent??'':'',
+      location:value('location'),equipment:value('equipment'),quantity:value('quantity'),
+      system:system.selectedOptions[0].textContent??'',timeframe:value('timeframe'),message:value('message'),
+    },messages);
     summary.hidden = false;
     summaryHeading.focus();
   });
@@ -115,12 +115,12 @@ if (form && fields && system && systemLink && systemNotice && summary && summary
     const text = summaryText.value;
     try {
       await navigator.clipboard.writeText(text);
-      if (text === summaryText.value && !summary.hidden) copyStatus.textContent = 'Summary copied. It has not been sent to VisionSure.';
+      if (text === summaryText.value && !summary.hidden) copyStatus.textContent = messages.copied;
     } catch {
       if (text === summaryText.value && !summary.hidden) {
         summaryText.focus();
         summaryText.select();
-        copyStatus.textContent = 'Automatic copy is unavailable. Copy the selected text manually.';
+        copyStatus.textContent = messages.copyFailed;
       }
     }
   });

@@ -1,71 +1,74 @@
 ---
-import { getPublishedSolutions } from '../../lib/solutions';
-import { industries } from '../../data/industries';
-import { quoteEndpoint } from '../../data/quote';
-const solutions = await getPublishedSolutions();
+import InlineMessage from '../ui/InlineMessage.astro';
+import type {QuoteFormCopy} from '../../i18n/quote-types';
+import type {QuoteOption} from '../../lib/quote-options';
+interface Props {copy:QuoteFormCopy;systems:QuoteOption[];industryOptions:{value:string;label:string}[];endpoint:string|null;action:string;links:Record<'privacy'|'terms',{label:string;href:string}>;}
+const {copy,systems,industryOptions,endpoint,action,links}=Astro.props;
 const fieldClass = 'mt-2 block min-h-12 w-full min-w-0 rounded-control border border-line-medium bg-white px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-brand-500';
 const labelClass = 'block text-sm font-bold text-ink';
 ---
 
 <div class="rounded-panel border border-line-light bg-white p-6 shadow-soft sm:p-9">
-  <h2 id="quote-heading" class="text-3xl font-bold tracking-tight text-ink">{quoteEndpoint ? 'Request a quote.' : 'Prepare your request.'}</h2>
-  <p class="mt-3 text-sm leading-7 text-copy">Tell us about your equipment and the view you need. Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required.</p>
+  <h2 id="quote-heading" class="text-3xl font-bold tracking-tight text-ink">{endpoint ? copy.headings.live : copy.headings.local}</h2>
+  <p class="mt-3 text-sm leading-7 text-copy">{copy.intro}</p>
   <aside id="quote-mode" class="mt-6 rounded-card border border-line-brand bg-surface-brand p-5 text-sm leading-7 text-copy">
-    <p class="font-bold text-brand-700">{quoteEndpoint ? 'Tell us what your operation needs.' : 'Online sending is not available yet.'}</p>
-    <p>{quoteEndpoint ? 'Your request will be processed through Formspree for delivery to VisionSure. Review the privacy information below before sending.' : 'You can prepare and copy a request summary here. Your entries stay on this page and are not sent to VisionSure. Copy the summary before leaving or reloading.'}</p>
+    <p class="font-bold text-brand-700">{endpoint ? copy.mode.liveTitle : copy.mode.localTitle}</p>
+    <p>{endpoint ? copy.mode.liveText : copy.mode.localText}</p>
   </aside>
-  <noscript><p class="mt-5 text-sm text-copy">Enable JavaScript to use this form, or use the direct contact details if available.</p></noscript>
+  <noscript><p class="mt-5 text-sm text-copy">{copy.noScript}</p></noscript>
 
-  <form id="quote-form" method="post" action={quoteEndpoint ?? '/contact#quote'} data-endpoint={quoteEndpoint ?? ''} aria-labelledby="quote-heading" aria-describedby="quote-mode">
+  <form id="quote-form" method="post" action={endpoint ?? action} data-endpoint={endpoint ?? ''} data-copy={JSON.stringify(copy.runtime)} aria-labelledby="quote-heading" aria-describedby="quote-mode">
     <!-- Disabled until the submit handler is installed; no accidental fallback POST. -->
     <fieldset id="quote-fields" disabled class="mt-8 min-w-0 space-y-8">
-      <legend class="sr-only">Request details</legend>
+      <legend class="sr-only">{copy.requestDetails}</legend>
       <fieldset class="min-w-0">
-        <legend class="mb-5 text-xs font-extrabold tracking-widest text-brand-600 uppercase">01 / Your details</legend>
+        <legend class="mb-5 text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.yourDetails}</legend>
         <div class="grid gap-5 sm:grid-cols-2">
-          <label class={labelClass} for="quote-name">Full name *<input class={fieldClass} id="quote-name" name="name" autocomplete="name" required maxlength="100" /></label>
-          <label class={labelClass} for="quote-company">Company *<input class={fieldClass} id="quote-company" name="company" autocomplete="organization" required maxlength="150" /></label>
-          <label class={labelClass} for="quote-email">Email *<input class={fieldClass} id="quote-email" name="email" type="email" autocomplete="email" required maxlength="254" /></label>
-          <label class={labelClass} for="quote-phone">Phone <span class="font-normal text-copy">(optional)</span><input class={fieldClass} id="quote-phone" name="phone" type="tel" autocomplete="tel" maxlength="50" /></label>
+          <label class={labelClass} for="quote-name">{copy.labels.name} *<input class={fieldClass} id="quote-name" name="name" autocomplete="name" required maxlength="100" /></label>
+          <label class={labelClass} for="quote-company">{copy.labels.company} *<input class={fieldClass} id="quote-company" name="company" autocomplete="organization" required maxlength="150" /></label>
+          <label class={labelClass} for="quote-email">{copy.labels.email} *<input class={fieldClass} id="quote-email" name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+          <label class={labelClass} for="quote-phone">{copy.labels.phone} <span class="font-normal text-copy">{copy.optional}</span><input class={fieldClass} id="quote-phone" name="phone" type="tel" autocomplete="tel" maxlength="50" /></label>
         </div>
       </fieldset>
       <fieldset class="min-w-0 border-t border-line-light pt-7">
-        <legend class="pr-3 text-xs font-extrabold tracking-widest text-brand-600 uppercase">02 / Equipment & application</legend>
+        <legend class="pr-3 text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.equipmentDetails}</legend>
         <div class="grid gap-5 sm:grid-cols-2">
-          <label class={labelClass} for="quote-industry">Industry<select class={fieldClass} id="quote-industry" name="industry"><option value="">Select an industry (optional)</option>{industries.map((industry) => <option value={industry.id}>{industry.title}</option>)}<option value="other">Other</option></select></label>
-          <label class={labelClass} for="quote-location">Operating location<input class={fieldClass} id="quote-location" name="location" placeholder="City / region / country" maxlength="200" /></label>
-          <label class={labelClass} for="quote-equipment">Equipment make & model<input class={fieldClass} id="quote-equipment" name="equipment" placeholder="e.g. crane, loader or fleet vehicle" maxlength="200" /></label>
-          <label class={labelClass} for="quote-quantity">Number of machines / vehicles<input class={fieldClass} id="quote-quantity" name="quantity" type="number" inputmode="numeric" min="1" max="100000" step="1" /></label>
+          <label class={labelClass} for="quote-equipment">{copy.labels.equipment}<input class={fieldClass} id="quote-equipment" name="equipment" placeholder={copy.placeholders.equipment} maxlength="200" /></label>
           <div class="min-w-0 sm:col-span-2">
-            <label class={labelClass} for="quote-system">System of interest</label>
-            <select class={fieldClass} id="quote-system" name="system" aria-describedby="system-hint"><option value="">Not sure yet — help me choose</option>{solutions.map(({ data }) => <option value={data.systemCode} data-url={`/solutions/${data.slug}`}>{data.systemCode} · {data.title}</option>)}</select>
-            <p id="system-hint" class="mt-2 text-xs leading-6 text-copy">Choose a starting point. You can mention additional systems in your description.</p>
-            <a id="selected-system-link" hidden class="mt-2 text-sm font-bold text-brand-600 underline underline-offset-4">View selected system specifications</a>
-            <p id="system-notice" hidden role="status" class="mt-2 text-sm text-copy">The requested system was not found. Please select an option from the catalog.</p>
+            <label class={labelClass} for="quote-system">{copy.labels.system}</label>
+            <select class={fieldClass} id="quote-system" name="system" aria-describedby="system-hint"><option value="">{copy.systemDefault}</option>{systems.map(item => <option value={item.value} data-code={item.code} data-url={item.href}>{item.label}</option>)}</select>
+            <p id="system-hint" class="mt-2 text-xs leading-6 text-copy">{copy.systemHint}</p>
+            <a id="selected-system-link" hidden class="mt-2 text-sm font-bold text-brand-600 underline underline-offset-4">{copy.systemLink}</a>
+            <p id="system-notice" hidden role="status" class="mt-2 text-sm text-copy">{copy.systemMissing}</p>
           </div>
-          <label class={`${labelClass} sm:col-span-2`} for="quote-timeframe">Preferred timeframe <span class="font-normal text-copy">(optional)</span><input class={fieldClass} id="quote-timeframe" name="timeframe" placeholder="e.g. planned maintenance period" maxlength="150" /></label>
-          <label class={`${labelClass} sm:col-span-2`} for="quote-message">What do you need to see or monitor? *<textarea class={`${fieldClass} min-h-36 resize-y`} id="quote-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder="Describe the blind spots, operating conditions and whether you need recording, obstacle alerts or remote access." aria-describedby="message-hint"></textarea><span id="message-hint" class="mt-2 block text-xs font-normal leading-6 text-copy">10–5,000 characters. Describe available photographs here; attachments are not collected on this page.</span></label>
+          <label class={`${labelClass} sm:col-span-2`} for="quote-message">{copy.labels.message} *<textarea class={`${fieldClass} min-h-36 resize-y`} id="quote-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder={copy.placeholders.message} aria-describedby="message-hint"></textarea><span id="message-hint" class="mt-2 block text-xs font-normal leading-6 text-copy">{copy.messageHint}</span></label>
         </div>
       </fieldset>
-      <div hidden aria-hidden="true"><label for="quote-website">Leave this field empty</label><input id="quote-website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
+      <details class="rounded-card border border-line-light p-5"><summary class="cursor-pointer font-bold text-brand-600">{copy.additionalDetails}</summary><div class="mt-5 grid gap-5 sm:grid-cols-2">
+          <label class={labelClass} for="quote-industry">{copy.labels.industry}<select class={fieldClass} id="quote-industry" name="industry"><option value="">{copy.industryDefault}</option>{industryOptions.map(item => <option value={item.value}>{item.label}</option>)}<option value="other">{copy.otherIndustry}</option></select></label>
+          <label class={labelClass} for="quote-location">{copy.labels.location}<input class={fieldClass} id="quote-location" name="location" placeholder={copy.placeholders.location} maxlength="200" /></label>
+          <label class={labelClass} for="quote-quantity">{copy.labels.quantity}<input class={fieldClass} id="quote-quantity" name="quantity" type="number" inputmode="numeric" min="1" max="100000" step="1" /></label>
+          <label class={`${labelClass}`} for="quote-timeframe">{copy.labels.timeframe} <span class="font-normal text-copy">{copy.optional}</span><input class={fieldClass} id="quote-timeframe" name="timeframe" placeholder={copy.placeholders.timeframe} maxlength="150" /></label>
+      </div></details>
+      <div hidden aria-hidden="true"><label for="quote-website">{copy.honeypot}</label><input id="quote-website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
       <div class="text-sm leading-7 text-copy">
-        {quoteEndpoint && <label class="mb-4 flex items-start gap-3" for="quote-consent"><input id="quote-consent" name="consent" value="request-response" type="checkbox" required class="mt-1.5 h-5 w-5 shrink-0 accent-brand-500" /><span>I agree to the use of these details to respond to this request, as described in the <a href="/privacy-policy" class="font-bold text-brand-600 underline underline-offset-4">Privacy Policy</a>. *</span></label>}
-        <p>Read the <a href="/privacy-policy" class="font-bold text-brand-600 underline underline-offset-4">Privacy Policy</a> and <a href="/terms" class="font-bold text-brand-600 underline underline-offset-4">Terms of Use</a>. A request does not place an order.</p>
+        {endpoint && <label class="mb-4 flex items-start gap-3" for="quote-consent"><input id="quote-consent" name="consent" value="request-response" type="checkbox" required class="mt-1.5 h-5 w-5 shrink-0 accent-brand-500" /><span><InlineMessage message={copy.consent} links={links}/> *</span></label>}
+        <p><InlineMessage message={copy.legalNotice} links={links}/></p>
       </div>
       <div class="flex flex-wrap items-center gap-4 border-t border-line-light pt-6">
-        <button id="quote-submit" type="submit" class="inline-flex min-h-12 items-center justify-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600 disabled:cursor-wait disabled:opacity-60">{quoteEndpoint ? 'Send request' : 'Prepare summary'}</button>
-        <button type="reset" class="min-h-12 rounded-pill border border-line-medium px-6 py-3 text-sm font-bold text-copy hover:border-brand-500">Clear details</button>
+        <button id="quote-submit" type="submit" class="inline-flex min-h-12 items-center justify-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600 disabled:cursor-wait disabled:opacity-60">{endpoint ? copy.send : copy.prepare}</button>
+        <button type="reset" class="min-h-12 rounded-pill border border-line-medium px-6 py-3 text-sm font-bold text-copy hover:border-brand-500">{copy.clear}</button>
       </div>
     </fieldset>
   </form>
   <div id="delivery-status" hidden tabindex="-1" role="status" aria-live="polite" class="mt-6 scroll-mt-28 rounded-card border border-line-brand bg-surface-brand p-5 text-sm leading-7 text-ink"></div>
 
   <section id="quote-summary" hidden class="mt-8 scroll-mt-28 rounded-card border border-line-brand bg-surface-brand p-5 sm:p-6" aria-labelledby="summary-heading">
-    <h3 id="summary-heading" tabindex="-1" class="text-xl font-bold text-ink">Your summary is ready to copy.</h3>
-    <p class="mt-2 text-sm leading-7 text-copy">This request has not been sent. Copy it for your records and share it once a contact channel is available.</p>
-    <label for="summary-text" class="mt-5 block text-sm font-bold text-ink">Request summary</label>
+    <h3 id="summary-heading" tabindex="-1" class="text-xl font-bold text-ink">{copy.summaryTitle}</h3>
+    <p class="mt-2 text-sm leading-7 text-copy">{copy.summaryNotice}</p>
+    <label for="summary-text" class="mt-5 block text-sm font-bold text-ink">{copy.summaryLabel}</label>
     <textarea id="summary-text" readonly rows="12" class={`${fieldClass} resize-y font-mono leading-6`}></textarea>
-    <button id="copy-summary" type="button" class="mt-4 min-h-12 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600">Copy summary</button>
+    <button id="copy-summary" type="button" class="mt-4 min-h-12 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600">{copy.copySummary}</button>
     <p id="copy-status" role="status" aria-live="polite" class="mt-3 text-sm leading-7 text-copy"></p>
   </section>
 </div>

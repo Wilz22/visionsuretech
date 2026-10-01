@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
+    "@tabler/icons": "^3.48.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
+    "flowbite": "^4.0.2",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {

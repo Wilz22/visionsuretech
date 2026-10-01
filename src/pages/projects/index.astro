@@ -1,30 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ProjectCard from '../../components/projects/ProjectCard.astro';
-import { getVisibleProjects } from '../../lib/projects';
-const projects = await getVisibleProjects();
-const hasReferences = projects.some(({ entry }) => entry.data.status === 'reference');
-const hasPublished = projects.some(({ entry }) => entry.data.status === 'published');
+import ProjectOverview from '../../components/projects/ProjectOverview.astro';
+import {getVisibleProjects} from '../../lib/projects';
+import {buildProjectOverview} from '../../lib/project-models';
+import {getMessages} from '../../i18n';
+import {routes} from '../../data/company';
+const messages=getMessages();
+const model=buildProjectOverview(await getVisibleProjects());
 ---
-
-<BaseLayout title="Projects & Case Studies" description="Explore VisionSure project stories, from operational challenges to camera, radar and recording configurations." noindex={!hasPublished}>
-  <section class="border-b border-line-light bg-page pt-10 pb-16 sm:pb-20">
-    <div class="container">
-      <nav aria-label="Breadcrumb" class="text-sm text-copy"><ol class="flex gap-3"><li><a href="/" class="hover:text-brand-600">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Projects</li></ol></nav>
-      <div class="mt-12 grid gap-7 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16">
-        <div><p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">Projects & case studies</p><h1 class="mt-5 text-4xl leading-[1.05] font-bold tracking-[-0.045em] text-ink sm:text-6xl">Every configuration<br />starts with a challenge.</h1></div>
-        <p class="max-w-xl text-lg leading-8 text-copy">Equipment, operating conditions and the view an operator needs. Follow the story from the initial requirement to the system configuration and its results.</p>
-      </div>
-      {hasReferences && <aside class="mt-10 max-w-3xl rounded-card border border-line-brand bg-surface-brand p-6"><h2 class="text-sm font-bold text-brand-700">Reference content · Project details pending</h2><p class="mt-2 text-sm leading-7 text-copy">The entries marked “Reference example” illustrate the planned case study format. They describe possible applications, not completed VisionSure installations. Client details, photographs and verified results will be added when available.</p></aside>}
-    </div>
-  </section>
-  <section class="container py-16 sm:py-20" aria-label="Project stories">
-    {projects.length ? <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{projects.map((project) => <li><ProjectCard project={project} /></li>)}</ul> : <p class="text-copy">Project stories are being prepared. Explore our systems and their specifications below.</p>}
-  </section>
-  <section class="bg-surface-brand py-14 sm:py-16">
-    <div class="container flex flex-wrap items-center justify-between gap-7">
-      <div class="max-w-xl"><h2 class="text-3xl font-bold tracking-tight text-ink">Find a starting point for your equipment.</h2><p class="mt-4 leading-7 text-copy">Explore the full catalog or browse applications by industry.</p></div>
-      <div class="flex flex-wrap gap-3"><a href="/solutions" class="inline-flex min-h-12 items-center rounded-pill bg-brand-500 px-6 text-sm font-bold text-white hover:bg-brand-600">Explore solutions</a><a href="/industries" class="inline-flex min-h-12 items-center rounded-pill border border-line-medium bg-white px-6 text-sm font-bold text-brand-600 hover:border-brand-500">Browse industries</a></div>
-    </div>
-  </section>
-</BaseLayout>
+<BaseLayout title={messages.projectsPage.title} description={messages.projectsPage.description} noindex={!model.hasPublished}><ProjectOverview model={model} messages={messages} homeHref={routes.home} productsHref={routes.products} industriesHref={routes.industries}/></BaseLayout>

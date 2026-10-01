@@ -1,0 +1,16 @@
+---
+import ListingLayout from '../../../components/templates/ListingLayout.astro';
+import CategoryListing from '../../../components/products/CategoryListing.astro';
+import {productCategoryIds} from '../../../data/catalogCategories';
+import {resolveIndustries} from '../../../lib/industry-content';
+import {getPublishedProducts} from '../../../lib/products';
+import {buildCategoryListing} from '../../../lib/listing-models';
+import {productUrl} from '../../../lib/routes';
+import {getMessages} from '../../../i18n';
+import {defaultLocale} from '../../../i18n/config';
+export function getStaticPaths(){return productCategoryIds.map(id=>({params:{category:id},props:{id}}));}
+const messages=getMessages();
+const industries=resolveIndustries(messages.industryEditorial);
+const model=buildCategoryListing(Astro.props.id,await getPublishedProducts(),industries,messages);
+---
+<ListingLayout title={model.category.title} description={model.category.description} noindex crumbs={model.crumbs} breadcrumbLabel={messages.common.breadcrumb}><CategoryListing model={model} messages={messages} productHref={product=>productUrl(product.data)} locale={defaultLocale}/></ListingLayout>

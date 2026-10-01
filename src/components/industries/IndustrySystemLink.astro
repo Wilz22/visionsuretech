@@ -1,11 +1,11 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getSolutionCategory } from '../../data/solutionCategories';
+import type {IndustrySystemCopy} from '../../i18n/project-types';
+import {formatMessage} from '../../i18n/format';
 
-interface Props { solution: CollectionEntry<'solutions'>; reason: string; }
-const { solution, reason } = Astro.props;
+interface Props {solution:CollectionEntry<'products'>;reason:string;categoryName:string;href:string;copy:IndustrySystemCopy;}
+const {solution,reason,categoryName,href,copy}=Astro.props;
 const { data } = solution;
-const category = getSolutionCategory(data.category);
 ---
 
 <article class="h-full rounded-card border border-line-light bg-white p-6 shadow-soft sm:p-7">
@@ -13,13 +13,13 @@ const category = getSolutionCategory(data.category);
     {data.image ? (
       <img src={data.image.src} alt={data.image.alt} width={data.image.width} height={data.image.height} loading="lazy" decoding="async" class="h-20 w-24 shrink-0 object-contain max-[380px]:hidden" />
     ) : (
-      <div class="flex h-20 w-24 shrink-0 items-center justify-center rounded-control bg-brand-50 text-sm font-bold text-brand-600 max-[380px]:hidden" aria-hidden="true">WiFi<br />GPS · 4G</div>
+      <div class="flex h-20 w-24 shrink-0 items-center justify-center rounded-control bg-brand-50 text-sm font-bold text-brand-600 max-[380px]:hidden" aria-hidden="true">{copy.imagePending}</div>
     )}
     <div class="min-w-0">
-      <p class="text-xs font-bold tracking-wide text-brand-600">{data.systemCode} <span aria-hidden="true">/</span> {category.name}</p>
-      <h3 class="mt-2 text-xl leading-tight font-bold tracking-tight text-ink"><a href={`/solutions/${data.slug}`} class="hover:text-brand-600">{data.title}</a></h3>
+      <p class="text-xs font-bold tracking-wide text-brand-600">{data.systemCode} <span aria-hidden="true">/</span> {categoryName}</p>
+      <h3 class="mt-2 text-xl leading-tight font-bold tracking-tight text-ink"><a href={href} class="hover:text-brand-600">{data.title}</a></h3>
     </div>
   </div>
   <p class="mt-5 text-sm leading-7 text-copy">{reason}</p>
-  <a href={`/solutions/${data.slug}`} aria-label={`View ${data.systemCode} specifications`} class="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800">View system <span aria-hidden="true">→</span></a>
+  <a href={href} aria-label={formatMessage(copy.detailsFor,{model:data.systemCode})} class="mt-5 inline-flex min-h-11 items-center gap-3 text-sm font-bold text-brand-600 hover:text-brand-800">{copy.details} <span aria-hidden="true">→</span></a>
 </article>

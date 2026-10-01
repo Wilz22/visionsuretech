@@ -1,0 +1,6 @@
+---
+import type {ReferencePageCopy} from '../../i18n/page-types';
+interface Props {sections:ReferencePageCopy['sections'];actionLabel:string;actionHref:string;variant?:'compact'|'plain'|'primary';}
+const {sections,actionLabel,actionHref,variant='plain'}=Astro.props;
+---
+{sections.map((section,index)=><section><h2 class:list={['font-bold text-ink',variant==='compact'?'text-2xl':'text-3xl']}>{section.title}</h2><p class="mt-5 max-w-3xl leading-8 text-copy">{section.text}</p>{index===sections.length-1&&<a href={actionHref} class:list={['mt-6 inline-flex min-h-12 items-center gap-2 font-bold',variant==='primary'?'rounded-pill bg-brand-500 px-6 text-white':'text-brand-600']}>{actionLabel}{variant!=='primary'&&<span aria-hidden="true">→</span>}</a>}</section>)}

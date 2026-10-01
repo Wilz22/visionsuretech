@@ -1,19 +1,9 @@
-import { faqGroups } from '../data/faq';
-import { getPublishedSolutions } from './solutions';
-
-export async function getFaqGroups() {
-  const solutions = await getPublishedSolutions();
-  return faqGroups.map((group) => ({
-    ...group,
-    items: group.items.map((item) => ({
-      ...item,
-      links: (item.systemCodes ?? []).map((code) => {
-        const solution = solutions.find(({ data }) => data.systemCode === code);
-        if (!solution) throw new Error(`FAQ ${item.id} references unavailable system ${code}`);
-        return { href: `/solutions/${solution.data.slug}`, label: `${code} · ${solution.data.title}` };
-      }),
-    })),
-  }));
+import {getMessages} from '../i18n';
+import {defaultLocale,type Locale} from '../i18n/config';
+import {getPublishedProducts} from './products';
+import {resolveFaqGroups} from './faq-content';
+export async function getFaqGroups(locale:Locale=defaultLocale,resolveHref:(href:string)=>string=href=>href) {
+ const messages=getMessages(locale);
+ return resolveFaqGroups(messages.faqEditorial,await getPublishedProducts(),messages.faqPage,resolveHref);
 }
-
-export type FaqEntry = Awaited<ReturnType<typeof getFaqGroups>>[number]['items'][number];
+export type FaqEntry=Awaited<ReturnType<typeof getFaqGroups>>[number]['items'][number];
