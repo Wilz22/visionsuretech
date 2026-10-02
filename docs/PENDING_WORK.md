@@ -21,7 +21,7 @@ Arquitectura: industrias y Dash Cams separadas en definiciones y contenido ingl�
 - [ ] Activar y comprobar una cotización real en dashboard y correo, con spam/CAPTCHA de la cuenta elegida. Las pruebas actuales son simuladas.
 - [ ] Decidir Assessment entre agenda externa y solicitud de contacto. El usuario pidió dejarlo pendiente para consultar al cliente. No hay reserva activa.
 - [ ] Confirmar compra/checkout de Dash Cams; hoy hay cotización y Assessment, sin carrito ni precios ficticios.
-- [ ] Confirmar campos obligatorios y si Contact requiere otro formulario. Hoy Quote tiene nombre, empresa, email y mensaje obligatorios.
+- [ ] Confirmar campos obligatorios y si Contact requiere otro formulario. Quote queda limitado por indicación del usuario al punto 4 del Work Order: nombre, empresa, teléfono, tipo de equipo y producto de interés. Nombre y empresa siguen obligatorios; teléfono y equipo opcionales; producto admite ayuda para elegir.
 - [ ] Revisar con Jacob/Maria las seis plantillas y registrar aprobación escrita. No marcar la fase como cerrada antes de esto.
 
 ## Insumos y decisiones del cliente / Fase 2

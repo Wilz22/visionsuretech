@@ -33,5 +33,5 @@ const faqItems=faqGroups.flatMap(group=>group.items).filter(item=>item.featured)
   <WhyVisionSure copy={copy.whyVisionSure} />
   <ProjectsPreview projectCopy={messages.projectUi} projectHref={project=>projectUrl(project.entry.data.slug)} copy={copy.projects} projects={projects} projectsHref={routes.projects} />
   <FaqPreview relatedLabel={messages.faqPage.relatedSystems} copy={copy.faq} items={faqItems} faqHref={routes.faq} />
-  <div class="container pb-20"><QuoteCta copy={messages.quoteCta} label={messages.common.quote} href={routes.quote} /></div>
+  <div class="container py-12 sm:py-20"><QuoteCta copy={messages.quoteCta} label={messages.common.quote} href={routes.quote} /></div>
 </HomeLayout>

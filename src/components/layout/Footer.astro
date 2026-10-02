@@ -6,17 +6,18 @@ import type {Messages} from '../../i18n/types';
 import {defaultLocale,type Locale} from '../../i18n/config';
 import {company} from '../../data/company';
 import CallLink from '../ui/CallLink.astro';
+import EmailLink from '../ui/EmailLink.astro';
 interface Props {locale?:Locale;navigation?:NavigationModel;copy?:Messages['footer'];common?:Messages['common'];}
 const {locale=defaultLocale,navigation=buildNavigation(getMessages(locale).navigation),copy=getMessages(locale).footer,common=getMessages(locale).common}=Astro.props;
 ---
-<footer class="border-t border-line-light bg-surface-soft pt-14 pb-24">
+<footer class="border-t border-line-light bg-surface-soft pt-14 pb-24 sm:pb-8">
   <div class="container">
     <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div>
         <a href={navigation.company.find(item=>item.id==='home')!.href} aria-label={formatMessage(common.homeLink,{company:company.name})}><img src="/images/brand/visionsure-logo.svg" alt={company.name} width="210" height="58" class="w-48" loading="lazy"/></a>
         <p class="mt-5 text-sm leading-7 text-copy">{copy.summary}</p>
         <CallLink/>
-        <a href={`mailto:${company.contact.email}`} class="block py-3 text-sm font-bold text-brand-600 break-words">{company.contact.email}</a>
+        <EmailLink email={company.contact.email}/>
         <p class="text-sm text-copy">{copy.locationNotice}</p>
       </div>
       {navigation.main.filter(item=>item.children).map(item=><nav aria-label={formatMessage(copy.sectionLabel,{section:item.label})}>
@@ -28,7 +29,7 @@ const {locale=defaultLocale,navigation=buildNavigation(getMessages(locale).navig
         <ul class="mt-4">{navigation.company.map(item=><li>{item.id==='quote'?<QuoteLink href={item.href} label={item.label} class="inline-flex min-h-11 text-sm text-copy hover:text-brand-600"/>:<a href={item.href} class="inline-flex min-h-11 items-center text-sm text-copy">{item.label}</a>}</li>)}</ul>
       </nav>
     </div>
-    <div class="mt-12 flex flex-wrap items-center justify-between gap-5 border-t border-line-light pt-7">
+    <div class="mt-12 flex flex-wrap items-center justify-between gap-5 border-t border-line-light pt-7 sm:pr-40">
       <p class="text-xs text-copy">{formatMessage(copy.copyright,{year:String(new Date().getFullYear()),company:company.name})}</p>
       <nav aria-label={copy.legalLabel} class="flex flex-wrap gap-5">{navigation.legal.map(item=><a href={item.href} class="inline-flex min-h-11 items-center text-xs text-copy hover:text-brand-600">{item.label}</a>)}</nav>
     </div>

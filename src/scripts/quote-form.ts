@@ -74,11 +74,9 @@ if (form && fields && system && systemLink && systemNotice && summary && summary
     if (!form.reportValidity()) return;
     const data = new FormData(form);
     const value = (name: string) => String(data.get(name) ?? '').trim();
-    const industry = form.querySelector<HTMLSelectElement>('#quote-industry');
     if (endpoint) {
       data.set('_subject', messages.subject);
       data.set('system_label', system.selectedOptions[0].textContent ?? messages.notSure);
-      data.set('industry_label', industry?.value ? industry.selectedOptions[0].textContent ?? '' : messages.notSpecified);
       inFlight = true;
       fields.disabled = true;
       submit.disabled = true;
@@ -103,10 +101,8 @@ if (form && fields && system && systemLink && systemNotice && summary && summary
     }
     // Without an enabled endpoint, prepare locally and never transmit entries.
     summaryText.value = buildQuoteSummary({
-      name:value('name'),company:value('company'),email:value('email'),phone:value('phone'),
-      industry:industry?.value?industry.selectedOptions[0].textContent??'':'',
-      location:value('location'),equipment:value('equipment'),quantity:value('quantity'),
-      system:system.selectedOptions[0].textContent??'',timeframe:value('timeframe'),message:value('message'),
+      name:value('name'),company:value('company'),phone:value('phone'),equipment:value('equipment'),
+      system:system.selectedOptions[0].textContent??'',
     },messages);
     summary.hidden = false;
     summaryHeading.focus();

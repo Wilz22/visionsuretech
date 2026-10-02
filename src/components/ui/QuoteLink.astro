@@ -4,4 +4,4 @@ import {getMessages} from '../../i18n';
 interface Props { href: string; class: string; label?: string; }
 const { href, class: className, label=getMessages().common.quote } = Astro.props;
 ---
-<a href={href} class:list={['group items-center gap-2.5', className]}><span>{label}</span><TablerIcon name="chevronRight" class="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" /></a>
+<a href={href} class:list={['group items-center gap-2.5', className]}><TablerIcon name="fileDescription" class="h-5 w-5 shrink-0"/><span>{label}</span><TablerIcon name="chevronRight" class="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none" /></a>

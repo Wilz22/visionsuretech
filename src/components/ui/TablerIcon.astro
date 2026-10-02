@@ -12,8 +12,11 @@ import Building from '@tabler/icons/outline/building.svg';
 import World from '@tabler/icons/outline/world.svg';
 import Check from '@tabler/icons/outline/check.svg';
 import Close from '@tabler/icons/outline/x.svg';
+import Phone from '@tabler/icons/outline/phone.svg';
+import FileDescription from '@tabler/icons/outline/file-description.svg';
+import Mail from '@tabler/icons/outline/mail.svg';
 
-const icons = { menu: Menu, close: Close, world: World, check: Check, chevronRight: ChevronRight, whatsapp: WhatsApp, crane: Crane, backhoe: Backhoe, truck: Truck, mountain: Mountain, ship: Ship, tractor: Tractor, building: Building };
+const icons = { mail: Mail, fileDescription: FileDescription, phone: Phone, menu: Menu, close: Close, world: World, check: Check, chevronRight: ChevronRight, whatsapp: WhatsApp, crane: Crane, backhoe: Backhoe, truck: Truck, mountain: Mountain, ship: Ship, tractor: Tractor, building: Building };
 interface Props { name: keyof typeof icons; class?: string; }
 const { name, class: className = 'h-5 w-5' } = Astro.props;
 const Icon = icons[name];
