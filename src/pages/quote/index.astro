@@ -4,18 +4,15 @@ import QuoteForm from '../../components/contact/QuoteForm.astro';
 import {getMessages} from '../../i18n';
 import {getPublishedProducts} from '../../lib/products';
 import {buildQuoteOptions} from '../../lib/quote-options';
-import {industryDefinitions} from '../../data/industryDefinitions';
 import {resolveDashCams} from '../../lib/dash-cam-content';
 import {quoteEndpoint} from '../../data/quote';
 import {company,routes} from '../../data/company';
 import {quoteUrl} from '../../lib/routes';
-import type {NavigationLabelId} from '../../i18n/types';
 const messages=getMessages();
 const dashCams=resolveDashCams(messages.dashCamEditorial);
 const copy=messages.quoteForm;
 const products=await getPublishedProducts();
 const systems=buildQuoteOptions(products.map(product=>product.data),dashCams,copy);
-const industryOptions=industryDefinitions.map(industry=>({value:industry.id,label:messages.navigation.labels[industry.id as NavigationLabelId]}));
 const links={privacy:{label:copy.privacyLabel,href:'/privacy-policy/'},terms:{label:copy.termsLabel,href:'/terms/'}};
 ---
-<FormLayout title={copy.pageTitle} description={copy.pageDescription} copy={messages.formLayout} contact={company.contact} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.pageTitle}]}><QuoteForm copy={copy} systems={systems} industryOptions={industryOptions} endpoint={quoteEndpoint} action={quoteUrl()} links={links}/></FormLayout>
+<FormLayout title={copy.pageTitle} description={copy.pageDescription} copy={messages.formLayout} contact={company.contact} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.pageTitle}]}><QuoteForm copy={copy} systems={systems} endpoint={quoteEndpoint} action={quoteUrl()} links={links}/></FormLayout>

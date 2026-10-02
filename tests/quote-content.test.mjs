@@ -7,12 +7,14 @@ import {buildQuoteSummary} from '../src/lib/quote-summary.ts';
 test('quote summary uses supplied labels, preserves values and makes missing fields explicit',()=>{
   const base=getMessages().quoteForm.runtime;
   const copy={...base,notSpecified:'Sin indicar',summary:{...base.summary,heading:'RESUMEN SIN ENVIAR',labels:{...base.summary.labels,name:'Nombre',system:'Sistema'},line:'{label} → {value}'}};
-  const summary=buildQuoteSummary({name:'  QA local  ',system:'VST-S6301',message:'Two cameras for rear visibility.'},copy);
+  const summary=buildQuoteSummary({name:'  QA local  ',system:'VST-S6301',equipment:'Crane'},copy);
   assert.ok(summary.startsWith('RESUMEN SIN ENVIAR\n'));
   assert.ok(summary.includes('Nombre → QA local'));
   assert.ok(summary.includes('Sistema → VST-S6301'));
-  assert.ok(summary.includes('Email → Sin indicar'));
-  assert.ok(summary.includes('Two cameras for rear visibility.'));
+  assert.ok(summary.includes('Phone → Sin indicar'));
+  assert.ok(summary.includes('Equipment type → Crane'));
+  assert.ok(!summary.includes('Email'));
+  assert.equal(summary.split('\n').length,7);
 });
 
 test('quote options keep stable model IDs and routes when display content changes',()=>{

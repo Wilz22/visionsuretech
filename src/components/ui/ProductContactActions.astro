@@ -1,0 +1,34 @@
+---
+import QuoteLink from "./QuoteLink.astro";
+import CallLink from "./CallLink.astro";
+import TablerIcon from "./TablerIcon.astro";
+import { formatMessage } from "../../i18n/format";
+import type { Messages } from "../../i18n/types";
+interface Props {
+  quoteHref: string;
+  whatsappHref: string;
+  product: string;
+  copy: Messages["common"];
+}
+const { quoteHref, whatsappHref, product, copy } = Astro.props;
+const whatsappUrl = new URL(whatsappHref);
+whatsappUrl.searchParams.set(
+  "text",
+  formatMessage(copy.productWhatsappMessage, { product }),
+);
+---
+
+<div class="mt-7 grid gap-3 sm:grid-cols-2">
+  <QuoteLink
+    href={quoteHref}
+    label={copy.quote}
+    class="inline-flex min-h-12 justify-center rounded-pill bg-brand-500 px-4 py-3 text-sm font-bold text-white hover:bg-brand-600"
+  />
+  <a
+    href={whatsappUrl.href}
+    class="inline-flex min-h-12 items-center justify-center gap-2 rounded-pill border border-line-brand bg-white px-4 py-3 text-sm font-bold text-brand-600 transition-colors hover:border-brand-500 hover:bg-brand-50 motion-reduce:transition-none"
+  >
+    <TablerIcon name="whatsapp" class="h-5 w-5 shrink-0" />
+    <span>{copy.productWhatsapp}</span>
+  </a>
+</div>

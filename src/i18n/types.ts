@@ -33,7 +33,7 @@ export interface Messages {
   catalogGrid:CatalogGridCopy; gallery:GalleryCopy; dashCamCard:DashCamCardCopy; dashCamOverview:DashCamOverviewCopy;
   formLayout: { contactHeading:string; locality:string; addressNotice:string; locationHeading:string; mapNotice:string };
   quoteForm: QuoteFormCopy;
-  common: { breadcrumb:string; quote: string; homeLink: string; whatsapp: string; whatsappLabel: string };
+  common: { breadcrumb:string; quote: string; homeLink: string; whatsapp: string; whatsappLabel: string; productWhatsapp: string; productWhatsappMessage: string };
   navigation: {
     labels: Record<NavigationLabelId, string>;
     primaryLabel: string; showLinks: string; explore: string;

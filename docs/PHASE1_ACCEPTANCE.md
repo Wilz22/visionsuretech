@@ -21,7 +21,7 @@ Fuente de alcance: [plan entregado por el usuario](PHASE1_IMPLEMENTATION_PLAN.md
 | Inicio | Hero solicitado → selector de seis equipos → categorías → Dash Cam strip → Why VisionSure → proyectos de referencia → FAQ y CTA final → Footer. |
 | Navegación | Menú y Footer desde datos comunes; Flowbite Collapse/Dropdown con teclado, Escape, foco y `aria-expanded`. Teléfono y WhatsApp reales del Work Order. |
 | Páginas de apoyo | Services, Resources, Glossary con anclas ADAS/DMS/FCW, About, Quote y Warranty. Conservadas Contact, FAQ, Projects, Privacy, Terms y 404. |
-| Cotización | `/quote/?product=vst-s6301`, opciones industriales y dash cams, compatibilidad con `?system=VST-S6301`, parámetros validados. Formulario corto con detalles adicionales opcionales. Resumen local si no hay proveedor activo. |
+| Cotización | `/quote/?product=vst-s6301`, opciones industriales y dash cams, compatibilidad con `?system=VST-S6301`, parámetros validados. Solo los cinco campos del punto 4: nombre, empresa, teléfono, tipo de equipo y producto de interés. Resumen local con esos mismos campos si no hay proveedor activo. |
 | SEO | Metadatos/canonical, imágenes sociales existentes, Organization/Breadcrumb/Product JSON-LD, noindex en referencias y sitemap que excluye esas páginas. Sitemap provisional limitado a Home, Products/Industries overview, Quote y Contact. |
 
 ## Decisiones del usuario
@@ -56,7 +56,7 @@ Verificación vigente del 2026-10-01: 39 pruebas aprobadas, build de 48 páginas
 1. Cliente confirma Formspree o alternativa y configura un formulario que entregue a `info@visionsuretech.ca`.
 2. Activar en entorno autorizado y probar aceptación, recepción en dashboard y correo, todos los campos y protección contra spam. Registrar evidencia sin datos personales.
 3. Cliente decide Assessment: agenda (enlace, ubicación, zona horaria, duración, horarios y confirmación) o solicitud de contacto (campos y destinatario). Implementar el flujo elegido y comprobarlo.
-4. Confirmar obligatoriedad del teléfono/equipo y requisitos finales de Contact. Hoy nombre, empresa, email y mensaje son obligatorios; teléfono/equipo opcionales.
+4. Confirmar obligatoriedad del teléfono/equipo y requisitos finales de Contact. Quote utiliza solo los cinco campos del punto 4 por indicación del usuario. Nombre y empresa son obligatorios; teléfono/equipo opcionales; producto permite pedir ayuda para elegir.
 5. Confirmar compra/checkout de Dash Cams. Hoy se usan cotización y Assessment, sin pago ni carrito simulados.
 6. Jacob/Maria revisan las seis plantillas, navegación, estructura y referencias y aprueban por escrito. No hay aprobación registrada.
 

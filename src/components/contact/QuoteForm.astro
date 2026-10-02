@@ -2,8 +2,8 @@
 import InlineMessage from '../ui/InlineMessage.astro';
 import type {QuoteFormCopy} from '../../i18n/quote-types';
 import type {QuoteOption} from '../../lib/quote-options';
-interface Props {copy:QuoteFormCopy;systems:QuoteOption[];industryOptions:{value:string;label:string}[];endpoint:string|null;action:string;links:Record<'privacy'|'terms',{label:string;href:string}>;}
-const {copy,systems,industryOptions,endpoint,action,links}=Astro.props;
+interface Props {copy:QuoteFormCopy;systems:QuoteOption[];endpoint:string|null;action:string;links:Record<'privacy'|'terms',{label:string;href:string}>;}
+const {copy,systems,endpoint,action,links}=Astro.props;
 const fieldClass = 'mt-2 block min-h-12 w-full min-w-0 rounded-control border border-line-medium bg-white px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-brand-500';
 const labelClass = 'block text-sm font-bold text-ink';
 ---
@@ -26,7 +26,6 @@ const labelClass = 'block text-sm font-bold text-ink';
         <div class="grid gap-5 sm:grid-cols-2">
           <label class={labelClass} for="quote-name">{copy.labels.name} *<input class={fieldClass} id="quote-name" name="name" autocomplete="name" required maxlength="100" /></label>
           <label class={labelClass} for="quote-company">{copy.labels.company} *<input class={fieldClass} id="quote-company" name="company" autocomplete="organization" required maxlength="150" /></label>
-          <label class={labelClass} for="quote-email">{copy.labels.email} *<input class={fieldClass} id="quote-email" name="email" type="email" autocomplete="email" required maxlength="254" /></label>
           <label class={labelClass} for="quote-phone">{copy.labels.phone} <span class="font-normal text-copy">{copy.optional}</span><input class={fieldClass} id="quote-phone" name="phone" type="tel" autocomplete="tel" maxlength="50" /></label>
         </div>
       </fieldset>
@@ -41,18 +40,10 @@ const labelClass = 'block text-sm font-bold text-ink';
             <a id="selected-system-link" hidden class="mt-2 text-sm font-bold text-brand-600 underline underline-offset-4">{copy.systemLink}</a>
             <p id="system-notice" hidden role="status" class="mt-2 text-sm text-copy">{copy.systemMissing}</p>
           </div>
-          <label class={`${labelClass} sm:col-span-2`} for="quote-message">{copy.labels.message} *<textarea class={`${fieldClass} min-h-36 resize-y`} id="quote-message" name="message" rows="5" required minlength="10" maxlength="5000" placeholder={copy.placeholders.message} aria-describedby="message-hint"></textarea><span id="message-hint" class="mt-2 block text-xs font-normal leading-6 text-copy">{copy.messageHint}</span></label>
         </div>
       </fieldset>
-      <details class="rounded-card border border-line-light p-5"><summary class="cursor-pointer font-bold text-brand-600">{copy.additionalDetails}</summary><div class="mt-5 grid gap-5 sm:grid-cols-2">
-          <label class={labelClass} for="quote-industry">{copy.labels.industry}<select class={fieldClass} id="quote-industry" name="industry"><option value="">{copy.industryDefault}</option>{industryOptions.map(item => <option value={item.value}>{item.label}</option>)}<option value="other">{copy.otherIndustry}</option></select></label>
-          <label class={labelClass} for="quote-location">{copy.labels.location}<input class={fieldClass} id="quote-location" name="location" placeholder={copy.placeholders.location} maxlength="200" /></label>
-          <label class={labelClass} for="quote-quantity">{copy.labels.quantity}<input class={fieldClass} id="quote-quantity" name="quantity" type="number" inputmode="numeric" min="1" max="100000" step="1" /></label>
-          <label class={`${labelClass}`} for="quote-timeframe">{copy.labels.timeframe} <span class="font-normal text-copy">{copy.optional}</span><input class={fieldClass} id="quote-timeframe" name="timeframe" placeholder={copy.placeholders.timeframe} maxlength="150" /></label>
-      </div></details>
       <div hidden aria-hidden="true"><label for="quote-website">{copy.honeypot}</label><input id="quote-website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
       <div class="text-sm leading-7 text-copy">
-        {endpoint && <label class="mb-4 flex items-start gap-3" for="quote-consent"><input id="quote-consent" name="consent" value="request-response" type="checkbox" required class="mt-1.5 h-5 w-5 shrink-0 accent-brand-500" /><span><InlineMessage message={copy.consent} links={links}/> *</span></label>}
         <p><InlineMessage message={copy.legalNotice} links={links}/></p>
       </div>
       <div class="flex flex-wrap items-center gap-4 border-t border-line-light pt-6">

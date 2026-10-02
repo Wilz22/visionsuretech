@@ -32,7 +32,7 @@ export const en: Messages = {
   catalogGrid,gallery,dashCamCard,dashCamOverview,
   formLayout: { contactHeading:'Contact VisionSure', locality:'Langley, BC', addressNotice:'Street address and business hours pending client confirmation.', locationHeading:'Location & hours', mapNotice:'Map location and opening hours will be added once the client confirms the address and schedule.' },
   quoteForm,
-  common: { breadcrumb:'Breadcrumb', quote: 'Request a Quote', homeLink: '{company} - Home', whatsapp: 'WhatsApp', whatsappLabel: 'Chat with {company} on WhatsApp' },
+  common: { breadcrumb:'Breadcrumb', quote: 'Request a Quote', homeLink: '{company} - Home', whatsapp: 'WhatsApp', whatsappLabel: 'Chat with {company} on WhatsApp', productWhatsapp: 'Ask about this product', productWhatsappMessage: 'Hi, I’m interested in {product}. Could you provide more information and help me choose the right setup?' },
   navigation: {
     labels: {
       home: 'Home', products: 'Products', industries: 'Industries', dashCams: 'Dash Cams', services: 'Services', resources: 'Resources', about: 'About', contact: 'Contact', quote: 'Request a Quote',
