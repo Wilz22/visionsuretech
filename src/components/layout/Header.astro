@@ -1,13 +1,35 @@
 ---
-import {buildNavigation, type NavigationItem} from '../../lib/navigation';
-import {getMessages,formatMessage} from '../../i18n';
-import {locales,defaultLocale,type Locale} from '../../i18n/config';
-import type {Messages} from '../../i18n/types';
-import {company} from '../../data/company';
+import { buildNavigation, type NavigationItem } from "../../lib/navigation";
+import { getMessages, formatMessage } from "../../i18n";
+import { locales, defaultLocale, type Locale } from "../../i18n/config";
+import type { Messages } from "../../i18n/types";
+import { company } from "../../data/company";
 import TablerIcon from "../ui/TablerIcon.astro";
-interface Props {locale?:Locale;copy?:Messages['navigation'];navigation?:NavigationItem[];homeLabel?:string;homeHref?:string;languageOptions?:readonly {code:string;label:string;enabled:boolean}[];}
-const {locale=defaultLocale,copy=getMessages(locale).navigation,navigation=buildNavigation(copy).main,homeLabel=formatMessage(getMessages(locale).common.homeLink,{company:company.name}),homeHref='/',languageOptions=locales}=Astro.props;
-const selectedLanguage=languageOptions.find(language=>language.code===locale)!;
+interface Props {
+  locale?: Locale;
+  copy?: Messages["navigation"];
+  navigation?: NavigationItem[];
+  homeLabel?: string;
+  homeHref?: string;
+  languageOptions?: readonly {
+    code: string;
+    label: string;
+    enabled: boolean;
+  }[];
+}
+const {
+  locale = defaultLocale,
+  copy = getMessages(locale).navigation,
+  navigation = buildNavigation(copy).main,
+  homeLabel = formatMessage(getMessages(locale).common.homeLink, {
+    company: company.name,
+  }),
+  homeHref = "/",
+  languageOptions = locales,
+} = Astro.props;
+const selectedLanguage = languageOptions.find(
+  (language) => language.code === locale,
+)!;
 const current = Astro.url.pathname.replace(/\/$/, "") || "/";
 const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
 ---
@@ -22,7 +44,7 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
     <a
       href={homeHref}
       aria-label={homeLabel}
-      class="relative order-1 block h-12 w-32 shrink-0 overflow-hidden sm:w-40 xl:w-44"
+      class="relative order-1 block h-12 w-42 shrink-0 overflow-hidden"
     >
       <img
         src="/images/brand/visionsure-logo.svg"
@@ -55,7 +77,9 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
                   ]}
                   aria-expanded="false"
                   aria-controls={`nav-dropdown-${index}`}
-                  aria-label={formatMessage(copy.showLinks,{section:item.label})}
+                  aria-label={formatMessage(copy.showLinks, {
+                    section: item.label,
+                  })}
                 >
                   <span class="nav-option-label">{item.label}</span>
                   <TablerIcon
@@ -87,7 +111,9 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
                       href={item.href}
                       class="mb-1 flex min-h-11 items-center justify-between gap-3 rounded-control px-3 py-2 text-sm font-bold text-brand-700 hover:bg-brand-50 xl:mb-0 xl:items-start xl:py-3 xl:text-lg"
                     >
-                      <span>{formatMessage(copy.explore,{section:item.label})}</span>
+                      <span>
+                        {formatMessage(copy.explore, { section: item.label })}
+                      </span>
                       <TablerIcon
                         name="chevronRight"
                         class="mt-0.5 h-5 w-5 shrink-0"
@@ -124,12 +150,16 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
         id="language-toggle"
         hidden
         type="button"
-        aria-label={formatMessage(copy.languageLabel,{language:selectedLanguage.label})}
+        aria-label={formatMessage(copy.languageLabel, {
+          language: selectedLanguage.label,
+        })}
         aria-controls="language-menu"
         aria-expanded="false"
         class="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-control px-2 text-sm font-semibold text-brand-700 hover:bg-brand-50"
       >
-        <TablerIcon name="world" class="h-5 w-5" /><span>{selectedLanguage.code.toUpperCase()}</span><TablerIcon
+        <TablerIcon name="world" class="h-5 w-5" /><span
+          >{selectedLanguage.code.toUpperCase()}</span
+        ><TablerIcon
           name="chevronRight"
           class="hidden h-3.5 w-3.5 rotate-90 sm:block"
         />
@@ -164,7 +194,37 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
           {copy.language}
         </p>
         <ul class="text-sm">
-          {languageOptions.map(language=><li><button type="button" id={language.code===selectedLanguage.code?'language-active':undefined} aria-current={language.code===selectedLanguage.code?'true':undefined} disabled={!language.enabled} class:list={['flex min-h-11 w-full items-center justify-between gap-3 rounded-control px-3 text-left',language.code===selectedLanguage.code?'bg-brand-50 font-semibold text-brand-700':'text-copy/60']}><span lang={language.code}>{language.label}</span>{language.code===selectedLanguage.code?<TablerIcon name="check" class="h-4 w-4"/>:<span class="text-xs">{copy.comingSoon}</span>}</button></li>)}
+          {
+            languageOptions.map((language) => (
+              <li>
+                <button
+                  type="button"
+                  id={
+                    language.code === selectedLanguage.code
+                      ? "language-active"
+                      : undefined
+                  }
+                  aria-current={
+                    language.code === selectedLanguage.code ? "true" : undefined
+                  }
+                  disabled={!language.enabled}
+                  class:list={[
+                    "flex min-h-11 w-full items-center justify-between gap-3 rounded-control px-3 text-left",
+                    language.code === selectedLanguage.code
+                      ? "bg-brand-50 font-semibold text-brand-700"
+                      : "text-copy/60",
+                  ]}
+                >
+                  <span lang={language.code}>{language.label}</span>
+                  {language.code === selectedLanguage.code ? (
+                    <TablerIcon name="check" class="h-4 w-4" />
+                  ) : (
+                    <span class="text-xs">{copy.comingSoon}</span>
+                  )}
+                </button>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
@@ -225,7 +285,8 @@ const active = (href: string) => current === (href.replace(/\/$/, "") || "/");
   trigger.setAttribute("aria-expanded", String(desktop.matches));
   if (!desktop.matches) menu.classList.add("hidden");
   const navigation = new Collapse(menu, trigger, {
-    onExpand: () => trigger.setAttribute("aria-label", trigger.dataset.closeLabel!),
+    onExpand: () =>
+      trigger.setAttribute("aria-label", trigger.dataset.closeLabel!),
     onCollapse: () => {
       trigger.setAttribute("aria-label", trigger.dataset.openLabel!);
       closePanels();

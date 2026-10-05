@@ -6,4 +6,4 @@ import type {Messages} from '../../i18n/types';
 interface Props {copy?:Messages['common'];}
 const {copy=getMessages().common}=Astro.props;
 ---
-<a href={`https://wa.me/${company.contact.whatsappNumber}`} aria-label={formatMessage(copy.whatsappLabel,{company:company.name})} class="fixed right-4 bottom-4 z-40 inline-flex h-12 items-center gap-2 rounded-pill bg-brand-700 px-4 text-sm font-bold text-white shadow-raised hover:bg-brand-800 sm:right-6 sm:bottom-6"><TablerIcon name="whatsapp" class="h-5 w-5"/><span>{copy.whatsapp}</span></a>
+<a href={`https://wa.me/${company.contact.whatsappNumber}`} aria-label={formatMessage(copy.whatsappLabel,{company:company.name})} class="fixed right-4 bottom-4 z-40 inline-flex h-12 items-center gap-2 rounded-pill bg-[#25D366] px-4 text-sm font-bold text-white shadow-raised hover:bg-[#1ebe57] sm:right-6 sm:bottom-6"><TablerIcon name="whatsapp" class="h-5 w-5"/><span>{copy.whatsapp}</span></a>
