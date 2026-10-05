@@ -1,66 +1,220 @@
 ---
 import InlineMessage from '../ui/InlineMessage.astro';
-import type {QuoteFormCopy} from '../../i18n/quote-types';
-import type {QuoteOption} from '../../lib/quote-options';
-interface Props {copy:QuoteFormCopy;systems:QuoteOption[];endpoint:string|null;action:string;links:Record<'privacy'|'terms',{label:string;href:string}>;}
-const {copy,systems,endpoint,action,links}=Astro.props;
-const fieldClass = 'mt-2 block min-h-12 w-full min-w-0 rounded-control border border-line-medium bg-white px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-brand-500';
+import type { QuoteFormCopy } from '../../i18n/quote-types';
+import type { QuoteOption } from '../../lib/quote-options';
+interface Props {
+  copy: QuoteFormCopy;
+  systems: QuoteOption[];
+  endpoint: string | null;
+  action: string;
+  links: Record<'privacy' | 'terms', { label: string; href: string }>;
+}
+const { copy, systems, endpoint, action, links } = Astro.props;
+const fieldClass =
+  'mt-2 block min-h-12 w-full min-w-0 rounded-control border border-line-medium bg-white px-4 py-3 text-sm text-ink placeholder:text-muted focus:border-brand-500';
 const labelClass = 'block text-sm font-bold text-ink';
 ---
 
 <div class="rounded-panel border border-line-light bg-white p-6 shadow-soft sm:p-9">
-  <h2 id="quote-heading" class="text-3xl font-bold tracking-tight text-ink">{endpoint ? copy.headings.live : copy.headings.local}</h2>
+  <h2 id="quote-heading" class="text-3xl font-bold tracking-tight text-ink">
+    {endpoint ? copy.headings.live : copy.headings.local}
+  </h2>
   <p class="mt-3 text-sm leading-7 text-copy">{copy.intro}</p>
-  <aside id="quote-mode" class="mt-6 rounded-card border border-line-brand bg-surface-brand p-5 text-sm leading-7 text-copy">
-    <p class="font-bold text-brand-700">{endpoint ? copy.mode.liveTitle : copy.mode.localTitle}</p>
+  <aside
+    id="quote-mode"
+    class="mt-6 rounded-card border border-line-brand bg-surface-brand p-5 text-sm leading-7 text-copy"
+  >
+    <p class="font-bold text-brand-700">
+      {endpoint ? copy.mode.liveTitle : copy.mode.localTitle}
+    </p>
     <p>{endpoint ? copy.mode.liveText : copy.mode.localText}</p>
   </aside>
-  <noscript><p class="mt-5 text-sm text-copy">{copy.noScript}</p></noscript>
+  <noscript>
+    <p class="mt-5 text-sm text-copy">{copy.noScript}</p>
+  </noscript>
 
-  <form id="quote-form" method="post" action={endpoint ?? action} data-endpoint={endpoint ?? ''} data-copy={JSON.stringify(copy.runtime)} aria-labelledby="quote-heading" aria-describedby="quote-mode">
+  <form
+    id="quote-form"
+    method="post"
+    action={endpoint ?? action}
+    data-endpoint={endpoint ?? ''}
+    data-copy={JSON.stringify(copy.runtime)}
+    aria-labelledby="quote-heading"
+    aria-describedby="quote-mode"
+  >
     <!-- Disabled until the submit handler is installed; no accidental fallback POST. -->
     <fieldset id="quote-fields" disabled class="mt-8 min-w-0 space-y-8">
       <legend class="sr-only">{copy.requestDetails}</legend>
       <fieldset class="min-w-0">
-        <legend class="mb-5 text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.yourDetails}</legend>
+        <legend class="mb-5 text-xs font-extrabold tracking-widest text-brand-600 uppercase">
+          {copy.yourDetails}
+        </legend>
         <div class="grid gap-5 sm:grid-cols-2">
-          <label class={labelClass} for="quote-name">{copy.labels.name} *<input class={fieldClass} id="quote-name" name="name" autocomplete="name" required maxlength="100" /></label>
-          <label class={labelClass} for="quote-company">{copy.labels.company} *<input class={fieldClass} id="quote-company" name="company" autocomplete="organization" required maxlength="150" /></label>
-          <label class={labelClass} for="quote-phone">{copy.labels.phone} <span class="font-normal text-copy">{copy.optional}</span><input class={fieldClass} id="quote-phone" name="phone" type="tel" autocomplete="tel" maxlength="50" /></label>
+          <label class={labelClass} for="quote-name">
+            {copy.labels.name} *
+            <input
+              class={fieldClass}
+              id="quote-name"
+              name="name"
+              autocomplete="name"
+              required
+              maxlength="100"
+            />
+          </label>
+          <label class={labelClass} for="quote-company">
+            {copy.labels.company} *
+            <input
+              class={fieldClass}
+              id="quote-company"
+              name="company"
+              autocomplete="organization"
+              required
+              maxlength="150"
+            />
+          </label>
+          <label class={labelClass} for="quote-phone">
+            {copy.labels.phone}
+            <span class="font-normal text-copy">{copy.optional}</span>
+            <input
+              class={fieldClass}
+              id="quote-phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              maxlength="50"
+            />
+          </label>
         </div>
       </fieldset>
       <fieldset class="min-w-0 border-t border-line-light pt-7">
-        <legend class="pr-3 text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.equipmentDetails}</legend>
+        <legend class="pr-3 text-xs font-extrabold tracking-widest text-brand-600 uppercase">
+          {copy.equipmentDetails}
+        </legend>
         <div class="grid gap-5 sm:grid-cols-2">
-          <label class={labelClass} for="quote-equipment">{copy.labels.equipment}<input class={fieldClass} id="quote-equipment" name="equipment" placeholder={copy.placeholders.equipment} maxlength="200" /></label>
+          <label class={labelClass} for="quote-equipment">
+            {copy.labels.equipment}
+            <input
+              class={fieldClass}
+              id="quote-equipment"
+              name="equipment"
+              placeholder={copy.placeholders.equipment}
+              maxlength="200"
+            />
+          </label>
           <div class="min-w-0 sm:col-span-2">
-            <label class={labelClass} for="quote-system">{copy.labels.system}</label>
-            <select class={fieldClass} id="quote-system" name="system" aria-describedby="system-hint"><option value="">{copy.systemDefault}</option>{systems.map(item => <option value={item.value} data-code={item.code} data-url={item.href}>{item.label}</option>)}</select>
-            <p id="system-hint" class="mt-2 text-xs leading-6 text-copy">{copy.systemHint}</p>
-            <a id="selected-system-link" hidden class="mt-2 text-sm font-bold text-brand-600 underline underline-offset-4">{copy.systemLink}</a>
-            <p id="system-notice" hidden role="status" class="mt-2 text-sm text-copy">{copy.systemMissing}</p>
+            <label class={labelClass} for="quote-system">
+              {copy.labels.system}
+            </label>
+            <select
+              class={fieldClass}
+              id="quote-system"
+              name="system"
+              aria-describedby="system-hint"
+            >
+              <option value="">{copy.systemDefault}</option>
+              {systems.map((item) => (
+                <option
+                  value={item.value}
+                  data-code={item.code}
+                  data-url={item.href}
+                >
+                  {item.label}
+                </option>
+              ))}
+            </select>
+            <p id="system-hint" class="mt-2 text-xs leading-6 text-copy">
+              {copy.systemHint}
+            </p>
+            <a
+              id="selected-system-link"
+              hidden
+              class="mt-2 text-sm font-bold text-brand-600 underline underline-offset-4"
+            >
+              {copy.systemLink}
+            </a>
+            <p
+              id="system-notice"
+              hidden
+              role="status"
+              class="mt-2 text-sm text-copy"
+            >
+              {copy.systemMissing}
+            </p>
           </div>
         </div>
       </fieldset>
-      <div hidden aria-hidden="true"><label for="quote-website">{copy.honeypot}</label><input id="quote-website" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
+      <div hidden aria-hidden="true">
+        <label for="quote-website">{copy.honeypot}</label>
+        <input
+          id="quote-website"
+          name="_gotcha"
+          tabindex="-1"
+          autocomplete="off"
+        />
+      </div>
       <div class="text-sm leading-7 text-copy">
-        <p><InlineMessage message={copy.legalNotice} links={links}/></p>
+        <p>
+          <InlineMessage message={copy.legalNotice} links={links} />
+        </p>
       </div>
       <div class="flex flex-wrap items-center gap-4 border-t border-line-light pt-6">
-        <button id="quote-submit" type="submit" class="inline-flex min-h-12 items-center justify-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600 disabled:cursor-wait disabled:opacity-60">{endpoint ? copy.send : copy.prepare}</button>
-        <button type="reset" class="min-h-12 rounded-pill border border-line-medium px-6 py-3 text-sm font-bold text-copy hover:border-brand-500">{copy.clear}</button>
+        <button
+          id="quote-submit"
+          type="submit"
+          class="inline-flex min-h-12 items-center justify-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600 disabled:cursor-wait disabled:opacity-60"
+        >
+          {endpoint ? copy.send : copy.prepare}
+        </button>
+        <button
+          type="reset"
+          class="min-h-12 rounded-pill border border-line-medium px-6 py-3 text-sm font-bold text-copy hover:border-brand-500"
+        >
+          {copy.clear}
+        </button>
       </div>
     </fieldset>
   </form>
-  <div id="delivery-status" hidden tabindex="-1" role="status" aria-live="polite" class="mt-6 scroll-mt-28 rounded-card border border-line-brand bg-surface-brand p-5 text-sm leading-7 text-ink"></div>
+  <div
+    id="delivery-status"
+    hidden
+    tabindex="-1"
+    role="status"
+    aria-live="polite"
+    class="mt-6 scroll-mt-28 rounded-card border border-line-brand bg-surface-brand p-5 text-sm leading-7 text-ink"
+  ></div>
 
-  <section id="quote-summary" hidden class="mt-8 scroll-mt-28 rounded-card border border-line-brand bg-surface-brand p-5 sm:p-6" aria-labelledby="summary-heading">
-    <h3 id="summary-heading" tabindex="-1" class="text-xl font-bold text-ink">{copy.summaryTitle}</h3>
+  <section
+    id="quote-summary"
+    hidden
+    class="mt-8 scroll-mt-28 rounded-card border border-line-brand bg-surface-brand p-5 sm:p-6"
+    aria-labelledby="summary-heading"
+  >
+    <h3 id="summary-heading" tabindex="-1" class="text-xl font-bold text-ink">
+      {copy.summaryTitle}
+    </h3>
     <p class="mt-2 text-sm leading-7 text-copy">{copy.summaryNotice}</p>
-    <label for="summary-text" class="mt-5 block text-sm font-bold text-ink">{copy.summaryLabel}</label>
-    <textarea id="summary-text" readonly rows="12" class={`${fieldClass} resize-y font-mono leading-6`}></textarea>
-    <button id="copy-summary" type="button" class="mt-4 min-h-12 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600">{copy.copySummary}</button>
-    <p id="copy-status" role="status" aria-live="polite" class="mt-3 text-sm leading-7 text-copy"></p>
+    <label for="summary-text" class="mt-5 block text-sm font-bold text-ink">
+      {copy.summaryLabel}
+    </label>
+    <textarea
+      id="summary-text"
+      readonly
+      rows="12"
+      class={`${fieldClass} resize-y font-mono leading-6`}
+    ></textarea>
+    <button
+      id="copy-summary"
+      type="button"
+      class="mt-4 min-h-12 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600"
+    >
+      {copy.copySummary}
+    </button>
+    <p
+      id="copy-status"
+      role="status"
+      aria-live="polite"
+      class="mt-3 text-sm leading-7 text-copy"
+    ></p>
   </section>
 </div>
 

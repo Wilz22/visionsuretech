@@ -1,9 +1,27 @@
 ---
 import ContentLayout from '../components/templates/ContentLayout.astro';
 import View from '../components/pages/ServicesContent.astro';
-import {getMessages} from '../i18n';
-import {routes} from '../data/company';
-const messages=getMessages();
-const copy=messages.services;
+import { getMessages } from '../i18n';
+import { routes } from '../data/company';
+const messages = getMessages();
+const copy = messages.services;
 ---
-<ContentLayout title={copy.title} description={copy.description} reference copy={messages.contentLayout} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.title}]}><View copy={copy} messages={messages} assessmentHref="/dash-cams/book-assessment/" quoteHref={routes.quote}/></ContentLayout>
+
+<ContentLayout
+  title={copy.title}
+  description={copy.description}
+  reference
+  copy={messages.contentLayout}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.title },
+  ]}
+>
+  <View
+    copy={copy}
+    messages={messages}
+    assessmentHref="/dash-cams/book-assessment/"
+    quoteHref={routes.quote}
+  />
+</ContentLayout>

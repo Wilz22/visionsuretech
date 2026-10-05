@@ -1,5 +1,18 @@
 ---
-import {company} from '../../data/company';
-const schema={'@context':'https://schema.org','@type':'Organization',name:company.name,url:company.canonicalUrl,logo:new URL('/images/brand/visionsure-logo.svg',company.canonicalUrl).href,email:company.contact.email,telephone:company.contact.phoneE164};
+import { company } from '../../data/company';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: company.name,
+  url: company.canonicalUrl,
+  logo: new URL('/images/brand/visionsure-logo.svg', company.canonicalUrl).href,
+  email: company.contact.email,
+  telephone: company.contact.phoneE164,
+};
 ---
-<script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')}/>
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+/>

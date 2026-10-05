@@ -3,13 +3,76 @@ import ListingLayout from './ListingLayout.astro';
 import ProductCard from '../products/ProductCard.astro';
 import IndustryIcon from '../industries/IndustryIcon.astro';
 import QuoteCta from '../ui/QuoteCta.astro';
-import type {IndustryDetailModel} from '../../lib/detail-models';
-import type {Messages} from '../../i18n/types';
-import {defaultLocale,type Locale} from "../../i18n/config";
-interface Props {locale?:Locale;resolveHref?:(href:string)=>string;model:IndustryDetailModel;messages:Messages;}
-const locale=Astro.props.locale??defaultLocale;
-const {model,messages}=Astro.props;
-const {industry,systems,quoteHref,crumbs}=model;
-const copy=messages.industryDetail;
+import type { IndustryDetailModel } from '../../lib/detail-models';
+import type { Messages } from '../../i18n/types';
+import { defaultLocale, type Locale } from '../../i18n/config';
+interface Props {
+  locale?: Locale;
+  resolveHref?: (href: string) => string;
+  model: IndustryDetailModel;
+  messages: Messages;
+}
+const locale = Astro.props.locale ?? defaultLocale;
+const { model, messages } = Astro.props;
+const { industry, systems, quoteHref, crumbs } = model;
+const copy = messages.industryDetail;
 ---
-<ListingLayout locale={locale} resolveHref={Astro.props.resolveHref} breadcrumbLabel={messages.common.breadcrumb} title={industry.title} description={industry.description} noindex crumbs={crumbs}><section class="grid gap-10 lg:grid-cols-2"><div><h2 class="text-3xl font-bold text-ink">{copy.blindSpots}</h2><p class="mt-5 leading-8 text-copy">{industry.overview}</p></div><ul class="space-y-4">{industry.needs.map(need=><li class="rounded-card border border-line-light bg-white p-5 leading-7 text-copy">{need}</li>)}</ul></section><section><h2 class="text-3xl font-bold text-ink">{copy.systems}</h2><p class="mt-4 text-sm leading-7 text-copy">{copy.reference}</p>{systems.length?<div class="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">{systems.map(({solution,reason,href})=><div class="grid min-w-0 grid-rows-[1fr_auto] gap-4"><ProductCard product={solution} copy={messages.productCard} visualCopy={messages.productVisual} href={href}/><p class="text-sm leading-7 text-copy">{reason}</p></div>)}</div>:<p class="mt-6 rounded-card border border-dashed border-line-brand p-6 text-copy">{copy.pendingConfigurations}</p>}</section><section><h2 class="text-3xl font-bold text-ink">{copy.gallery}</h2><div class="mt-6 flex min-h-56 flex-col items-center justify-center rounded-panel border border-dashed border-line-brand bg-surface-brand p-7 text-center"><IndustryIcon industry={industry.id} class="h-20 w-20 text-brand-600"/><p class="mt-4 text-sm leading-7 text-copy">{copy.pendingGallery}</p></div></section><QuoteCta copy={messages.quoteCta} label={messages.common.quote} href={quoteHref}/></ListingLayout>
+
+<ListingLayout
+  locale={locale}
+  resolveHref={Astro.props.resolveHref}
+  breadcrumbLabel={messages.common.breadcrumb}
+  title={industry.title}
+  description={industry.description}
+  noindex
+  crumbs={crumbs}
+>
+  <section class="grid gap-10 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-bold text-ink">{copy.blindSpots}</h2>
+      <p class="mt-5 leading-8 text-copy">{industry.overview}</p>
+    </div>
+    <ul class="space-y-4">
+      {industry.needs.map((need) => (
+        <li class="rounded-card border border-line-light bg-white p-5 leading-7 text-copy">
+          {need}
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section>
+    <h2 class="text-3xl font-bold text-ink">{copy.systems}</h2>
+    <p class="mt-4 text-sm leading-7 text-copy">{copy.reference}</p>
+    {systems.length ? (
+      <div class="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {systems.map(({ solution, reason, href }) => (
+          <div class="grid min-w-0 grid-rows-[1fr_auto] gap-4">
+            <ProductCard
+              product={solution}
+              copy={messages.productCard}
+              visualCopy={messages.productVisual}
+              href={href}
+            />
+            <p class="text-sm leading-7 text-copy">{reason}</p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="mt-6 rounded-card border border-dashed border-line-brand p-6 text-copy">
+        {copy.pendingConfigurations}
+      </p>
+    )}
+  </section>
+  <section>
+    <h2 class="text-3xl font-bold text-ink">{copy.gallery}</h2>
+    <div class="mt-6 flex min-h-56 flex-col items-center justify-center rounded-panel border border-dashed border-line-brand bg-surface-brand p-7 text-center">
+      <IndustryIcon industry={industry.id} class="h-20 w-20 text-brand-600" />
+      <p class="mt-4 text-sm leading-7 text-copy">{copy.pendingGallery}</p>
+    </div>
+  </section>
+  <QuoteCta
+    copy={messages.quoteCta}
+    label={messages.common.quote}
+    href={quoteHref}
+  />
+</ListingLayout>

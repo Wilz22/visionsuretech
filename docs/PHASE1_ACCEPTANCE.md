@@ -8,7 +8,7 @@ Auditoría vigente de cierre: [PHASE1_CLOSURE_AUDIT.md](PHASE1_CLOSURE_AUDIT.md)
 
 La estructura del sitio está implementada para revisión. **La Fase 1 contractual aún no está cerrada:** faltan activar y comprobar la recepción de cotizaciones, resolver Assessment y registrar la aprobación de Jacob/Maria. No se ha desplegado ni enviado una solicitud real.
 
-Fuente de alcance: [plan entregado por el usuario](PHASE1_IMPLEMENTATION_PLAN.md). El Work Order y los PDFs son referencias; las decisiones posteriores del usuario prevalecen.
+Fuente de alcance: el Work Order y los PDFs de referencia entregados por el usuario; las decisiones posteriores del usuario prevalecen.
 
 ## Entregado
 

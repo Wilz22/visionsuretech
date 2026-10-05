@@ -1,8 +1,41 @@
 ---
-import TablerIcon from "../ui/TablerIcon.astro";
+import TablerIcon from '../ui/TablerIcon.astro';
 import IndustryIcon from '../industries/IndustryIcon.astro';
-import type {HomeCopy,EquipmentLink} from '../../i18n/home-types';
-interface Props {copy:HomeCopy['equipment'];equipment:EquipmentLink[];}
-const {copy,equipment}=Astro.props;
+import type { HomeCopy, EquipmentLink } from '../../i18n/home-types';
+interface Props {
+  copy: HomeCopy['equipment'];
+  equipment: EquipmentLink[];
+}
+const { copy, equipment } = Astro.props;
 ---
-<section class="bg-surface-soft py-16 sm:py-24"><div class="container"><h2 class="text-3xl font-bold tracking-tight text-ink sm:text-5xl">{copy.title}</h2><p class="mt-5 max-w-2xl leading-8 text-copy">{copy.description}</p><ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{equipment.map(item=><li><a href={item.href} class="flex min-h-32 items-center gap-5 rounded-panel border border-line-light bg-white p-6 font-bold text-ink hover:border-brand-400"><IndustryIcon industry={item.icon} class="h-16 w-16 shrink-0 text-brand-600"/><span>{item.label}</span><TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle ml-auto text-brand-600" /></a></li>)}</ul></div></section>
+
+<section class="bg-surface-soft py-16 sm:py-24">
+  <div class="container">
+    <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-5xl">
+      {copy.title}
+    </h2>
+    <p class="mt-5 max-w-2xl leading-8 text-copy">{copy.description}</p>
+    <ul class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {equipment.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="flex min-h-32 items-center gap-5 rounded-panel border border-line-light bg-white p-6 font-bold text-ink hover:border-brand-400"
+          >
+            <>
+              <IndustryIcon
+                industry={item.icon}
+                class="h-16 w-16 shrink-0 text-brand-600"
+              />
+              <span>{item.label}</span>
+              <TablerIcon
+                name="chevronRight"
+                class="inline-block h-4 w-4 shrink-0 align-middle ml-auto text-brand-600"
+              />
+            </>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

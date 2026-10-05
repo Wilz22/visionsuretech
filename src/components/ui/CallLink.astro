@@ -1,7 +1,24 @@
 ---
-import {company} from '../../data/company';
+import { company } from '../../data/company';
 import TablerIcon from './TablerIcon.astro';
-interface Props {class?:string;phone?:string|null;phoneE164?:string}
-const {phone=company.contact.phone,phoneE164=company.contact.phoneE164,class:className='inline-flex min-h-11 items-center font-bold text-brand-600'}=Astro.props;
+interface Props {
+  class?: string;
+  phone?: string | null;
+  phoneE164?: string;
+}
+const {
+  phone = company.contact.phone,
+  phoneE164 = company.contact.phoneE164,
+  class:
+    className = 'inline-flex min-h-11 items-center font-bold text-brand-600',
+} = Astro.props;
 ---
-{phone&&<a href={`tel:${phoneE164}`} class:list={[className,'gap-2']}><TablerIcon name="phone" class="h-5 w-5 shrink-0"/><span>{phone}</span></a>}
+
+{phone && (
+  <a href={`tel:${phoneE164}`} class:list={[className, 'gap-2']}>
+    <>
+      <TablerIcon name="phone" class="h-5 w-5 shrink-0" />
+      <span>{phone}</span>
+    </>
+  </a>
+)}

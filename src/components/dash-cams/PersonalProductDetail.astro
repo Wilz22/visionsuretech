@@ -4,13 +4,124 @@ import ProductGallery from '../products/ProductGallery.astro';
 import DashCamCard from './DashCamCard.astro';
 import ProductContactActions from '../ui/ProductContactActions.astro';
 import TablerIcon from '../ui/TablerIcon.astro';
-import type {PersonalDetailModel} from '../../lib/detail-models';
-import type {Messages} from '../../i18n/types';
-import {formatMessage} from '../../i18n/format';
-import {defaultLocale,type Locale} from "../../i18n/config";
-interface Props {locale?:Locale;resolveHref?:(href:string)=>string;view:PersonalDetailModel;messages:Messages;whatsappHref:string}
-const {view,messages,whatsappHref}=Astro.props;
-const {model,description,configurationNotice,quoteHref,assessmentHref,related,glossaryLinks,crumbs}=view;
-const copy=messages.personalDetail;
+import type { PersonalDetailModel } from '../../lib/detail-models';
+import type { Messages } from '../../i18n/types';
+import { formatMessage } from '../../i18n/format';
+import { defaultLocale, type Locale } from '../../i18n/config';
+interface Props {
+  locale?: Locale;
+  resolveHref?: (href: string) => string;
+  view: PersonalDetailModel;
+  messages: Messages;
+  whatsappHref: string;
+}
+const { view, messages, whatsappHref } = Astro.props;
+const {
+  model,
+  description,
+  configurationNotice,
+  quoteHref,
+  assessmentHref,
+  related,
+  glossaryLinks,
+  crumbs,
+} = view;
+const copy = messages.personalDetail;
 ---
-<ProductDetail locale={Astro.props.locale??defaultLocale} resolveHref={Astro.props.resolveHref} breadcrumbLabel={messages.common.breadcrumb} title={model.title} description={description} noindex crumbs={crumbs}><div class="container space-y-12 py-14"><div class="grid gap-10 lg:grid-cols-2"><ProductGallery images={[]} title={model.title} copy={messages.gallery}/><div><p class="text-xs font-bold text-brand-600">{copy.reference}</p><h2 class="mt-5 text-2xl font-bold text-ink">{copy.overview}</h2><p class="mt-4 leading-8 text-copy">{configurationNotice}</p><h3 class="mt-6 font-bold text-ink">{copy.idealFor}</h3><p class="mt-3 text-sm leading-7 text-copy">{copy.fitment}</p><a href={assessmentHref} class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-pill border border-line-brand px-5 text-sm font-bold text-brand-600">{copy.assessment}<TablerIcon name="chevronRight" class="h-4 w-4 shrink-0"/></a><ProductContactActions quoteHref={quoteHref} whatsappHref={whatsappHref} product={model.title} copy={messages.common}/></div></div>{copy.sections.map(title=><section class="rounded-panel border border-dashed border-line-brand bg-white p-7"><h2 class="text-2xl font-bold text-ink">{title}</h2><p class="mt-4 leading-7 text-copy">{copy.pendingSheet}</p><div class="mt-5 overflow-x-auto"><table class="w-full text-left text-sm"><caption class="sr-only">{formatMessage(copy.tableCaption,{model:model.title,section:title})}</caption><thead class="bg-surface-soft"><tr><th scope="col" class="p-4">{copy.detail}</th><th scope="col" class="p-4">{copy.information}</th></tr></thead><tbody><tr class="border-t border-line-light"><th scope="row" class="p-4">{title}</th><td class="p-4 leading-7 text-copy">{copy.pendingData}</td></tr></tbody></table></div></section>)}<section><h2 class="text-2xl font-bold text-ink">{copy.glossary}</h2><div class="mt-4 flex flex-wrap gap-5">{Object.values(glossaryLinks).map(link=><a href={link.href} class="inline-flex min-h-11 items-center font-bold text-brand-600 underline">{link.label}</a>)}</div><p class="mt-3 text-sm text-copy">{copy.glossaryNotice}</p><p class="mt-5 text-sm text-muted">{copy.pendingPdf}</p></section><section><h2 class="text-3xl font-bold text-ink">{copy.related}</h2><div class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{related.map(item=><DashCamCard model={item.model} copy={messages.dashCamCard} href={item.href}/>)}</div></section></div></ProductDetail>
+
+<ProductDetail
+  locale={Astro.props.locale ?? defaultLocale}
+  resolveHref={Astro.props.resolveHref}
+  breadcrumbLabel={messages.common.breadcrumb}
+  title={model.title}
+  description={description}
+  noindex
+  crumbs={crumbs}
+>
+  <div class="container space-y-12 py-14">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <ProductGallery images={[]} title={model.title} copy={messages.gallery} />
+      <div>
+        <p class="text-xs font-bold text-brand-600">{copy.reference}</p>
+        <h2 class="mt-5 text-2xl font-bold text-ink">{copy.overview}</h2>
+        <p class="mt-4 leading-8 text-copy">{configurationNotice}</p>
+        <h3 class="mt-6 font-bold text-ink">{copy.idealFor}</h3>
+        <p class="mt-3 text-sm leading-7 text-copy">{copy.fitment}</p>
+        <a
+          href={assessmentHref}
+          class="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-pill border border-line-brand px-5 text-sm font-bold text-brand-600"
+        >
+          {copy.assessment}
+          <TablerIcon name="chevronRight" class="h-4 w-4 shrink-0" />
+        </a>
+        <ProductContactActions
+          quoteHref={quoteHref}
+          whatsappHref={whatsappHref}
+          product={model.title}
+          copy={messages.common}
+        />
+      </div>
+    </div>
+    {copy.sections.map((title) => (
+      <section class="rounded-panel border border-dashed border-line-brand bg-white p-7">
+        <h2 class="text-2xl font-bold text-ink">{title}</h2>
+        <p class="mt-4 leading-7 text-copy">{copy.pendingSheet}</p>
+        <div class="mt-5 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <caption class="sr-only">
+              {formatMessage(copy.tableCaption, {
+                model: model.title,
+                section: title,
+              })}
+            </caption>
+            <thead class="bg-surface-soft">
+              <tr>
+                <th scope="col" class="p-4">
+                  {copy.detail}
+                </th>
+                <th scope="col" class="p-4">
+                  {copy.information}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t border-line-light">
+                <th scope="row" class="p-4">
+                  {title}
+                </th>
+                <td class="p-4 leading-7 text-copy">{copy.pendingData}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))}
+    <section>
+      <h2 class="text-2xl font-bold text-ink">{copy.glossary}</h2>
+      <div class="mt-4 flex flex-wrap gap-5">
+        {Object.values(glossaryLinks).map((link) => (
+          <a
+            href={link.href}
+            class="inline-flex min-h-11 items-center font-bold text-brand-600 underline"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <p class="mt-3 text-sm text-copy">{copy.glossaryNotice}</p>
+      <p class="mt-5 text-sm text-muted">{copy.pendingPdf}</p>
+    </section>
+    <section>
+      <h2 class="text-3xl font-bold text-ink">{copy.related}</h2>
+      <div class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {related.map((item) => (
+          <DashCamCard
+            model={item.model}
+            copy={messages.dashCamCard}
+            href={item.href}
+          />
+        ))}
+      </div>
+    </section>
+  </div>
+</ProductDetail>

@@ -1,37 +1,65 @@
 ---
-import HomeLayout from "../components/templates/HomeLayout.astro";
-import Hero from "../components/home/Hero.astro";
-import EquipmentSelector from "../components/home/EquipmentSelector.astro";
-import ProductCategories from "../components/home/ProductCategories.astro";
-import DashCamStrip from "../components/home/DashCamStrip.astro";
-import QuoteCta from "../components/ui/QuoteCta.astro";
-import WhyVisionSure from "../components/home/WhyVisionSure.astro";
-import ProjectsPreview from "../components/home/ProjectsPreview.astro";
-import FaqPreview from "../components/home/FaqPreview.astro";
-import {getMessages} from '../i18n';
-import {buildHomeLinks} from '../lib/home';
-import {getVisibleProjects} from '../lib/projects';
-import {getFaqGroups} from '../lib/faq';
-import {projectUrl} from '../lib/routes';
-import {routes} from '../data/company';
-const messages=getMessages();
-const copy=messages.home;
-const links=buildHomeLinks(messages);
-const [allProjects,faqGroups]=await Promise.all([getVisibleProjects(),getFaqGroups()]);
-const projects=allProjects.slice(0,3);
-const faqItems=faqGroups.flatMap(group=>group.items).filter(item=>item.featured);
+import HomeLayout from '../components/templates/HomeLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import EquipmentSelector from '../components/home/EquipmentSelector.astro';
+import ProductCategories from '../components/home/ProductCategories.astro';
+import DashCamStrip from '../components/home/DashCamStrip.astro';
+import QuoteCta from '../components/ui/QuoteCta.astro';
+import WhyVisionSure from '../components/home/WhyVisionSure.astro';
+import ProjectsPreview from '../components/home/ProjectsPreview.astro';
+import FaqPreview from '../components/home/FaqPreview.astro';
+import { getMessages } from '../i18n';
+import { buildHomeLinks } from '../lib/home';
+import { getVisibleProjects } from '../lib/projects';
+import { getFaqGroups } from '../lib/faq';
+import { projectUrl } from '../lib/routes';
+import { routes } from '../data/company';
+const messages = getMessages();
+const copy = messages.home;
+const links = buildHomeLinks(messages);
+const [allProjects, faqGroups] = await Promise.all([
+  getVisibleProjects(),
+  getFaqGroups(),
+]);
+const projects = allProjects.slice(0, 3);
+const faqItems = faqGroups
+  .flatMap((group) => group.items)
+  .filter((item) => item.featured);
 ---
 
-<HomeLayout
-  title={copy.meta.title}
-  description={copy.meta.description}
->
-  <Hero copy={copy.hero} quoteHref={routes.quote} productsHref={routes.products} imageSrc="/images/home/hero-industrial-visibility.webp" />
+<HomeLayout title={copy.meta.title} description={copy.meta.description}>
+  <Hero
+    copy={copy.hero}
+    quoteHref={routes.quote}
+    productsHref={routes.products}
+    imageSrc="/images/home/hero-industrial-visibility.webp"
+  />
   <EquipmentSelector copy={copy.equipment} equipment={links.equipment} />
   <ProductCategories copy={copy.categories} categories={links.categories} />
-  <DashCamStrip copy={copy.dashCams} compareHref={routes.dashCams} assessmentHref="/dash-cams/book-assessment/" />
+  <DashCamStrip
+    copy={copy.dashCams}
+    compareHref={routes.dashCams}
+    assessmentHref="/dash-cams/book-assessment/"
+  />
   <WhyVisionSure copy={copy.whyVisionSure} />
-  <ProjectsPreview projectCopy={messages.projectUi} projectHref={project=>projectUrl(project.entry.data.slug)} copy={copy.projects} projects={projects} projectsHref={routes.projects} />
-  <FaqPreview relatedLabel={messages.faqPage.relatedSystems} copy={copy.faq} items={faqItems} faqHref={routes.faq} />
-  <div class="container py-12 sm:py-20"><QuoteCta copy={messages.quoteCta} label={messages.common.quote} href={routes.quote} /></div>
+  <ProjectsPreview
+    projectCopy={messages.projectUi}
+    projectHref={(project) => projectUrl(project.entry.data.slug)}
+    copy={copy.projects}
+    projects={projects}
+    projectsHref={routes.projects}
+  />
+  <FaqPreview
+    relatedLabel={messages.faqPage.relatedSystems}
+    copy={copy.faq}
+    items={faqItems}
+    faqHref={routes.faq}
+  />
+  <div class="container py-12 sm:py-20">
+    <QuoteCta
+      copy={messages.quoteCta}
+      label={messages.common.quote}
+      href={routes.quote}
+    />
+  </div>
 </HomeLayout>

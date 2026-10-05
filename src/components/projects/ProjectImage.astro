@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import {getMessages} from '../../i18n';
+import { getMessages } from '../../i18n';
 import IndustryIcon from '../industries/IndustryIcon.astro';
 
 interface Props {
@@ -9,15 +9,33 @@ interface Props {
   label?: string;
   eager?: boolean;
 }
-const { photo, industry, label = getMessages().projectUi.photoPending, eager = false } = Astro.props;
+const {
+  photo,
+  industry,
+  label = getMessages().projectUi.photoPending,
+  eager = false,
+} = Astro.props;
 ---
 
 {photo ? (
-  <img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading={eager ? 'eager' : 'lazy'} decoding="async" class="aspect-[16/10] w-full object-cover" />
+  <img
+    src={photo.src}
+    alt={photo.alt}
+    width={photo.width}
+    height={photo.height}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    class="aspect-16/10 w-full object-cover"
+  />
 ) : (
-  <div class="relative flex aspect-[16/10] flex-col items-center justify-center gap-4 overflow-hidden bg-surface-brand p-6 text-center text-brand-600">
-    <div class="absolute inset-5 rounded-card border border-dashed border-brand-300" aria-hidden="true" />
+  <div class="relative flex aspect-16/10 flex-col items-center justify-center gap-4 overflow-hidden bg-surface-brand p-6 text-center text-brand-600">
+    <div
+      class="absolute inset-5 rounded-card border border-dashed border-brand-300"
+      aria-hidden="true"
+    />
     <IndustryIcon industry={industry} class="h-20 w-20 opacity-75" />
-    <span class="relative max-w-56 text-xs font-bold leading-5 tracking-wide">{label}</span>
+    <span class="relative max-w-56 text-xs font-bold leading-5 tracking-wide">
+      {label}
+    </span>
   </div>
 )}

@@ -1,8 +1,59 @@
 ---
-import TablerIcon from "../ui/TablerIcon.astro";
-import type {HomeCopy,HomeCategory} from '../../i18n/home-types';
-import {formatMessage} from '../../i18n/format';
-interface Props {copy:HomeCopy['categories'];categories:HomeCategory[];}
-const {copy,categories}=Astro.props;
+import TablerIcon from '../ui/TablerIcon.astro';
+import type { HomeCopy, HomeCategory } from '../../i18n/home-types';
+import { formatMessage } from '../../i18n/format';
+interface Props {
+  copy: HomeCopy['categories'];
+  categories: HomeCategory[];
+}
+const { copy, categories } = Astro.props;
 ---
-<section class="container py-16 sm:py-24"><h2 class="text-3xl font-bold tracking-tight text-ink sm:text-5xl">{copy.title}</h2><p class="mt-5 max-w-2xl leading-8 text-copy">{copy.description}</p><ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{categories.map(category=><li><a href={category.href} class="block h-full overflow-hidden rounded-panel border border-line-light bg-white shadow-soft hover:border-brand-400">{category.image?<img src={category.image} alt={formatMessage(copy.imageAlt,{category:category.name})} width="800" height="600" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-contain p-5"/>:<div class="flex aspect-[4/3] items-center justify-center bg-surface-brand p-6 text-center font-bold text-brand-600">{category.name}<br/>{copy.pending}</div>}<div class="border-t border-line-light p-6"><h3 class="text-xl font-bold text-ink">{category.name} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle" /></h3><p class="mt-3 text-sm leading-7 text-copy">{category.description}</p></div></a></li>)}</ul></section>
+
+<section class="container py-16 sm:py-24">
+  <h2 class="text-3xl font-bold tracking-tight text-ink sm:text-5xl">
+    {copy.title}
+  </h2>
+  <p class="mt-5 max-w-2xl leading-8 text-copy">{copy.description}</p>
+  <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {categories.map((category) => (
+      <li>
+        <a
+          href={category.href}
+          class="block h-full overflow-hidden rounded-panel border border-line-light bg-white shadow-soft hover:border-brand-400"
+        >
+          {category.image ? (
+            <img
+              src={category.image}
+              alt={formatMessage(copy.imageAlt, { category: category.name })}
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[4/3] w-full object-contain p-5"
+            />
+          ) : (
+            <div class="flex aspect-[4/3] items-center justify-center bg-surface-brand p-6 text-center font-bold text-brand-600">
+              {category.name}
+              <br />
+              {copy.pending}
+            </div>
+          )}
+          <div class="border-t border-line-light p-6">
+            <>
+              <h3 class="text-xl font-bold text-ink">
+                {category.name}{' '}
+                <TablerIcon
+                  name="chevronRight"
+                  class="inline-block h-4 w-4 shrink-0 align-middle"
+                />
+              </h3>
+              <p class="mt-3 text-sm leading-7 text-copy">
+                {category.description}
+              </p>
+            </>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

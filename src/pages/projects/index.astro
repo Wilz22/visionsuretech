@@ -1,11 +1,24 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectOverview from '../../components/projects/ProjectOverview.astro';
-import {getVisibleProjects} from '../../lib/projects';
-import {buildProjectOverview} from '../../lib/project-models';
-import {getMessages} from '../../i18n';
-import {routes} from '../../data/company';
-const messages=getMessages();
-const model=buildProjectOverview(await getVisibleProjects());
+import { getVisibleProjects } from '../../lib/projects';
+import { buildProjectOverview } from '../../lib/project-models';
+import { getMessages } from '../../i18n';
+import { routes } from '../../data/company';
+const messages = getMessages();
+const model = buildProjectOverview(await getVisibleProjects());
 ---
-<BaseLayout title={messages.projectsPage.title} description={messages.projectsPage.description} noindex={!model.hasPublished}><ProjectOverview model={model} messages={messages} homeHref={routes.home} productsHref={routes.products} industriesHref={routes.industries}/></BaseLayout>
+
+<BaseLayout
+  title={messages.projectsPage.title}
+  description={messages.projectsPage.description}
+  noindex={!model.hasPublished}
+>
+  <ProjectOverview
+    model={model}
+    messages={messages}
+    homeHref={routes.home}
+    productsHref={routes.products}
+    industriesHref={routes.industries}
+  />
+</BaseLayout>

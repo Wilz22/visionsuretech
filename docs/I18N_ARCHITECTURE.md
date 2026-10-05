@@ -30,7 +30,7 @@ Verificación actual: 16 pruebas y build/auditoría de 48 páginas. Navegador co
 
 Home compone siete vistas con props: Hero, EquipmentSelector, ProductCategories, DashCamStrip, WhyVisionSure, ProjectsPreview y FaqPreview. `locales/en-home.ts` contiene sus textos, SEO, avisos de referencia y alt del hero; `home-types.ts` define contratos sin literales ingleses. `lib/home.ts` resuelve etiquetas/destinos por IDs estables, permite un resolver de URL futuro y rechaza textos ausentes. La página carga proyectos/FAQ y pasa los resultados a sus vistas; estas no consultan colecciones ni eligen idioma. Hero recibe también el recurso visual y los destinos; no asume dos viñetas o tres etiquetas.
 
-`data/home.ts` queda como adaptador transitorio para About y la antigua SolutionsGrid: reutiliza el diccionario y añade enlaces, evitando duplicar el contenido editorial. Las fichas de proyectos, respuestas FAQ y datos técnicos siguen siendo contenido inglés existente; no afirmar que Home completa o todo el sitio dispone ya de versiones traducidas. AboutIntro, TrustBar e IndustriesGrid son componentes antiguos fuera de la composición actual y todavía requieren revisión antes de reutilizarlos.
+`data/home.ts` queda como adaptador transitorio para About y los enlaces de Home: reutiliza el diccionario y añade enlaces, evitando duplicar el contenido editorial. Las fichas de proyectos, respuestas FAQ y datos técnicos siguen siendo contenido inglés existente; no afirmar que Home completa o todo el sitio dispone ya de versiones traducidas.
 
 Validación: 17 pruebas, build de 48 páginas y auditoría de 42 rutas obligatorias. La prueba del resolver cambia etiquetas y prefijos conservando IDs, relaciones y datos originales, y verifica el rechazo de claves ausentes. Navegador: contenido actual conservado, seis enlaces de equipos, ningún Request a Quote en header y sin desbordamiento horizontal con viewport móvil de 375 px. Formspree y traducciones públicas siguen pendientes.
 
@@ -126,7 +126,7 @@ Verificación: 37 pruebas aprobadas y build de 48 páginas aprobado; las pruebas
 
 Wrappers industriales, personales y legales propagan locale/estrategia de enlaces a sus layouts; DashCamOverview propaga el locale recibido. SystemVisual recibe textos por props: la frase de AI MDVR y sus etiquetas pasan al diccionario por código de modelo. Un futuro producto sin foto usa un mensaje genérico, sin atribuirle canales/conectividad del AI MDVR. ProductCard/Grid y sus consumidores activos pasan esos mensajes.
 
-Revisión de imports: AboutIntro, IndustriesGrid, SolutionsGrid, TrustBar y SystemCard no son consumidores activos de las páginas actuales; se conservan como componentes anteriores, sin declararlos listos para otros idiomas. Su reutilización exige migrarlos explícitamente. No se añadieron rutas traducidas ni contenido aprobado ficticio.
+Revisión de imports: los componentes anteriores que no son consumidores activos se retiraron del árbol para evitar duplicados. No se añadieron rutas traducidas ni contenido aprobado ficticio.
 
 Verificación: 39 pruebas aprobadas, build de 48 páginas y auditoría de 42 rutas aprobados. La estructura actual tiene sus principales vistas/datos separados. Habilitar otro idioma requiere diccionario/editorial completo, revisión técnica de valores narrativos, wrappers de rutas y SEO localizado. Los gates externos de Fase 1 no están resueltos.
 

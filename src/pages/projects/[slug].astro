@@ -1,13 +1,27 @@
 ---
-import type {GetStaticPaths} from 'astro';
+import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectDetailContent from '../../components/projects/ProjectDetailContent.astro';
-import {getVisibleProjects,type Project} from '../../lib/projects';
-import {buildProjectDetail} from '../../lib/project-models';
-import {getMessages} from '../../i18n';
-export const getStaticPaths=(async ()=>(await getVisibleProjects()).map(project=>({params:{slug:project.entry.data.slug},props:{project}}))) satisfies GetStaticPaths;
-interface Props {project:Project;}
-const messages=getMessages();
-const model=buildProjectDetail(Astro.props.project,messages);
+import { getVisibleProjects, type Project } from '../../lib/projects';
+import { buildProjectDetail } from '../../lib/project-models';
+import { getMessages } from '../../i18n';
+export const getStaticPaths = (async () =>
+  (await getVisibleProjects()).map((project) => ({
+    params: { slug: project.entry.data.slug },
+    props: { project },
+  }))) satisfies GetStaticPaths;
+interface Props {
+  project: Project;
+}
+const messages = getMessages();
+const model = buildProjectDetail(Astro.props.project, messages);
 ---
-<BaseLayout title={model.title} description={model.data.summary} image={model.data.photos[0]?.src} noindex={model.reference}><ProjectDetailContent model={model} messages={messages}/></BaseLayout>
+
+<BaseLayout
+  title={model.title}
+  description={model.data.summary}
+  image={model.data.photos[0]?.src}
+  noindex={model.reference}
+>
+  <ProjectDetailContent model={model} messages={messages} />
+</BaseLayout>

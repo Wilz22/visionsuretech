@@ -1,11 +1,32 @@
 ---
 import ContentLayout from '../components/templates/ContentLayout.astro';
 import View from '../components/pages/AboutContent.astro';
-import {getMessages} from '../i18n';
-import {routes} from '../data/company';
-import {buildHomeLinks} from '../lib/home';
-import {company} from '../data/company';
-const messages=getMessages();
-const copy=messages.about;
+import { getMessages } from '../i18n';
+import { routes } from '../data/company';
+import { buildHomeLinks } from '../lib/home';
+import { company } from '../data/company';
+const messages = getMessages();
+const copy = messages.about;
 ---
-<ContentLayout title={copy.title} description={copy.description} reference copy={messages.contentLayout} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.title}]}><View copy={copy} paragraphs={messages.home.about.paragraphs} categories={buildHomeLinks(messages).categories} planningHref={`${routes.faq}#planning-your-project`} email={company.contact.email} quoteHref={routes.quote} quoteLabel={messages.common.quote}/></ContentLayout>
+
+<ContentLayout
+  title={copy.title}
+  description={copy.description}
+  reference
+  copy={messages.contentLayout}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.title },
+  ]}
+>
+  <View
+    copy={copy}
+    paragraphs={messages.home.about.paragraphs}
+    categories={buildHomeLinks(messages).categories}
+    planningHref={`${routes.faq}#planning-your-project`}
+    email={company.contact.email}
+    quoteHref={routes.quote}
+    quoteLabel={messages.common.quote}
+  />
+</ContentLayout>

@@ -1,12 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FaqPageContent from '../components/faq/FaqPageContent.astro';
-import {getFaqGroups} from '../lib/faq';
-import {buildFaqSchema} from '../lib/faq-content';
-import {getMessages} from '../i18n';
-import {routes} from '../data/company';
-const messages=getMessages();
-const groups=await getFaqGroups();
-const schema=buildFaqSchema(groups);
+import { getFaqGroups } from '../lib/faq';
+import { buildFaqSchema } from '../lib/faq-content';
+import { getMessages } from '../i18n';
+import { routes } from '../data/company';
+const messages = getMessages();
+const groups = await getFaqGroups();
+const schema = buildFaqSchema(groups);
 ---
-<BaseLayout title={messages.faqPage.title} description={messages.faqPage.description} image="/images/solutions/vst-s6301.jpg" noindex><script slot="head" type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')}/><FaqPageContent groups={groups} messages={messages} homeHref={routes.home} productsHref={routes.products}/></BaseLayout>
+
+<BaseLayout
+  title={messages.faqPage.title}
+  description={messages.faqPage.description}
+  image="/images/solutions/vst-s6301.jpg"
+  noindex
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+  />
+  <FaqPageContent
+    groups={groups}
+    messages={messages}
+    homeHref={routes.home}
+    productsHref={routes.products}
+  />
+</BaseLayout>

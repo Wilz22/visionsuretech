@@ -1,18 +1,44 @@
 ---
 import FormLayout from '../../components/templates/FormLayout.astro';
 import QuoteForm from '../../components/contact/QuoteForm.astro';
-import {getMessages} from '../../i18n';
-import {getPublishedProducts} from '../../lib/products';
-import {buildQuoteOptions} from '../../lib/quote-options';
-import {resolveDashCams} from '../../lib/dash-cam-content';
-import {quoteEndpoint} from '../../data/quote';
-import {company,routes} from '../../data/company';
-import {quoteUrl} from '../../lib/routes';
-const messages=getMessages();
-const dashCams=resolveDashCams(messages.dashCamEditorial);
-const copy=messages.quoteForm;
-const products=await getPublishedProducts();
-const systems=buildQuoteOptions(products.map(product=>product.data),dashCams,copy);
-const links={privacy:{label:copy.privacyLabel,href:'/privacy-policy/'},terms:{label:copy.termsLabel,href:'/terms/'}};
+import { getMessages } from '../../i18n';
+import { getPublishedProducts } from '../../lib/products';
+import { buildQuoteOptions } from '../../lib/quote-options';
+import { resolveDashCams } from '../../lib/dash-cam-content';
+import { quoteEndpoint } from '../../data/quote';
+import { company, routes } from '../../data/company';
+import { quoteUrl } from '../../lib/routes';
+const messages = getMessages();
+const dashCams = resolveDashCams(messages.dashCamEditorial);
+const copy = messages.quoteForm;
+const products = await getPublishedProducts();
+const systems = buildQuoteOptions(
+  products.map((product) => product.data),
+  dashCams,
+  copy,
+);
+const links = {
+  privacy: { label: copy.privacyLabel, href: '/privacy-policy/' },
+  terms: { label: copy.termsLabel, href: '/terms/' },
+};
 ---
-<FormLayout title={copy.pageTitle} description={copy.pageDescription} copy={messages.formLayout} contact={company.contact} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.pageTitle}]}><QuoteForm copy={copy} systems={systems} endpoint={quoteEndpoint} action={quoteUrl()} links={links}/></FormLayout>
+
+<FormLayout
+  title={copy.pageTitle}
+  description={copy.pageDescription}
+  copy={messages.formLayout}
+  contact={company.contact}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.pageTitle },
+  ]}
+>
+  <QuoteForm
+    copy={copy}
+    systems={systems}
+    endpoint={quoteEndpoint}
+    action={quoteUrl()}
+    links={links}
+  />
+</FormLayout>

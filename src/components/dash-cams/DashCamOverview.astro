@@ -1,27 +1,125 @@
 ---
 import ListingLayout from '../templates/ListingLayout.astro';
 import DashCamCard from './DashCamCard.astro';
-import {formatCount,formatMessage} from '../../i18n/format';
-import type {DashCam} from '../../data/dashCams';
-import type {DashCamOverviewCopy,DashCamCardCopy} from '../../i18n/catalog-types';
-import type {Locale} from '../../i18n/config';
-interface Props {models:DashCam[];copy:DashCamOverviewCopy;cardCopy:DashCamCardCopy;locale:Locale;resolveHref?:(href:string)=>string;assessmentHref:string;modelHref:(model:DashCam)=>string;}
-const {models,copy,cardCopy,locale,assessmentHref,modelHref}=Astro.props;
-const channels=[...new Set(models.map(model=>model.channels))].sort((a,b)=>a-b);
+import { formatCount, formatMessage } from '../../i18n/format';
+import type { DashCam } from '../../data/dashCams';
+import type {
+  DashCamOverviewCopy,
+  DashCamCardCopy,
+} from '../../i18n/catalog-types';
+import type { Locale } from '../../i18n/config';
+interface Props {
+  models: DashCam[];
+  copy: DashCamOverviewCopy;
+  cardCopy: DashCamCardCopy;
+  locale: Locale;
+  resolveHref?: (href: string) => string;
+  assessmentHref: string;
+  modelHref: (model: DashCam) => string;
+}
+const { models, copy, cardCopy, locale, assessmentHref, modelHref } =
+  Astro.props;
+const channels = [...new Set(models.map((model) => model.channels))].sort(
+  (a, b) => a - b,
+);
 ---
-<ListingLayout locale={locale} resolveHref={Astro.props.resolveHref} title={copy.title} description={copy.description} noindex>
-  <aside class="rounded-card border border-line-brand bg-surface-brand p-6 text-sm leading-7 text-copy">{copy.notice}</aside>
-  <section data-dash-list data-locale={locale} data-count-copy={JSON.stringify(copy.count)}>
+
+<ListingLayout
+  locale={locale}
+  resolveHref={Astro.props.resolveHref}
+  title={copy.title}
+  description={copy.description}
+  noindex
+>
+  <aside class="rounded-card border border-line-brand bg-surface-brand p-6 text-sm leading-7 text-copy">
+    {copy.notice}
+  </aside>
+  <section
+    data-dash-list
+    data-locale={locale}
+    data-count-copy={JSON.stringify(copy.count)}
+  >
     <h2 class="text-3xl font-bold text-ink">{copy.heading}</h2>
-    <label class="mt-6 block max-w-sm text-sm font-bold text-ink">{copy.channels}<select data-dash-filter class="mt-2 block min-h-12 w-full rounded-control border border-line-medium bg-white px-4"><option value="">{copy.allConfigurations}</option>{channels.map(count=><option value={count}>{formatMessage(copy.channelOption,{count:String(count)})}</option>)}</select></label>
-    <div class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{models.map(model=><div data-dash-channel={model.channels}><DashCamCard model={model} copy={cardCopy} href={modelHref(model)}/></div>)}</div>
-    <p data-dash-count role="status" aria-live="polite" class="mt-5 text-sm text-copy">{formatCount(models.length,copy.count,locale)}</p>
-    <p data-dash-empty hidden class="mt-5 rounded-card border border-line-light p-6 text-copy">{copy.empty}</p>
+    <label class="mt-6 block max-w-sm text-sm font-bold text-ink">
+      {copy.channels}
+      <select
+        data-dash-filter
+        class="mt-2 block min-h-12 w-full rounded-control border border-line-medium bg-white px-4"
+      >
+        <option value="">{copy.allConfigurations}</option>
+        {channels.map((count) => (
+          <option value={count}>
+            {formatMessage(copy.channelOption, { count: String(count) })}
+          </option>
+        ))}
+      </select>
+    </label>
+    <div class="mt-7 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {models.map((model) => (
+        <div data-dash-channel={model.channels}>
+          <DashCamCard model={model} copy={cardCopy} href={modelHref(model)} />
+        </div>
+      ))}
+    </div>
+    <p
+      data-dash-count
+      role="status"
+      aria-live="polite"
+      class="mt-5 text-sm text-copy"
+    >
+      {formatCount(models.length, copy.count, locale)}
+    </p>
+    <p
+      data-dash-empty
+      hidden
+      class="mt-5 rounded-card border border-line-light p-6 text-copy"
+    >
+      {copy.empty}
+    </p>
   </section>
   <section>
     <h2 class="text-3xl font-bold text-ink">{copy.comparison}</h2>
-    <div class="mt-6 overflow-x-auto rounded-card border border-line-light"><table class="w-full text-left text-sm"><caption class="sr-only">{copy.tableCaption}</caption><thead class="bg-surface-soft"><tr><th scope="col" class="p-5">{copy.configuration}</th><th scope="col" class="p-5">{copy.overview}</th><th scope="col" class="p-5">{copy.finalDetails}</th></tr></thead><tbody>{models.map(model=><tr class="border-t border-line-light bg-white"><th scope="row" class="p-5"><a href={modelHref(model)} class="text-brand-600 underline">{model.title}</a></th><td class="p-5 leading-7 text-copy">{model.configuration}</td><td class="p-5 text-copy">{copy.pendingDetails}</td></tr>)}</tbody></table></div>
+    <div class="mt-6 overflow-x-auto rounded-card border border-line-light">
+      <table class="w-full text-left text-sm">
+        <caption class="sr-only">{copy.tableCaption}</caption>
+        <thead class="bg-surface-soft">
+          <tr>
+            <th scope="col" class="p-5">
+              {copy.configuration}
+            </th>
+            <th scope="col" class="p-5">
+              {copy.overview}
+            </th>
+            <th scope="col" class="p-5">
+              {copy.finalDetails}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {models.map((model) => (
+            <tr class="border-t border-line-light bg-white">
+              <>
+                <th scope="row" class="p-5">
+                  <a href={modelHref(model)} class="text-brand-600 underline">
+                    {model.title}
+                  </a>
+                </th>
+                <td class="p-5 leading-7 text-copy">{model.configuration}</td>
+                <td class="p-5 text-copy">{copy.pendingDetails}</td>
+              </>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </section>
-  <a href={assessmentHref} class="inline-flex min-h-12 items-center rounded-pill bg-brand-500 px-6 font-bold text-white">{copy.assessment}</a>
+  <a
+    href={assessmentHref}
+    class="inline-flex min-h-12 items-center rounded-pill bg-brand-500 px-6 font-bold text-white"
+  >
+    {copy.assessment}
+  </a>
 </ListingLayout>
-<script>import '../../scripts/dash-cam-filter';</script>
+<script>
+  import '../../scripts/dash-cam-filter';
+</script>

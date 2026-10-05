@@ -1,9 +1,43 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../ui/Breadcrumbs.astro';
-import {defaultLocale,type Locale} from "../../i18n/config";
-interface Props {locale?:Locale;resolveHref?:(href:string)=>string;breadcrumbLabel?:string;title:string;heading?:string;description:string;noindex?:boolean;image?:string;crumbs:{label:string;href?:string}[]}
-const locale=Astro.props.locale??defaultLocale;
-const {title,heading=title,description,noindex=false,image,crumbs,breadcrumbLabel}=Astro.props;
+import { defaultLocale, type Locale } from '../../i18n/config';
+interface Props {
+  locale?: Locale;
+  resolveHref?: (href: string) => string;
+  breadcrumbLabel?: string;
+  title: string;
+  heading?: string;
+  description: string;
+  noindex?: boolean;
+  image?: string;
+  crumbs: { label: string; href?: string }[];
+}
+const locale = Astro.props.locale ?? defaultLocale;
+const {
+  title,
+  heading = title,
+  description,
+  noindex = false,
+  image,
+  crumbs,
+  breadcrumbLabel,
+} = Astro.props;
 ---
-<BaseLayout locale={locale} resolveHref={Astro.props.resolveHref} title={title} description={description} noindex={noindex} image={image}><section class="container pt-10"><Breadcrumbs items={crumbs} label={breadcrumbLabel}/><h1 class="mt-6 max-w-4xl text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">{heading}</h1></section><slot/></BaseLayout>
+
+<BaseLayout
+  locale={locale}
+  resolveHref={Astro.props.resolveHref}
+  title={title}
+  description={description}
+  noindex={noindex}
+  image={image}
+>
+  <section class="container pt-10">
+    <Breadcrumbs items={crumbs} label={breadcrumbLabel} />
+    <h1 class="mt-6 max-w-4xl text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">
+      {heading}
+    </h1>
+  </section>
+  <slot />
+</BaseLayout>

@@ -1,8 +1,55 @@
 ---
-import TablerIcon from "../ui/TablerIcon.astro";
-import type {ResourcesCopy} from '../../i18n/page-types';
-import type {ResourceLink} from '../../lib/page-links';
-interface Props {copy:ResourcesCopy;links:ResourceLink[];productsHref:string;}
-const {copy,links,productsHref}=Astro.props;
+import TablerIcon from '../ui/TablerIcon.astro';
+import type { ResourcesCopy } from '../../i18n/page-types';
+import type { ResourceLink } from '../../lib/page-links';
+interface Props {
+  copy: ResourcesCopy;
+  links: ResourceLink[];
+  productsHref: string;
+}
+const { copy, links, productsHref } = Astro.props;
 ---
-<ul class="grid gap-5 md:grid-cols-3">{links.map(item=><li><a href={item.href} class="block h-full rounded-panel border border-line-light p-7 hover:border-brand-400"><h2 class="text-xl font-bold text-ink">{item.title} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle" /></h2><p class="mt-4 text-sm leading-7 text-copy">{item.text}</p></a></li>)}</ul><section id="regulations"><h2 class="text-2xl font-bold text-ink">{copy.regulations.title}</h2><p class="mt-4 leading-8 text-copy">{copy.regulations.text}</p></section><section id="system-guide"><h2 class="text-2xl font-bold text-ink">{copy.guide.title}</h2><p class="mt-4 leading-8 text-copy">{copy.guide.text}</p><a href={productsHref} class="mt-4 inline-flex min-h-11 items-center font-bold text-brand-600 gap-2">{copy.guide.label} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle" /></a></section><section id="downloads"><h2 class="text-2xl font-bold text-ink">{copy.downloads.title}</h2><p class="mt-4 leading-8 text-copy">{copy.downloads.text}</p></section>
+
+<ul class="grid gap-5 md:grid-cols-3">
+  {links.map((item) => (
+    <li>
+      <a
+        href={item.href}
+        class="block h-full rounded-panel border border-line-light p-7 hover:border-brand-400"
+      >
+        <>
+          <h2 class="text-xl font-bold text-ink">
+            {item.title}{' '}
+            <TablerIcon
+              name="chevronRight"
+              class="inline-block h-4 w-4 shrink-0 align-middle"
+            />
+          </h2>
+          <p class="mt-4 text-sm leading-7 text-copy">{item.text}</p>
+        </>
+      </a>
+    </li>
+  ))}
+</ul>
+<section id="regulations">
+  <h2 class="text-2xl font-bold text-ink">{copy.regulations.title}</h2>
+  <p class="mt-4 leading-8 text-copy">{copy.regulations.text}</p>
+</section>
+<section id="system-guide">
+  <h2 class="text-2xl font-bold text-ink">{copy.guide.title}</h2>
+  <p class="mt-4 leading-8 text-copy">{copy.guide.text}</p>
+  <a
+    href={productsHref}
+    class="mt-4 inline-flex min-h-11 items-center font-bold text-brand-600 gap-2"
+  >
+    {copy.guide.label}
+    <TablerIcon
+      name="chevronRight"
+      class="inline-block h-4 w-4 shrink-0 align-middle"
+    />
+  </a>
+</section>
+<section id="downloads">
+  <h2 class="text-2xl font-bold text-ink">{copy.downloads.title}</h2>
+  <p class="mt-4 leading-8 text-copy">{copy.downloads.text}</p>
+</section>

@@ -1,9 +1,27 @@
 ---
 import FormLayout from '../components/templates/FormLayout.astro';
 import ContactContent from '../components/pages/ContactContent.astro';
-import {getMessages} from '../i18n';
-import {company,routes} from '../data/company';
-const messages=getMessages();
-const copy=messages.contactPage;
+import { getMessages } from '../i18n';
+import { company, routes } from '../data/company';
+const messages = getMessages();
+const copy = messages.contactPage;
 ---
-<FormLayout title={copy.title} description={copy.description} copy={messages.formLayout} contact={company.contact} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.title}]}><ContactContent copy={copy} cta={messages.quoteCta} quoteLabel={messages.common.quote} quoteHref={routes.quote}/></FormLayout>
+
+<FormLayout
+  title={copy.title}
+  description={copy.description}
+  copy={messages.formLayout}
+  contact={company.contact}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.title },
+  ]}
+>
+  <ContactContent
+    copy={copy}
+    cta={messages.quoteCta}
+    quoteLabel={messages.common.quote}
+    quoteHref={routes.quote}
+  />
+</FormLayout>
