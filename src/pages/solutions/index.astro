@@ -1,12 +1,27 @@
 ---
 import ListingLayout from '../../components/templates/ListingLayout.astro';
 import IndustryOverview from '../../components/industries/IndustryOverview.astro';
-import {resolveIndustries} from '../../lib/industry-content';
-import {routes} from '../../data/company';
-import {buildIndustryLinks} from '../../lib/listing-models';
-import {getMessages} from '../../i18n';
-const messages=getMessages();
-const industries=resolveIndustries(messages.industryEditorial);
-const copy=messages.industryOverview;
+import { resolveIndustries } from '../../lib/industry-content';
+import { routes } from '../../data/company';
+import { buildIndustryLinks } from '../../lib/listing-models';
+import { getMessages } from '../../i18n';
+const messages = getMessages();
+const industries = resolveIndustries(messages.industryEditorial);
+const copy = messages.industryOverview;
 ---
-<ListingLayout title={copy.title} description={copy.description} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.title}]}><IndustryOverview industries={buildIndustryLinks(industries)} messages={messages} quoteHref={routes.quote}/></ListingLayout>
+
+<ListingLayout
+  title={copy.title}
+  description={copy.description}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.title },
+  ]}
+>
+  <IndustryOverview
+    industries={buildIndustryLinks(industries)}
+    messages={messages}
+    quoteHref={routes.quote}
+  />
+</ListingLayout>

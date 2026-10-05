@@ -1,14 +1,37 @@
 ---
-import TablerIcon from "../ui/TablerIcon.astro";
+import TablerIcon from '../ui/TablerIcon.astro';
 import type { DecisionHelpCopy } from '../../i18n/types';
-interface Props { content: DecisionHelpCopy; resourceHref: string; }
+interface Props {
+  content: DecisionHelpCopy;
+  resourceHref: string;
+}
 const { content, resourceHref } = Astro.props;
 ---
-<section data-decision-help class="rounded-panel border border-line-light bg-white p-7 sm:p-9">
+
+<section
+  data-decision-help
+  class="rounded-panel border border-line-light bg-white p-7 sm:p-9"
+>
   <h2 class="text-2xl font-bold text-ink">{content.title}</h2>
   <p class="mt-4 max-w-3xl leading-8 text-copy">{content.introduction}</p>
   <div class="mt-6 grid gap-6 md:grid-cols-2">
-    {content.considerations.map(item => <div class="rounded-card bg-surface-soft p-5"><h3 class="text-lg font-bold text-ink">{item.title}</h3><p class="mt-3 text-sm leading-7 text-copy">{item.text}</p></div>)}
+    {content.considerations.map((item) => (
+      <div class="rounded-card bg-surface-soft p-5">
+        <>
+          <h3 class="text-lg font-bold text-ink">{item.title}</h3>
+          <p class="mt-3 text-sm leading-7 text-copy">{item.text}</p>
+        </>
+      </div>
+    ))}
   </div>
-  <a href={resourceHref} class="mt-5 inline-flex min-h-11 items-center font-bold text-brand-600 gap-2">{content.resourceLabel} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle ml-2" /></a>
+  <a
+    href={resourceHref}
+    class="mt-5 inline-flex min-h-11 items-center font-bold text-brand-600 gap-2"
+  >
+    {content.resourceLabel}
+    <TablerIcon
+      name="chevronRight"
+      class="inline-block h-4 w-4 shrink-0 align-middle ml-2"
+    />
+  </a>
 </section>

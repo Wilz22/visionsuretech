@@ -1,10 +1,16 @@
 ---
-import {getIndustryCatalog} from '../../lib/industries';
-import {buildIndustryDetail} from '../../lib/detail-models';
-import {getMessages} from '../../i18n';
+import { getIndustryCatalog } from '../../lib/industries';
+import { buildIndustryDetail } from '../../lib/detail-models';
+import { getMessages } from '../../i18n';
 import IndustryDetail from '../../components/templates/IndustryDetail.astro';
-export async function getStaticPaths(){return (await getIndustryCatalog()).map(industry=>({params:{slug:industry.id},props:{industry}}));}
-const messages=getMessages();
-const model=buildIndustryDetail(Astro.props.industry,messages);
+export async function getStaticPaths() {
+  return (await getIndustryCatalog()).map((industry) => ({
+    params: { slug: industry.id },
+    props: { industry },
+  }));
+}
+const messages = getMessages();
+const model = buildIndustryDetail(Astro.props.industry, messages);
 ---
-<IndustryDetail model={model} messages={messages}/>
+
+<IndustryDetail model={model} messages={messages} />

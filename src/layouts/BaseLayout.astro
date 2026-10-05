@@ -1,36 +1,36 @@
 ---
-import "../styles/global.css";
+import '../styles/global.css';
 
-import SEO from "../components/seo/SEO.astro";
-import Header from "../components/layout/Header.astro";
-import Footer from "../components/layout/Footer.astro";
+import SEO from '../components/seo/SEO.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 import WhatsAppButton from '../components/ui/WhatsAppButton.astro';
 import OrganizationSchema from '../components/seo/OrganizationSchema.astro';
-import {buildPageShell} from '../lib/page-shell';
-import {defaultLocale,type Locale} from '../i18n/config';
+import { buildPageShell } from '../lib/page-shell';
+import { defaultLocale, type Locale } from '../i18n/config';
 
 interface Props {
-  locale?:Locale;
-  resolveHref?:(href:string)=>string;
+  locale?: Locale;
+  resolveHref?: (href: string) => string;
   title: string;
   description: string;
   image?: string;
   canonical?: string;
   noindex?: boolean;
-  type?: "website" | "article";
+  type?: 'website' | 'article';
 }
 
 const {
-  locale=defaultLocale,
+  locale = defaultLocale,
   resolveHref,
   title,
   description,
   image,
   canonical,
   noindex = false,
-  type = "website",
+  type = 'website',
 } = Astro.props;
-const shell=buildPageShell(locale,resolveHref);
+const shell = buildPageShell(locale, resolveHref);
 ---
 
 <!doctype html>
@@ -64,12 +64,23 @@ const shell=buildPageShell(locale,resolveHref);
   </head>
 
   <body>
-    <Header locale={locale} copy={shell.messages.navigation} navigation={shell.navigation.main} homeLabel={shell.homeLabel} homeHref={shell.homeHref}/>
+    <Header
+      locale={locale}
+      copy={shell.messages.navigation}
+      navigation={shell.navigation.main}
+      homeLabel={shell.homeLabel}
+      homeHref={shell.homeHref}
+    />
 
     <main>
       <slot />
     </main>
-    <Footer locale={locale} navigation={shell.navigation} copy={shell.messages.footer} common={shell.messages.common}/>
-    <WhatsAppButton copy={shell.messages.common}/>
+    <Footer
+      locale={locale}
+      navigation={shell.navigation}
+      copy={shell.messages.footer}
+      common={shell.messages.common}
+    />
+    <WhatsAppButton copy={shell.messages.common} />
   </body>
 </html>

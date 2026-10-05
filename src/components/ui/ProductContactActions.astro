@@ -1,19 +1,18 @@
 ---
-import QuoteLink from "./QuoteLink.astro";
-import CallLink from "./CallLink.astro";
-import TablerIcon from "./TablerIcon.astro";
-import { formatMessage } from "../../i18n/format";
-import type { Messages } from "../../i18n/types";
+import QuoteLink from './QuoteLink.astro';
+import TablerIcon from './TablerIcon.astro';
+import { formatMessage } from '../../i18n/format';
+import type { Messages } from '../../i18n/types';
 interface Props {
   quoteHref: string;
   whatsappHref: string;
   product: string;
-  copy: Messages["common"];
+  copy: Messages['common'];
 }
 const { quoteHref, whatsappHref, product, copy } = Astro.props;
 const whatsappUrl = new URL(whatsappHref);
 whatsappUrl.searchParams.set(
-  "text",
+  'text',
   formatMessage(copy.productWhatsappMessage, { product }),
 );
 ---

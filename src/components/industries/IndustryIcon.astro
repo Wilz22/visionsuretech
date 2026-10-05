@@ -1,8 +1,20 @@
 ---
 import TablerIcon from '../ui/TablerIcon.astro';
-interface Props { industry: string; class?: string; }
+interface Props {
+  industry: string;
+  class?: string;
+}
 const { industry, class: className } = Astro.props;
-const icons = { cranes: 'crane', construction: 'building', 'heavy-equipment': 'backhoe', 'trucks-fleets': 'truck', mining: 'mountain', ports: 'ship', agriculture: 'tractor' } as const;
+const icons = {
+  cranes: 'crane',
+  construction: 'building',
+  'heavy-equipment': 'backhoe',
+  'trucks-fleets': 'truck',
+  mining: 'mountain',
+  ports: 'ship',
+  agriculture: 'tractor',
+} as const;
 const name = icons[industry as keyof typeof icons] ?? 'building';
 ---
+
 <TablerIcon name={name} class={className} />

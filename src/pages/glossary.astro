@@ -1,10 +1,23 @@
 ---
 import ContentLayout from '../components/templates/ContentLayout.astro';
 import GlossaryContent from '../components/pages/GlossaryContent.astro';
-import {getMessages} from '../i18n';
-import {buildGlossaryTerms} from '../lib/page-links';
-import {routes} from '../data/company';
-const messages=getMessages();
-const copy=messages.glossary;
+import { getMessages } from '../i18n';
+import { buildGlossaryTerms } from '../lib/page-links';
+import { routes } from '../data/company';
+const messages = getMessages();
+const copy = messages.glossary;
 ---
-<ContentLayout title={copy.title} description={copy.description} reference copy={messages.contentLayout} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.title}]}><GlossaryContent copy={copy} terms={buildGlossaryTerms(messages)}/></ContentLayout>
+
+<ContentLayout
+  title={copy.title}
+  description={copy.description}
+  reference
+  copy={messages.contentLayout}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.title },
+  ]}
+>
+  <GlossaryContent copy={copy} terms={buildGlossaryTerms(messages)} />
+</ContentLayout>

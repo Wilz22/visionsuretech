@@ -1,8 +1,40 @@
 ---
-import {getMessages} from '../../i18n';
-interface Props {label?:string;items:{label:string;href?:string}[]}
-const {items,label=getMessages().common.breadcrumb}=Astro.props;
-const schema={'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:items.map((item,index)=>({'@type':'ListItem',position:index+1,name:item.label,item:new URL(item.href??Astro.url.pathname,Astro.site).href}))};
+import { getMessages } from '../../i18n';
+interface Props {
+  label?: string;
+  items: { label: string; href?: string }[];
+}
+const { items, label = getMessages().common.breadcrumb } = Astro.props;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: new URL(item.href ?? Astro.url.pathname, Astro.site).href,
+  })),
+};
 ---
-<nav aria-label={label} class="mb-10 text-sm text-copy"><ol class="inline-flex flex-wrap items-center gap-3">{items.map((item,index)=><li class="inline-flex items-center gap-3">{index>0&&<span aria-hidden="true">/</span>}{item.href?<a href={item.href} class="hover:text-brand-600">{item.label}</a>:<span aria-current="page">{item.label}</span>}</li>)}</ol></nav>
-<script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')}/>
+
+<nav aria-label={label} class="mb-10 text-sm text-copy">
+  <ol class="inline-flex flex-wrap items-center gap-3">
+    {items.map((item, index) => (
+      <li class="inline-flex items-center gap-3">
+        {index > 0 && <span aria-hidden="true">/</span>}
+        {item.href ? (
+          <a href={item.href} class="hover:text-brand-600">
+            {item.label}
+          </a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+/>

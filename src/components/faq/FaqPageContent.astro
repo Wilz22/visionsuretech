@@ -1,26 +1,106 @@
 ---
-import TablerIcon from "../ui/TablerIcon.astro";
+import TablerIcon from '../ui/TablerIcon.astro';
 import FaqAccordion from './FaqAccordion.astro';
-import type {resolveFaqGroups} from '../../lib/faq-content';
-import type {Messages} from '../../i18n/types';
-interface Props {groups:ReturnType<typeof resolveFaqGroups>;messages:Messages;homeHref:string;productsHref:string;}
-const {groups,messages,homeHref,productsHref}=Astro.props;
-const copy=messages.faqPage;
+import type { resolveFaqGroups } from '../../lib/faq-content';
+import type { Messages } from '../../i18n/types';
+interface Props {
+  groups: ReturnType<typeof resolveFaqGroups>;
+  messages: Messages;
+  homeHref: string;
+  productsHref: string;
+}
+const { groups, messages, homeHref, productsHref } = Astro.props;
+const copy = messages.faqPage;
 ---
-  <section class="border-b border-line-light bg-page pt-10 pb-14 sm:pb-16">
-    <div class="container">
-      <nav aria-label={messages.common.breadcrumb} class="text-sm text-copy"><ol class="flex gap-3"><li><a href={homeHref} class="hover:text-brand-600">{messages.navigation.labels.home}</a></li><li aria-hidden="true">/</li><li aria-current="page">{messages.navigation.labels.faq}</li></ol></nav>
-      <p class="mt-12 text-xs font-extrabold tracking-widest text-brand-600 uppercase">{copy.eyebrow}</p>
-      <h1 class="mt-5 max-w-3xl text-4xl leading-[1.05] font-bold tracking-[-0.045em] text-ink sm:text-6xl">{copy.heading.map((line,index)=><>{index>0&&<br/>}{line}</>)}</h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-copy">{copy.introduction}</p>
-      <p class="mt-5 text-sm font-bold text-brand-700">{copy.notice}</p>
-      <nav aria-label={copy.topics} class="mt-9"><ul class="flex flex-wrap gap-3">{groups.map((group) => <li><a href={`#${group.id}`} class="inline-flex min-h-12 items-center rounded-pill border border-line-medium bg-white px-5 py-3 text-sm font-bold text-brand-600 hover:border-brand-500">{group.title}</a></li>)}</ul></nav>
-    </div>
-  </section>
-  <div class="container divide-y divide-line-light">
-    {groups.map((group, index) => <section id={group.id} aria-labelledby={`${group.id}-heading`} class="grid scroll-mt-28 items-start gap-8 py-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16 sm:py-16">
-      <div><p class="text-xs font-bold tracking-widest text-brand-600">0{index + 1}</p><h2 id={`${group.id}-heading`} class="mt-3 text-3xl leading-tight font-bold tracking-tight text-ink">{group.title}</h2><p class="mt-4 leading-7 text-copy">{group.description}</p></div>
-      <FaqAccordion items={group.items} prefix="faq" relatedLabel={copy.relatedSystems} />
-    </section>)}
+
+<section class="border-b border-line-light bg-page pt-10 pb-14 sm:pb-16">
+  <div class="container">
+    <nav aria-label={messages.common.breadcrumb} class="text-sm text-copy">
+      <ol class="flex gap-3">
+        <li>
+          <a href={homeHref} class="hover:text-brand-600">
+            {messages.navigation.labels.home}
+          </a>
+        </li>
+        <li aria-hidden="true">/</li>
+        <li aria-current="page">{messages.navigation.labels.faq}</li>
+      </ol>
+    </nav>
+    <p class="mt-12 text-xs font-extrabold tracking-widest text-brand-600 uppercase">
+      {copy.eyebrow}
+    </p>
+    <h1 class="mt-5 max-w-3xl text-4xl leading-[1.05] font-bold tracking-[-0.045em] text-ink sm:text-6xl">
+      {copy.heading.map((line, index) => (
+        <>
+          {index > 0 && <br />}
+          {line}
+        </>
+      ))}
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-8 text-copy">
+      {copy.introduction}
+    </p>
+    <p class="mt-5 text-sm font-bold text-brand-700">{copy.notice}</p>
+    <nav aria-label={copy.topics} class="mt-9">
+      <ul class="flex flex-wrap gap-3">
+        {groups.map((group) => (
+          <li>
+            <a
+              href={`#${group.id}`}
+              class="inline-flex min-h-12 items-center rounded-pill border border-line-medium bg-white px-5 py-3 text-sm font-bold text-brand-600 hover:border-brand-500"
+            >
+              {group.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </div>
-  <section class="bg-surface-brand py-14 sm:py-16"><div class="container flex flex-wrap items-center justify-between gap-7"><div class="max-w-xl"><h2 class="text-3xl font-bold tracking-tight text-ink">{copy.catalogHeading}</h2><p class="mt-4 leading-7 text-copy">{copy.catalogText}</p></div><a href={productsHref} class="inline-flex min-h-12 items-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600">{copy.catalogLabel} <TablerIcon name="chevronRight" class="inline-block h-4 w-4 shrink-0 align-middle" /></a></div></section>
+</section>
+<div class="container divide-y divide-line-light">
+  {groups.map((group, index) => (
+    <section
+      id={group.id}
+      aria-labelledby={`${group.id}-heading`}
+      class="grid scroll-mt-28 items-start gap-8 py-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16 sm:py-16"
+    >
+      <div>
+        <p class="text-xs font-bold tracking-widest text-brand-600">
+          0{index + 1}
+        </p>
+        <h2
+          id={`${group.id}-heading`}
+          class="mt-3 text-3xl leading-tight font-bold tracking-tight text-ink"
+        >
+          {group.title}
+        </h2>
+        <p class="mt-4 leading-7 text-copy">{group.description}</p>
+      </div>
+      <FaqAccordion
+        items={group.items}
+        prefix="faq"
+        relatedLabel={copy.relatedSystems}
+      />
+    </section>
+  ))}
+</div>
+<section class="bg-surface-brand py-14 sm:py-16">
+  <div class="container flex flex-wrap items-center justify-between gap-7">
+    <div class="max-w-xl">
+      <h2 class="text-3xl font-bold tracking-tight text-ink">
+        {copy.catalogHeading}
+      </h2>
+      <p class="mt-4 leading-7 text-copy">{copy.catalogText}</p>
+    </div>
+    <a
+      href={productsHref}
+      class="inline-flex min-h-12 items-center gap-3 rounded-pill bg-brand-500 px-6 py-3 text-sm font-bold text-white hover:bg-brand-600"
+    >
+      {copy.catalogLabel}{' '}
+      <TablerIcon
+        name="chevronRight"
+        class="inline-block h-4 w-4 shrink-0 align-middle"
+      />
+    </a>
+  </div>
+</section>

@@ -1,11 +1,29 @@
 ---
 import FormLayout from '../../components/templates/FormLayout.astro';
 import AssessmentContent from '../../components/pages/AssessmentContent.astro';
-import {getBookingUrl} from '../../lib/booking';
-import {getMessages} from '../../i18n';
-import {company,routes} from '../../data/company';
-const bookingUrl=getBookingUrl(import.meta.env.PUBLIC_ASSESSMENT_BOOKING_URL);
-const messages=getMessages();
-const copy=messages.assessment;
+import { getBookingUrl } from '../../lib/booking';
+import { getMessages } from '../../i18n';
+import { company, routes } from '../../data/company';
+const bookingUrl = getBookingUrl(import.meta.env.PUBLIC_ASSESSMENT_BOOKING_URL);
+const messages = getMessages();
+const copy = messages.assessment;
 ---
-<FormLayout title={copy.title} description={copy.description} reference copy={messages.formLayout} contact={company.contact} breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:routes.home},{label:copy.title}]}><AssessmentContent copy={copy} bookingUrl={bookingUrl} contactHref={routes.contact}/></FormLayout>
+
+<FormLayout
+  title={copy.title}
+  description={copy.description}
+  reference
+  copy={messages.formLayout}
+  contact={company.contact}
+  breadcrumbLabel={messages.common.breadcrumb}
+  crumbs={[
+    { label: messages.navigation.labels.home, href: routes.home },
+    { label: copy.title },
+  ]}
+>
+  <AssessmentContent
+    copy={copy}
+    bookingUrl={bookingUrl}
+    contactHref={routes.contact}
+  />
+</FormLayout>

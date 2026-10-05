@@ -1,10 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import NotFoundContent from '../components/pages/NotFoundContent.astro';
-import {getMessages} from '../i18n';
-import {buildNotFoundLinks} from '../lib/page-links';
-import {routes} from '../data/company';
-const messages=getMessages();
-const copy=messages.notFound;
+import { getMessages } from '../i18n';
+import { buildNotFoundLinks } from '../lib/page-links';
+import { routes } from '../data/company';
+const messages = getMessages();
+const copy = messages.notFound;
 ---
-<BaseLayout title={copy.title} description={copy.description} noindex image="/images/solutions/vst-s6301.jpg"><NotFoundContent copy={copy} homeHref={routes.home} productsHref={routes.products} links={buildNotFoundLinks(messages)}/></BaseLayout>
+
+<BaseLayout
+  title={copy.title}
+  description={copy.description}
+  noindex
+  image="/images/solutions/vst-s6301.jpg"
+>
+  <NotFoundContent
+    copy={copy}
+    homeHref={routes.home}
+    productsHref={routes.products}
+    links={buildNotFoundLinks(messages)}
+  />
+</BaseLayout>
