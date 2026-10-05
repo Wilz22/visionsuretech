@@ -22,5 +22,16 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Windows-specific files
+Thumbs.db
+Desktop.ini
+
+# test and coverage output
+coverage/
+
+# hosting tool output
+.vercel/
+.netlify/
+
 # jetbrains setting folder
 .idea/
