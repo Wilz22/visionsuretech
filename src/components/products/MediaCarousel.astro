@@ -1,0 +1,46 @@
+---
+import TablerIcon from '../ui/TablerIcon.astro';
+import {formatMessage} from '../../i18n';
+import type {GalleryCopy} from '../../i18n/catalog-types';
+interface Props {
+  id:string; title:string; images:{src:string;alt:string;width:number;height:number}[];
+  copy:GalleryCopy; caption?:string; eager?:boolean; compact?:boolean; thumbnails?:boolean;
+}
+const {id,title,images,copy,caption,eager=false,compact=false,thumbnails=false}=Astro.props;
+const ratio=Math.min(...images.map(image=>image.width/image.height));
+---
+<figure id={id} data-media-carousel role="region" aria-roledescription="carousel" aria-label={title} class="min-w-0 overflow-hidden rounded-panel border border-line-light bg-white shadow-sm">
+  <div data-media-track class:list={['relative isolate overflow-hidden bg-white',thumbnails?'h-80 sm:h-96':'media-proportional']} style={`touch-action:pan-y;--media-ratio:${ratio}`}>
+    {images.map((image,index)=><div data-media-slide class:list={['absolute inset-0 duration-500 ease-in-out motion-reduce:transition-none',index>0&&'hidden']}>
+      <button type="button" data-media-open aria-label={`${copy.enlarge}: ${image.alt}`} class="group relative h-full w-full cursor-zoom-in focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:-outline-offset-4">
+        <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading={eager&&index===0?'eager':'lazy'} class:list={['h-full w-full object-contain',thumbnails&&'p-6']} draggable="false"/>
+        <span class="absolute bottom-4 right-4 rounded-full bg-white/95 p-3 text-brand-600 shadow-md"><TablerIcon name="zoomIn"/></span>
+      </button>
+    </div>)}
+    {images.length>1&&<>
+      <button type="button" data-media-prev aria-label={copy.previous} class="absolute left-3 top-1/2 z-40 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line-light bg-white/95 text-brand-600 shadow-md hover:bg-surface-brand focus-visible:outline-2 focus-visible:outline-brand-500"><TablerIcon name="chevronLeft"/></button>
+      <button type="button" data-media-next aria-label={copy.next} class="absolute right-3 top-1/2 z-40 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-line-light bg-white/95 text-brand-600 shadow-md hover:bg-surface-brand focus-visible:outline-2 focus-visible:outline-brand-500"><TablerIcon name="chevronRight"/></button>
+    </>}
+  </div>
+  {images.length>1&&<div class:list={['flex items-center gap-2 border-t border-line-light px-4 py-3',thumbnails?'justify-start':'justify-center']}>{images.map((image,index)=><button type="button" data-media-dot aria-label={formatMessage(copy.photoLabel,{title,index:String(index+1)})} aria-current={index===0?'true':'false'} class:list={['media-indicator flex items-center justify-center focus-visible:outline-2 focus-visible:outline-brand-500',thumbnails?'h-20 w-20 rounded-control border border-line-medium p-2':'h-11 w-11 rounded-full']}>
+    {thumbnails?<img src={image.src} alt="" width="64" height="64" class="h-16 w-16 object-contain" loading="lazy"/>:<span class="h-2.5 w-2.5 rounded-full bg-brand-600"/>}
+  </button>)}</div>}
+  {caption&&<figcaption class="border-t border-line-light px-5 py-3 text-xs leading-6 text-copy">{caption}</figcaption>}
+  <dialog data-media-dialog aria-label={`${copy.enlarge}: ${title}`} class="media-dialog rounded-panel border border-line-light bg-white p-0 text-ink shadow-xl">
+    <div class="flex items-center justify-between gap-4 border-b border-line-light p-3"><p class="truncate text-sm font-semibold">{title}</p><div class="flex shrink-0 gap-2"><button type="button" data-media-zoom aria-label={copy.zoom} class="rounded-control p-3 hover:bg-surface-brand"><TablerIcon name="zoomIn"/></button><button type="button" data-media-close aria-label={copy.close} class="rounded-control p-3 hover:bg-surface-brand"><TablerIcon name="close"/></button></div></div>
+    <div data-media-viewer class="media-viewer overflow-auto"><div data-media-canvas class="media-canvas"><img data-media-expanded src={images[0].src} alt={images[0].alt} width={images[0].width} height={images[0].height} draggable="false" class="h-full w-full object-contain"/></div></div>
+  </dialog>
+</figure>
+<style>
+  .media-dialog{width:min(96vw,90rem);max-width:96vw;max-height:94dvh;margin:auto;}
+  .media-dialog::backdrop{background:rgb(15 23 42 / .8);backdrop-filter:blur(4px);}
+  .media-viewer{height:calc(90dvh - 5rem);}
+  .media-proportional{aspect-ratio:var(--media-ratio);}
+  .media-canvas{display:flex;align-items:center;justify-content:center;width:100%;height:100%;}
+  .media-viewer[data-zoomed]{touch-action:none;cursor:grab;}
+  .media-viewer[data-dragging]{cursor:grabbing;}
+  .media-viewer[data-zoomed] img{max-width:none;flex-shrink:0;}
+  .media-indicator[aria-current='true']{border-color:var(--color-brand-500);}
+  [data-media-dot][aria-current='false'] span{background:#cbd5e1;}
+</style>
+<script>import '../../scripts/media-carousel';</script>

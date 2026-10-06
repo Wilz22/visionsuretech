@@ -10,6 +10,8 @@ import type {ContentLayoutCopy,ServicesCopy,ResourcesCopy,AboutCopy} from './pag
 import type {IndustrialDetailCopy,IndustryDetailCopy,PersonalDetailCopy} from './detail-types.ts';
 import type {HomeCopy} from './home-types.ts';
 import type {QuoteFormCopy} from './quote-types.ts';
+import type {VantrueCopy} from './vantrue-types';
+import type {VantrueProductCopy} from './vantrue-product-types';
 import type {CatalogGridCopy,GalleryCopy,DashCamCardCopy,DashCamOverviewCopy} from './catalog-types.ts';
 export interface DecisionHelpCopy {
   title: string;
@@ -19,6 +21,8 @@ export interface DecisionHelpCopy {
 }
 
 export interface Messages {
+  vantrue:VantrueCopy;
+  vantrueProducts:Record<string,VantrueProductCopy>;
   productVisual:{fallbackTitle:string;fallbackTags:readonly string[];byModel:Record<string,{title:string;tags:readonly string[]}>};
   dashCamEditorial:DashCamEditorial;
   industryEditorial:IndustryEditorial;

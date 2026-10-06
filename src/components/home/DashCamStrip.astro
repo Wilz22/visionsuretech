@@ -1,24 +1,30 @@
 ---
 import TablerIcon from '../ui/TablerIcon.astro';
 import type { HomeCopy } from '../../i18n/home-types';
+import type {VantrueCopy} from '../../i18n/vantrue-types';
 interface Props {
+  brandCopy:VantrueCopy;
   copy: HomeCopy['dashCams'];
   compareHref: string;
   assessmentHref: string;
 }
-const { copy, compareHref, assessmentHref } = Astro.props;
+const { copy, brandCopy, compareHref, assessmentHref } = Astro.props;
 ---
 
 <section class="bg-surface-brand py-16">
   <div class="container grid items-center gap-8 lg:grid-cols-2">
     <div>
+      <div class="mb-6 inline-flex items-center gap-4 rounded-card border border-line-brand bg-white px-5 py-3">
+        <img src="/images/brand/vantrue-logo.png" alt="Vantrue" width="144" height="72" class="h-10 w-28 object-contain" loading="lazy"/>
+        <span class="text-sm font-bold text-brand-700">{brandCopy.retailer}</span>
+      </div>
       <p class="text-xs font-extrabold tracking-widest text-brand-600 uppercase">
         {copy.eyebrow}
       </p>
       <h2 class="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-        {copy.title}
+        {brandCopy.title}
       </h2>
-      <p class="mt-5 leading-8 text-copy">{copy.description}</p>
+      <p class="mt-5 leading-8 text-copy">{brandCopy.description}</p>
     </div>
     <div class="flex flex-wrap gap-4">
       <a

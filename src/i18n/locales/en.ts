@@ -1,4 +1,7 @@
 import {dashCamEditorial} from './en-dash-cams.ts';
+import {vantrue} from './en-vantrue.ts';
+import {n5s} from './en-n5s.ts';
+import {s1ProMax} from './en-s1-pro-max.ts';
 import {industryEditorial} from './en-industries.ts';
 import {industrialDetail,industryDetail,personalDetail} from './en-detail.ts';
 import {contentLayout,services,resources,about} from './en-pages.ts';
@@ -18,6 +21,8 @@ import {catalogGrid,gallery,dashCamCard,dashCamOverview} from './en-catalog.ts';
 const introduction = 'Use these questions to prepare a configuration review. This is reference guidance; final specifications and equipment compatibility await verified client information.';
 
 export const en: Messages = {
+  vantrue,
+  vantrueProducts:{'VST-N5S':n5s,'VST-S1ProM4K4K':s1ProMax},
   productVisual:{fallbackTitle:'Product image pending',fallbackTags:[],byModel:{'VST-S8401':{title:'8 AI channels. One connected fleet.',tags:['WiFi','GPS','4G']}}},
   dashCamEditorial,
   industryEditorial,

@@ -8,8 +8,9 @@ import { resolveDashCams } from '../../lib/dash-cam-content';
 import { quoteEndpoint } from '../../data/quote';
 import { company, routes } from '../../data/company';
 import { quoteUrl } from '../../lib/routes';
+import {resolveVantrueDashCams} from '../../lib/vantrue-dash-cams';
 const messages = getMessages();
-const dashCams = resolveDashCams(messages.dashCamEditorial);
+const dashCams = [...resolveVantrueDashCams(messages.vantrue),...resolveDashCams(messages.dashCamEditorial)];
 const copy = messages.quoteForm;
 const products = await getPublishedProducts();
 const systems = buildQuoteOptions(

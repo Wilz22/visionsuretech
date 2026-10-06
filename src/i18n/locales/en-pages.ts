@@ -18,7 +18,7 @@ export const about:AboutCopy = {
  title:'About VisionSure Technologies',description:'Learn about VisionSure’s focus on visibility technology, its Langley location and contact channels.',
  introTitle:'Visibility with purpose.',historyPending:'Company history, team information and service area will be added after client review.',
  location:{title:'Based in Langley, BC',text:'Discuss your equipment and visibility requirements with VisionSure. Street address, map location and business hours are pending confirmation.'},
- brands:{title:'Brands we carry',text:'VisionSure products are presented under the VisionSure brand. Additional brand information requires client approval; supplier names are not published.'},
+ brands:{title:'Brands we carry',text:'VisionSure is authorized to sell and promote Vantrue dash cams. These products retain the Vantrue brand; VisionSure provides local product selection and installation support.'},
  planning:{title:'Start with the right questions.',steps:['Identify the equipment, operating environment and blind spots.','Decide whether you need live views, recording, detection or remote access.','Review camera positions, power, mounting, cables and connectivity.'],label:'Read the planning FAQs'},
  contactTitle:'Contact VisionSure',
 };

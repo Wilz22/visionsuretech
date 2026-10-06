@@ -39,6 +39,7 @@ const copy = messages.personalDetail;
   crumbs={crumbs}
 >
   <div class="container space-y-12 py-14">
+    {model.slug==='front-4k'&&<aside class="rounded-card border border-line-brand bg-surface-brand p-6 text-copy"><p class="font-bold text-brand-700">{messages.vantrue.restocking}</p><p class="mt-2 leading-7">{messages.vantrue.stockNotice}</p><a href="/dash-cams/front-2.5K/" class="mt-3 inline-flex min-h-11 items-center font-bold text-brand-600 underline underline-offset-4">{messages.vantrue.frontTitle}</a></aside>}
     <div class="grid gap-10 lg:grid-cols-2">
       <ProductGallery images={[]} title={model.title} copy={messages.gallery} />
       <div>

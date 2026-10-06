@@ -1,0 +1,12 @@
+---
+import {getMessages} from '../../../i18n';
+import {resolveVantrueDashCams} from '../../../lib/vantrue-dash-cams';
+import ListingLayout from '../../../components/templates/ListingLayout.astro';
+import DashCamCard from '../../../components/dash-cams/DashCamCard.astro';
+const messages=getMessages();
+const models=resolveVantrueDashCams(messages.vantrue).filter(model=>model.category==='front-2.5K');
+---
+<ListingLayout title={messages.vantrue.frontTitle} description={messages.vantrue.frontDescription} brandLabel={messages.vantrue.retailer} noindex crumbs={[{label:messages.navigation.labels.home,href:'/'},{label:messages.navigation.labels.dashCams,href:'/dash-cams/'},{label:messages.vantrue.frontTitle}]}>
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{models.map(model=><DashCamCard model={model} copy={messages.dashCamCard} href={model.href}/>)}</div>
+  <a href="/dash-cams/" class="inline-flex min-h-11 items-center font-bold text-brand-600 underline underline-offset-4">{messages.vantrue.overview}</a>
+</ListingLayout>

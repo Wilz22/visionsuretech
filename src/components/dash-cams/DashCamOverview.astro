@@ -105,7 +105,7 @@ const channels = [...new Set(models.map((model) => model.channels))].sort(
                   </a>
                 </th>
                 <td class="p-5 leading-7 text-copy">{model.configuration}</td>
-                <td class="p-5 text-copy">{copy.pendingDetails}</td>
+                <td class="p-5 text-copy">{model.availabilityLabel??model.statusLabel??copy.pendingDetails}</td>
               </>
             </tr>
           ))}
