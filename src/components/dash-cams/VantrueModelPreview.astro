@@ -1,0 +1,24 @@
+---
+import ListingLayout from '../templates/ListingLayout.astro';
+import ProductGallery from '../products/ProductGallery.astro';
+import ProductContactActions from '../ui/ProductContactActions.astro';
+import type {VantrueDashCam} from '../../lib/vantrue-dash-cams';
+import type {Messages} from '../../i18n/types';
+interface Props {model:VantrueDashCam;messages:Messages;whatsappHref:string;}
+const {model,messages,whatsappHref}=Astro.props;
+---
+<ListingLayout title={model.title} description={model.configuration} brandLabel={messages.vantrue.retailer} noindex crumbs={[{label:messages.navigation.labels.home,href:'/'},{label:messages.navigation.labels.dashCams,href:'/dash-cams/'},{label:model.title}]}>
+  <section class="grid items-start gap-8 lg:grid-cols-2">
+    <ProductGallery images={[model.image]} title={model.title} copy={messages.gallery}/>
+    <div>
+      <p class="text-sm font-bold text-brand-600">{model.sku}</p>
+      <h2 class="mt-4 text-2xl font-bold text-ink">{model.title}</h2>
+      <p class="mt-4 leading-8 text-copy">{model.configuration}</p>
+      <ProductContactActions quoteHref={`/quote/?product=${encodeURIComponent(model.sku)}`} whatsappHref={whatsappHref} product={model.title} copy={messages.common}/>
+    </div>
+  </section>
+  <section class="rounded-panel border border-dashed border-line-brand bg-surface-brand p-7">
+    <h2 class="text-xl font-bold text-ink">{messages.vantrue.previewTitle}</h2>
+    <p class="mt-3 leading-7 text-copy">{messages.vantrue.previewText}</p>
+  </section>
+</ListingLayout>

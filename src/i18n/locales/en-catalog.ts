@@ -3,7 +3,7 @@ export const catalogGrid: CatalogGridCopy = {
   search:'Search products',placeholder:'Model or function',catalogClass:'Catalog class',allClasses:'All classes',
   empty:'No systems match these filters. Clear the search or choose another class.',count:{one:'{count} system',other:'{count} systems'},
 };
-export const gallery: GalleryCopy = {photoLabel:'View {title} photograph {index}',pending:'Product photographs pending client content.',caption:'Reference catalog visual. Included items and options are listed separately; final gallery awaits verified content.'};
+export const gallery: GalleryCopy = {photoLabel:'View {title} photograph {index}',pending:'Product photographs pending client content.',caption:'Reference catalog visual. Included items and options are listed separately; final gallery awaits verified content.',previous:'Previous image',next:'Next image',enlarge:'Enlarge image',close:'Close image viewer',zoom:'Toggle image zoom'};
 export const dashCamCard: DashCamCardCopy = {reference:'Configuration reference · Model name pending',viewDetails:'View details'};
 export const dashCamOverview: DashCamOverviewCopy = {
   title:'Dash Cams',description:'Explore personal-vehicle camera configurations and prepare for a free assessment.',

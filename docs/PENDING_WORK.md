@@ -1,5 +1,16 @@
 # Pendientes VisionSure
 
+## Actualización del cliente — 2026-10-05
+
+- Vantrue está autorizado para venta y promoción. Sus Dash Cams mantienen la marca del fabricante; no se presentan como fabricación VisionSure. La restricción previa de fabricantes no aplica a esta línea por instrucción del usuario.
+- Excel actualizado: cinco SKU con rutas por categoría y modelo, registradas en `vantrueDashCamDefinitions.ts`. Las cinco páginas son vistas iniciales con imagen, nombre y configuración; falta completar sus fichas una por una.
+- Nueva categoría `/dash-cams/front-2.5K/` para VST-S1-Pro. Front-only 4K se conserva con estado pendiente de reposición, sin fecha inventada.
+- Home muestra la marca Vantrue y la autorización de venta. No se afirma patrocinio, exclusividad ni garantía del fabricante sobre VisionSure.
+- N5S implementado: seis párrafos y 14 características del Excel, diez imágenes, cuatro bloques alternados, 15 especificaciones, 12 elementos del paquete y cuatro accesorios opcionales. Registro verificado por Jacob el 2026-10-03; rutas/cotización por SKU. Las fichas S1 Pro Max, P2, E360 y S1 Pro siguen como vistas iniciales. PDFs/enlaces de proveedor continúan sin publicarse. La ficha permanece noindex hasta aprobación para lanzamiento.
+- Siguen pendientes las diferencias técnicas Excel/PDF (S1 Pro canales/capacidad, E360 resolución trasera, P2 variantes/ángulos/estacionamiento, S1 Pro Max funciones opcionales) y `LTE_5G-2.jpg`. Las URLs nuevas no resuelven estas diferencias.
+- Los enlaces de la columna “NOT PUT THE ON WEBSITE” permanecen como referencias internas, sin enlaces públicos al proveedor ni descargas automáticas.
+- Respuesta del cliente: revisar alcance y obligatoriedad de los nuevos campos del formulario; preparar Assessment para Google Calendar cuando entregue enlace y disponibilidad; CRM se configurará posteriormente.
+
 Actualizado: 2026-10-01. Estado detallado: [PHASE1_ACCEPTANCE.md](PHASE1_ACCEPTANCE.md).
 
 ## Implementado para revisión
@@ -36,6 +47,16 @@ Arquitectura: industrias y Dash Cams separadas en definiciones y contenido ingl�
 - [ ] Privacy, Terms y Warranty: responsable, tratamiento/retención de datos, condiciones comerciales, cobertura, duración, exclusiones y reclamaciones. Ver LEGAL_CONTENT_GUIDE.md.
 
 ## Lanzamiento
+
+S1 Pro Max implementada: siete párrafos y 13 características del Excel, 13 imágenes disponibles, galería/zoom/acciones reutilizados de N5S, componentes y accesorios separados. Buffer de 15 segundos tomado de `Parking_Mode-1.jpg`; datos adicionales no contradictorios tomados del PDF. Las tres fichas siguientes siguen pendientes de revisión individual.
+
+- [ ] S1 Pro Max: el Excel verificado incluye ADAS y BSD; el PDF marca BSD y DMS opcionales. Se conserva el Excel como fuente de verdad para ADAS/BSD y no se añade DMS a esta configuración. Confirmar/corregir el PDF antes de publicación.
+- [ ] S1 Pro Max: el PDF menciona cuatro LEDs IR de cabina en una configuración frontal/trasera; no se publica esa afirmación. Solicitar ficha corregida.
+- [ ] S1 Pro Max: las referencias del Excel `Night_Vision-01.jpg` y `Voice_Commands-1.jpg` se resuelven respectivamente a `Night_Vision-1.jpg` y `Voice_Commands-1.jpg.jpg` del ZIP. `LTE_5G-1.jpg` muestra Wi-Fi/GPS y se coloca en conectividad. `LTE_5G-2.jpg` no existe; solicitar imágenes LTE correctas. El texto LTE completo ya está implementado sin una imagen ficticia.
+- [ ] S1 Pro Max: no se suministró imagen del paquete; se muestran únicamente los tres componentes del Excel (dash cam, cámara trasera y soporte GPS). Solicitar foto verificada y confirmar componentes adicionales, sin asumirlos incluidos.
+
+- [ ] N5S: confirmar con el cliente la gráfica `Features-2.jpg`: indica “2.5K Rear Camera”, mientras que el Excel actualizado y la ficha técnica suministrada indican 1440P trasero. Se conservan las especificaciones del Excel; pedir una gráfica corregida o confirmación técnica antes de publicar.
+- [ ] N5S: `Recording_Modes-1.jpg` muestra 165° para rear cabin y 160° para rear; el PDF especifica 160° y 165° respectivamente. La tabla conserva el orden del PDF. Pedir confirmación o gráfica corregida.
 
 - [ ] Hosting, dominio, HTTPS, configuración del proveedor y verificación de HTTP 404.
 - [ ] Decidir redirecciones desde /industries/ y antiguas fichas /solutions/<slug>/.

@@ -1,0 +1,53 @@
+---
+import ProductDetail from '../templates/ProductDetail.astro';
+import MediaCarousel from '../products/MediaCarousel.astro';
+import ProductContactActions from '../ui/ProductContactActions.astro';
+import TablerIcon from '../ui/TablerIcon.astro';
+import type {VantrueDashCam} from '../../lib/vantrue-dash-cams';
+import type {VantrueProduct} from '../../lib/vantrue-product-detail';
+import type {Messages} from '../../i18n/types';
+interface Props {model:VantrueDashCam;detail:VantrueProduct;messages:Messages;whatsappHref:string;}
+const {model,detail,messages,whatsappHref}=Astro.props;
+const {copy}=detail;
+---
+<ProductDetail title={model.title} description={copy.summary} image={detail.gallery[0].src} noindex breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:'/'},{label:messages.navigation.labels.dashCams,href:'/dash-cams/'},{label:model.title}]}>
+  <div class="container space-y-14 py-12 sm:py-16">
+    <section class="grid items-start gap-8 lg:grid-cols-2">
+      <MediaCarousel id={`${model.sku}-hero`} images={detail.gallery} title={model.title} copy={messages.gallery} eager thumbnails/>
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-brand-600">{messages.vantrue.retailer}</p>
+        <p class="mt-4 text-sm font-bold text-brand-600">{model.sku}</p>
+        <h2 class="mt-4 text-2xl font-bold text-ink">{model.title}</h2>
+        <p class="mt-5 leading-8 text-copy">{copy.summary}</p>
+        <ProductContactActions quoteHref={`/quote/?product=${encodeURIComponent(model.sku)}`} whatsappHref={whatsappHref} product={model.title} copy={messages.common}/>
+        <a href={`/dash-cams/book-assessment/?product=${encodeURIComponent(model.sku)}`} class="mt-3 flex min-h-12 w-full items-center justify-center gap-3 rounded-pill border border-line-brand bg-surface-brand px-5 py-3 text-sm font-bold text-brand-600 transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 motion-reduce:transition-none"><TablerIcon name="clipboardCheck" class="h-5 w-5 shrink-0"/><span>{messages.personalDetail.assessment}</span><TablerIcon name="chevronRight" class="h-4 w-4 shrink-0"/></a>
+      </div>
+    </section>
+    <section aria-labelledby="product-overview">
+      <h2 id="product-overview" class="text-3xl font-bold text-ink">{copy.headings.overview}</h2>
+      <p class="mt-5 max-w-4xl whitespace-pre-line leading-8 text-copy">{copy.overview}</p>
+    </section>
+    <section aria-labelledby="product-features">
+      <h2 id="product-features" class="text-3xl font-bold text-ink">{copy.headings.features}</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">{copy.features.map(feature=><li class="flex items-start gap-3 rounded-card border border-line-light bg-white p-5 text-sm leading-7 text-copy"><TablerIcon name="check" class="mt-1 h-5 w-5 shrink-0 text-brand-600"/><span>{feature}</span></li>)}</ul>
+    </section>
+    {detail.blocks.map((block,index)=><section data-product-feature={block.id} class:list={['grid items-start gap-8 border-t border-line-light pt-10',block.images.length&&'lg:grid-cols-2 lg:items-center']}>
+      <div class:list={[index%2===1&&'lg:order-2']}><h2 class="text-3xl font-bold text-ink">{block.title}</h2><p class="mt-5 whitespace-pre-line leading-8 text-copy">{block.text}</p></div>
+      {block.images.length>0&&<div class:list={['min-w-0',index%2===1&&'lg:order-1']}><MediaCarousel id={`${model.sku}-${block.id}`} images={block.images} title={block.title} copy={messages.gallery} compact/></div>}
+    </section>)}
+    <section id="specifications" class="scroll-mt-28">
+      <h2 class="text-3xl font-bold text-ink">{copy.headings.specifications}</h2>
+      <div class="mt-6 overflow-x-auto rounded-card border border-line-light"><table class="w-full text-left text-sm text-copy"><caption class="sr-only">{model.title} — {copy.headings.specifications}</caption><thead class="bg-surface-soft"><tr><th scope="col" class="p-4">{messages.industrialDetail.specification}</th><th scope="col" class="p-4">{messages.industrialDetail.value}</th></tr></thead><tbody>{detail.specifications.map(spec=><tr class="border-t border-line-light"><th scope="row" class="p-4 align-top font-semibold text-ink">{spec.label}</th><td class="p-4 leading-7">{spec.value}</td></tr>)}</tbody></table></div>
+      <ul class="mt-5 space-y-3 text-sm leading-7 text-copy">{copy.notes.map(note=><li>{note}</li>)}</ul>
+    </section>
+    <section class:list={['grid items-start gap-8',detail.packageImage&&'lg:grid-cols-2']}>
+      <div><h2 class="text-3xl font-bold text-ink">{copy.headings.components}</h2><ul class="mt-5 space-y-3 text-sm leading-7 text-copy">{detail.components.map(component=><li class="flex items-start gap-3"><TablerIcon name="check" class="mt-1 h-5 w-5 shrink-0 text-brand-600"/><span>{component.label}</span></li>)}</ul>
+      </div>
+      {detail.packageImage&&<MediaCarousel id={`${model.sku}-package`} images={[detail.packageImage]} title={copy.headings.components} copy={messages.gallery}/>}
+    </section>
+    <section aria-labelledby="product-optional" class="rounded-panel border border-line-light bg-white p-7 sm:p-10">
+      <h2 id="product-optional" class="text-2xl font-bold text-ink">{copy.headings.optional}</h2><ul class="mt-5 grid gap-4 text-sm leading-7 text-copy sm:grid-cols-2">{detail.optional.map(item=><li class="rounded-card bg-surface-soft p-4">{item.label}</li>)}</ul>
+    </section>
+    <section class="rounded-panel border border-line-brand bg-surface-brand p-7 sm:p-10"><h2 class="text-3xl font-bold text-ink">{copy.headings.idealFor}</h2><p class="mt-5 leading-8 text-copy">{copy.idealFor}</p><ProductContactActions quoteHref={`/quote/?product=${encodeURIComponent(model.sku)}`} whatsappHref={whatsappHref} product={model.title} copy={messages.common}/></section>
+  </div>
+</ProductDetail>
