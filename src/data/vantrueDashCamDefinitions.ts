@@ -40,7 +40,7 @@ export const vantrueDashCamDefinitions = [
       "width": 1500,
       "height": 1500
     },
-    "contentStatus": "preview"
+    "contentStatus": "complete"
   },
   {
     "sku": "VST-E360Ace",
@@ -54,7 +54,7 @@ export const vantrueDashCamDefinitions = [
       "width": 1600,
       "height": 1600
     },
-    "contentStatus": "preview"
+    "contentStatus": "complete"
   },
   {
     "sku": "VST-S1-Pro",
@@ -68,7 +68,7 @@ export const vantrueDashCamDefinitions = [
       "width": 1600,
       "height": 1600
     },
-    "contentStatus": "preview"
+    "contentStatus": "complete"
   }
 ] as const;
 export type VantrueSku = typeof vantrueDashCamDefinitions[number]['sku'];

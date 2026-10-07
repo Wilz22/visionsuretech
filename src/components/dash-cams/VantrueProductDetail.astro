@@ -13,7 +13,7 @@ const {copy}=detail;
 <ProductDetail title={model.title} description={copy.summary} image={detail.gallery[0].src} noindex breadcrumbLabel={messages.common.breadcrumb} crumbs={[{label:messages.navigation.labels.home,href:'/'},{label:messages.navigation.labels.dashCams,href:'/dash-cams/'},{label:model.title}]}>
   <div class="container space-y-14 py-12 sm:py-16">
     <section class="grid items-start gap-8 lg:grid-cols-2">
-      <MediaCarousel id={`${model.sku}-hero`} images={detail.gallery} title={model.title} copy={messages.gallery} eager thumbnails/>
+      <MediaCarousel id={`${model.sku}-hero`} images={detail.gallery} title={model.title} copy={messages.gallery} caption={copy.galleryNotice} eager thumbnails/>
       <div>
         <p class="text-xs font-bold uppercase tracking-widest text-brand-600">{messages.vantrue.retailer}</p>
         <p class="mt-4 text-sm font-bold text-brand-600">{model.sku}</p>
@@ -33,7 +33,7 @@ const {copy}=detail;
     </section>
     {detail.blocks.map((block,index)=><section data-product-feature={block.id} class:list={['grid items-start gap-8 border-t border-line-light pt-10',block.images.length&&'lg:grid-cols-2 lg:items-center']}>
       <div class:list={[index%2===1&&'lg:order-2']}><h2 class="text-3xl font-bold text-ink">{block.title}</h2><p class="mt-5 whitespace-pre-line leading-8 text-copy">{block.text}</p></div>
-      {block.images.length>0&&<div class:list={['min-w-0',index%2===1&&'lg:order-1']}><MediaCarousel id={`${model.sku}-${block.id}`} images={block.images} title={block.title} copy={messages.gallery} compact/></div>}
+      {block.images.length>0&&<div class:list={['min-w-0',index%2===1&&'lg:order-1']}><MediaCarousel id={`${model.sku}-${block.id}`} images={block.images} title={block.title} copy={messages.gallery} caption={block.caption} compact/></div>}
     </section>)}
     <section id="specifications" class="scroll-mt-28">
       <h2 class="text-3xl font-bold text-ink">{copy.headings.specifications}</h2>

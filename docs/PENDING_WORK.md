@@ -3,10 +3,10 @@
 ## Actualización del cliente — 2026-10-05
 
 - Vantrue está autorizado para venta y promoción. Sus Dash Cams mantienen la marca del fabricante; no se presentan como fabricación VisionSure. La restricción previa de fabricantes no aplica a esta línea por instrucción del usuario.
-- Excel actualizado: cinco SKU con rutas por categoría y modelo, registradas en `vantrueDashCamDefinitions.ts`. Las cinco páginas son vistas iniciales con imagen, nombre y configuración; falta completar sus fichas una por una.
+- Excel actualizado: los cinco SKU ya tienen fichas detalladas y rutas por categoría/modelo: N5S, S1 Pro Max, P2, E360 ACE y S1 Pro. Las diferencias del material y la aprobación del cliente siguen pendientes.
 - Nueva categoría `/dash-cams/front-2.5K/` para VST-S1-Pro. Front-only 4K se conserva con estado pendiente de reposición, sin fecha inventada.
 - Home muestra la marca Vantrue y la autorización de venta. No se afirma patrocinio, exclusividad ni garantía del fabricante sobre VisionSure.
-- N5S implementado: seis párrafos y 14 características del Excel, diez imágenes, cuatro bloques alternados, 15 especificaciones, 12 elementos del paquete y cuatro accesorios opcionales. Registro verificado por Jacob el 2026-10-03; rutas/cotización por SKU. Las fichas S1 Pro Max, P2, E360 y S1 Pro siguen como vistas iniciales. PDFs/enlaces de proveedor continúan sin publicarse. La ficha permanece noindex hasta aprobación para lanzamiento.
+- N5S implementado: seis párrafos y 14 características del Excel, diez imágenes, cuatro bloques alternados, 15 especificaciones, 12 elementos del paquete y cuatro accesorios opcionales. Registro verificado por Jacob el 2026-10-03; rutas/cotización por SKU. PDFs/enlaces de proveedor continúan sin publicarse. Las fichas permanecen noindex hasta aprobación para lanzamiento.
 - Siguen pendientes las diferencias técnicas Excel/PDF (S1 Pro canales/capacidad, E360 resolución trasera, P2 variantes/ángulos/estacionamiento, S1 Pro Max funciones opcionales) y `LTE_5G-2.jpg`. Las URLs nuevas no resuelven estas diferencias.
 - Los enlaces de la columna “NOT PUT THE ON WEBSITE” permanecen como referencias internas, sin enlaces públicos al proveedor ni descargas automáticas.
 - Respuesta del cliente: revisar alcance y obligatoriedad de los nuevos campos del formulario; preparar Assessment para Google Calendar cuando entregue enlace y disponibilidad; CRM se configurará posteriormente.
@@ -48,7 +48,24 @@ Arquitectura: industrias y Dash Cams separadas en definiciones y contenido ingl�
 
 ## Lanzamiento
 
-S1 Pro Max implementada: siete párrafos y 13 características del Excel, 13 imágenes disponibles, galería/zoom/acciones reutilizados de N5S, componentes y accesorios separados. Buffer de 15 segundos tomado de `Parking_Mode-1.jpg`; datos adicionales no contradictorios tomados del PDF. Las tres fichas siguientes siguen pendientes de revisión individual.
+S1 Pro frontal implementada: siete párrafos, 16 características, seis imágenes, 17 especificaciones y dos componentes incluidos. Cámara trasera, LTE, hardwire y CPL separados como opcionales. Validación: 47 pruebas, compilación de 54 páginas, auditoría, fidelidad de contenido, escritorio/móvil, zoom y cotización preseleccionada VST-S1-Pro aprobados.
+
+- [ ] S1 Pro: solicitar PDF específico de 1CH/512GB. El suministrado corresponde a 2CH y afirma 1TB; la web conserva 1CH, 2.5K y 512GB del Excel verificado por Jacob el 2026-10-04.
+- [ ] S1 Pro: solicitar fotos/gráficas de la configuración frontal. `Hero-1.jpg` muestra la cámara trasera opcional y lleva aclaración pública de venta por separado; también anuncia 2.7K frente al 2.5K del Excel. Night Vision y AI Driver Alerts describen funcionalidades de configuraciones con cámara trasera. Confirmar exactamente qué alertas ADAS/BSD incluye 1CH; el texto conserva la descripción genérica del Excel y no promete alertas traseras en el paquete frontal.
+- [ ] S1 Pro: confirmar foto y lista completa del paquete. Se muestran únicamente dash cam frontal y soporte GPS, sin asumir cables, tarjeta o cámara trasera incluidos.
+
+E360 ACE implementada: ocho párrafos y 13 características del Excel, 11 imágenes, 18 especificaciones, cinco componentes incluidos y LTE/hardwire opcionales. Galería, zoom en visor, alineación zigzag y acciones reutilizadas. Validación: 46 pruebas, compilación, auditoría, fidelidad de contenido y revisión de escritorio/móvil; cotización preseleccionada VST-E360Ace comprobada.
+
+- [ ] E360 ACE: corregir el PDF y `Hero-2.jpg`, que indican cámara trasera 1440P frente a 2.7K en el Excel verificado. Los textos y la tabla mantienen 2.7K. Solicitar gráfica/ficha actualizada antes de publicar.
+- [ ] E360 ACE: confirmar una fotografía completa del paquete y si las dos baterías Panasonic 18650 vienen físicamente incluidas; el Excel especifica un grip que aloja dos baterías y hasta cuatro horas. No se agregaron baterías como componente separado incluido.
+
+- [ ] P2 Dashcam System: el Excel dice 165° trasero y cuatro modos de estacionamiento; el PDF dice 160° trasero y solo enumera detección de colisiones. Se conserva el Excel. Solicitar PDF corregido/confirmación del cliente.
+- [ ] P2: `Hero-2.jpg` muestra la configuración térmica de cuatro canales y se publica únicamente dentro de Thermal upgrade, marcada como ampliación, no en la galería principal del paquete VST-P2-DS. Mantener clara la diferencia con P2 Thermal y Full System.
+- [ ] P2: la referencia `Parking_Mode-2.jpg` del Excel corresponde a `Parking-Mode-2.jpg` del ZIP. No hay imagen del paquete: pedir foto y lista de cables/soportes/accesorios adicionales; solo se muestran los tres componentes indicados en el Excel.
+
+S1 Pro Max implementada: siete párrafos y 13 características del Excel, 13 imágenes disponibles, galería/zoom/acciones reutilizados de N5S, componentes y accesorios separados. Buffer de 15 segundos tomado de `Parking_Mode-1.jpg`; datos adicionales no contradictorios tomados del PDF.
+
+P2 implementada: siete párrafos, 14 características, 11 imágenes y 18 especificaciones. Componentes de VST-P2-DS separados de la ampliación térmica; Hero-2 se muestra en Thermal upgrade. Validación: 45 pruebas, compilación de 54 páginas, auditoría y fidelidad de párrafos/imágenes aprobadas. Revisión visual del navegador pendiente: no había navegador conectado durante esta implementación.
 
 - [ ] S1 Pro Max: el Excel verificado incluye ADAS y BSD; el PDF marca BSD y DMS opcionales. Se conserva el Excel como fuente de verdad para ADAS/BSD y no se añade DMS a esta configuración. Confirmar/corregir el PDF antes de publicación.
 - [ ] S1 Pro Max: el PDF menciona cuatro LEDs IR de cabina en una configuración frontal/trasera; no se publica esa afirmación. Solicitar ficha corregida.
