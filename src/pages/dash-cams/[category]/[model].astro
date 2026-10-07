@@ -1,14 +1,39 @@
 ---
-import {vantrueDashCamDefinitions} from '../../../data/vantrueDashCamDefinitions';
-import {resolveVantrueDashCams} from '../../../lib/vantrue-dash-cams';
-import {getMessages} from '../../../i18n';
-import {company} from '../../../data/company';
+import { vantrueDashCamDefinitions } from '../../../data/vantrueDashCamDefinitions';
+import { resolveVantrueDashCams } from '../../../lib/vantrue-dash-cams';
+import { getMessages } from '../../../i18n';
+import { company } from '../../../data/company';
 import VantrueModelPreview from '../../../components/dash-cams/VantrueModelPreview.astro';
 import VantrueProductDetail from '../../../components/dash-cams/VantrueProductDetail.astro';
-import {resolveVantrueProduct} from '../../../lib/vantrue-product-detail';
-export function getStaticPaths(){return vantrueDashCamDefinitions.map(model=>({params:{category:model.category,model:model.sku}}));}
-const messages=getMessages();
-const model=resolveVantrueDashCams(messages.vantrue).find(model=>model.sku===Astro.params.model&&model.category===Astro.params.category)!;
-const detail=resolveVantrueProduct(model.sku,messages.vantrueProducts[model.sku]);
+import { resolveVantrueProduct } from '../../../lib/vantrue-product-detail';
+export function getStaticPaths() {
+  return vantrueDashCamDefinitions.map((model) => ({
+    params: { category: model.category, model: model.sku },
+  }));
+}
+const messages = getMessages();
+const model = resolveVantrueDashCams(messages.vantrue).find(
+  (model) =>
+    model.sku === Astro.params.model &&
+    model.category === Astro.params.category,
+)!;
+const detail = resolveVantrueProduct(
+  model.sku,
+  messages.vantrueProducts[model.sku],
+);
 ---
-{detail?<VantrueProductDetail model={model} detail={detail} messages={messages} whatsappHref={`https://wa.me/${company.contact.whatsappNumber}`}/>:<VantrueModelPreview model={model} messages={messages} whatsappHref={`https://wa.me/${company.contact.whatsappNumber}`}/>}
+
+{detail ? (
+  <VantrueProductDetail
+    model={model}
+    detail={detail}
+    messages={messages}
+    whatsappHref={`https://wa.me/${company.contact.whatsappNumber}`}
+  />
+) : (
+  <VantrueModelPreview
+    model={model}
+    messages={messages}
+    whatsappHref={`https://wa.me/${company.contact.whatsappNumber}`}
+  />
+)}
