@@ -42,16 +42,17 @@ const active = (href: string) => current === (href.replace(/\/$/, '') || '/');
     <a
       href={homeHref}
       aria-label={homeLabel}
-      class="relative order-1 block h-12 w-42 shrink-0 overflow-hidden"
+      class="order-1 flex h-14 w-52 shrink-0 items-center"
     >
       <img
         src="/images/brand/visionsure-logo.svg"
         alt={company.name}
         width="216"
         height="90"
-        class="absolute top-1/2 left-0 h-auto w-full -translate-y-1/2"
+        class="h-auto w-full"
       />
     </a>
+
     <nav
       id="primary-menu"
       aria-label={copy.primaryLabel}
