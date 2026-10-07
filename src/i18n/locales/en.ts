@@ -2,6 +2,9 @@ import {dashCamEditorial} from './en-dash-cams.ts';
 import {vantrue} from './en-vantrue.ts';
 import {n5s} from './en-n5s.ts';
 import {s1ProMax} from './en-s1-pro-max.ts';
+import {p2} from './en-p2.ts';
+import {e360Ace} from './en-e360-ace.ts';
+import {s1Pro} from './en-s1-pro.ts';
 import {industryEditorial} from './en-industries.ts';
 import {industrialDetail,industryDetail,personalDetail} from './en-detail.ts';
 import {contentLayout,services,resources,about} from './en-pages.ts';
@@ -22,7 +25,7 @@ const introduction = 'Use these questions to prepare a configuration review. Thi
 
 export const en: Messages = {
   vantrue,
-  vantrueProducts:{'VST-N5S':n5s,'VST-S1ProM4K4K':s1ProMax},
+  vantrueProducts:{'VST-N5S':n5s,'VST-S1ProM4K4K':s1ProMax,'VST-P2-DS':p2,'VST-E360Ace':e360Ace,'VST-S1-Pro':s1Pro},
   productVisual:{fallbackTitle:'Product image pending',fallbackTags:[],byModel:{'VST-S8401':{title:'8 AI channels. One connected fleet.',tags:['WiFi','GPS','4G']}}},
   dashCamEditorial,
   industryEditorial,
