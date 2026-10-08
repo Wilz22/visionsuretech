@@ -72,17 +72,17 @@ export const e360Ace:VantrueProductCopy = {
     "handheld-grip": "Handheld battery grip / mount (2 × 18650 battery format)"
   },
   "photoAlts": {
-    "Hero-1.jpg": "Vantrue E360 ACE panoramic dash cam and rear camera kit",
-    "Hero-2.jpg": "Supplied Vantrue E360 ACE panoramic coverage graphic with front, cabin and rear views",
-    "Night_Vision-1.jpg": "Vantrue E360 infrared night vision with eight LEDs",
-    "Recording_Modes-1.jpg": "Vantrue E360 panoramic, fisheye, front/cabin and portrait recording modes",
-    "Handheld_Action-1.jpg": "Vantrue E360 detachable handheld grip and tripod use",
-    "Handheld_Action-2.jpg": "Vantrue E360 handheld 360-degree action camera illustration",
-    "Handheld_Action-3.jpg": "Vantrue E360 handheld battery grip illustration",
-    "LTE_Connectivity-1.jpg": "Vantrue optional LTE remote viewing, notification and cloud features",
-    "Parking_Mode-1.jpg": "Vantrue E360 buffered parking recording and protection modes",
-    "GPS_Log-1.jpg": "Vantrue E360 GPS route, speed and location logging",
-    "Wifi_Voice_Control-1.jpg": "Vantrue E360 Wi-Fi app connection and voice controls"
+    "Hero-1.webp": "Vantrue E360 ACE panoramic dash cam and rear camera kit",
+    "Hero-2.webp": "Supplied Vantrue E360 ACE panoramic coverage graphic with front, cabin and rear views",
+    "Night_Vision-1.webp": "Vantrue E360 infrared night vision with eight LEDs",
+    "Recording_Modes-1.webp": "Vantrue E360 panoramic, fisheye, front/cabin and portrait recording modes",
+    "Handheld_Action-1.webp": "Vantrue E360 detachable handheld grip and tripod use",
+    "Handheld_Action-2.webp": "Vantrue E360 handheld 360-degree action camera illustration",
+    "Handheld_Action-3.webp": "Vantrue E360 handheld battery grip illustration",
+    "LTE_Connectivity-1.webp": "Vantrue optional LTE remote viewing, notification and cloud features",
+    "Parking_Mode-1.webp": "Vantrue E360 buffered parking recording and protection modes",
+    "GPS_Log-1.webp": "Vantrue E360 GPS route, speed and location logging",
+    "Wifi_Voice_Control-1.webp": "Vantrue E360 Wi-Fi app connection and voice controls"
   },
   "optionalLabels": {
     "lte": "LTE module — sold separately",

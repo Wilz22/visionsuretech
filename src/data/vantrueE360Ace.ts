@@ -7,14 +7,14 @@ export const vantrueE360Ace = {
   "verifiedDate": "2026-10-03",
   "gallery": [
     {
-      "id": "Hero-1.jpg",
-      "src": "/images/dash-cams/e360-ace/Hero-1.jpg",
+      "id": "Hero-1.webp",
+      "src": "/images/dash-cams/e360-ace/Hero-1.webp",
       "width": 1600,
       "height": 1600
     },
     {
-      "id": "Hero-2.jpg",
-      "src": "/images/dash-cams/e360-ace/Hero-2.jpg",
+      "id": "Hero-2.webp",
+      "src": "/images/dash-cams/e360-ace/Hero-2.webp",
       "width": 1280,
       "height": 1600
     }
@@ -24,8 +24,8 @@ export const vantrueE360Ace = {
       "id": "night-vision",
       "images": [
         {
-          "id": "Night_Vision-1.jpg",
-          "src": "/images/dash-cams/e360-ace/Night_Vision-1.jpg",
+          "id": "Night_Vision-1.webp",
+          "src": "/images/dash-cams/e360-ace/Night_Vision-1.webp",
           "width": 1280,
           "height": 1600
         }
@@ -35,8 +35,8 @@ export const vantrueE360Ace = {
       "id": "recording-modes",
       "images": [
         {
-          "id": "Recording_Modes-1.jpg",
-          "src": "/images/dash-cams/e360-ace/Recording_Modes-1.jpg",
+          "id": "Recording_Modes-1.webp",
+          "src": "/images/dash-cams/e360-ace/Recording_Modes-1.webp",
           "width": 1280,
           "height": 1600
         }
@@ -46,20 +46,20 @@ export const vantrueE360Ace = {
       "id": "handheld",
       "images": [
         {
-          "id": "Handheld_Action-1.jpg",
-          "src": "/images/dash-cams/e360-ace/Handheld_Action-1.jpg",
+          "id": "Handheld_Action-1.webp",
+          "src": "/images/dash-cams/e360-ace/Handheld_Action-1.webp",
           "width": 2483,
           "height": 1311
         },
         {
-          "id": "Handheld_Action-2.jpg",
-          "src": "/images/dash-cams/e360-ace/Handheld_Action-2.jpg",
+          "id": "Handheld_Action-2.webp",
+          "src": "/images/dash-cams/e360-ace/Handheld_Action-2.webp",
           "width": 1280,
           "height": 1600
         },
         {
-          "id": "Handheld_Action-3.jpg",
-          "src": "/images/dash-cams/e360-ace/Handheld_Action-3.jpg",
+          "id": "Handheld_Action-3.webp",
+          "src": "/images/dash-cams/e360-ace/Handheld_Action-3.webp",
           "width": 1460,
           "height": 1460
         }
@@ -69,8 +69,8 @@ export const vantrueE360Ace = {
       "id": "lte",
       "images": [
         {
-          "id": "LTE_Connectivity-1.jpg",
-          "src": "/images/dash-cams/e360-ace/LTE_Connectivity-1.jpg",
+          "id": "LTE_Connectivity-1.webp",
+          "src": "/images/dash-cams/e360-ace/LTE_Connectivity-1.webp",
           "width": 1280,
           "height": 1600
         }
@@ -80,8 +80,8 @@ export const vantrueE360Ace = {
       "id": "parking",
       "images": [
         {
-          "id": "Parking_Mode-1.jpg",
-          "src": "/images/dash-cams/e360-ace/Parking_Mode-1.jpg",
+          "id": "Parking_Mode-1.webp",
+          "src": "/images/dash-cams/e360-ace/Parking_Mode-1.webp",
           "width": 1280,
           "height": 1600
         }
@@ -91,14 +91,14 @@ export const vantrueE360Ace = {
       "id": "connectivity",
       "images": [
         {
-          "id": "GPS_Log-1.jpg",
-          "src": "/images/dash-cams/e360-ace/GPS_Log-1.jpg",
+          "id": "GPS_Log-1.webp",
+          "src": "/images/dash-cams/e360-ace/GPS_Log-1.webp",
           "width": 2483,
           "height": 1249
         },
         {
-          "id": "Wifi_Voice_Control-1.jpg",
-          "src": "/images/dash-cams/e360-ace/Wifi_Voice_Control-1.jpg",
+          "id": "Wifi_Voice_Control-1.webp",
+          "src": "/images/dash-cams/e360-ace/Wifi_Voice_Control-1.webp",
           "width": 1280,
           "height": 1600
         }
