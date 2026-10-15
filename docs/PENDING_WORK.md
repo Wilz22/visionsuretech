@@ -1,5 +1,20 @@
 # Pendientes VisionSure
 
+## Simplificación de About — 2026-10-15
+
+- Apertura más breve, fotografía conjunta y ambas biografías completas. Retirados la franja de cifras/credenciales y los tres bloques de compromisos que repetían información. Ubicación, contacto y cotización reunidos en un solo cierre.
+- Por preferencia del usuario se conserva Google Maps en el componente compartido, con carga diferida, altura responsive y botón de indicaciones. Retirada la alternativa Leaflet/OpenStreetMap y sus dependencias. Reflejar Google Maps en la revisión final de privacidad.
+- Este bloque simplifica About; el trabajo de SEO para el sitio completo continúa pendiente de la revisión global y aprobación de contenido.
+
+## About y ubicación — 2026-10-14
+
+- Implementadas las biografías completas suministradas de Jacob y Maria, sus dos retratos y fotografía conjunta. Certificaciones y reconocimiento permanecen en el relato original, sin distintivos adicionales. 2014 corresponde a Quality Crane and Electronics Repair, no se atribuye como fundación de VisionSure.
+- Dirección confirmada por el usuario: Unit 10, 19695 – 96 Avenue, Langley, BC V1M 3E1. Cargada en About, Contact, Quote, Assessment, footer y Organization schema. Horarios omitidos por instrucción del usuario; no quedan como requisito de lanzamiento. Mapa inicial Google Maps sustituido el 2026-10-15 según el bloque anterior.
+- Cobertura mostrada: Lower Mainland y Fraser Valley, basada en la biografía de Maria. La web anterior confirma la dirección pero no establece radio de instalación; no se añadió cobertura provincial/nacional ni un radio ficticio.
+- About deja de ser referencia/noindex y entra al sitemap. Metadatos, AboutPage, Organization y Person preparados, con imágenes WebP responsive generadas por Astro. Son cambios locales; no se desplegó ni se envió nada a Google. La revisión final del entorno publicado/Search Console continúa pendiente.
+- Validación: 49 pruebas aprobadas y 54 páginas compiladas; auditoría general aprobada. Se corrigió una expectativa antigua del test S1 Pro Max (13 imágenes) para respetar las 11 imágenes curadas que ya estaban en el catálogo, sin modificar sus datos o imágenes.
+- Resueltos los pendientes anteriores de historia/equipo, dirección y horario. Mantener pendientes condiciones comerciales, datos industriales, legales, entrega real de cotizaciones, agenda y aprobación final.
+
 ## Actualización del cliente — 2026-10-05
 
 - Vantrue está autorizado para venta y promoción. Sus Dash Cams mantienen la marca del fabricante; no se presentan como fabricación VisionSure. La restricción previa de fabricantes no aplica a esta línea por instrucción del usuario.

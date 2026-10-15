@@ -1,14 +1,7 @@
 ---
 import { company } from '../../data/company';
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: company.name,
-  url: company.canonicalUrl,
-  logo: new URL('/images/brand/visionsure-logo.svg', company.canonicalUrl).href,
-  email: company.contact.email,
-  telephone: company.contact.phoneE164,
-};
+import { buildOrganizationSchema } from '../../lib/organization-schema';
+const schema = buildOrganizationSchema(company);
 ---
 
 <script

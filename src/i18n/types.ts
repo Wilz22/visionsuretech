@@ -35,7 +35,7 @@ export interface Messages {
   industrialDetail:IndustrialDetailCopy; industryDetail:IndustryDetailCopy; personalDetail:PersonalDetailCopy;
   home: HomeCopy;
   catalogGrid:CatalogGridCopy; gallery:GalleryCopy; dashCamCard:DashCamCardCopy; dashCamOverview:DashCamOverviewCopy;
-  formLayout: { contactHeading:string; locality:string; addressNotice:string; locationHeading:string; mapNotice:string };
+  formLayout: { contactHeading:string; locality:string; addressNotice:string; locationHeading:string; mapNotice:string;mapTitle:string;directions:string };
   quoteForm: QuoteFormCopy;
   common: { breadcrumb:string; quote: string; homeLink: string; whatsapp: string; whatsappLabel: string; productWhatsapp: string; productWhatsappMessage: string };
   navigation: {

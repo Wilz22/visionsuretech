@@ -33,7 +33,13 @@ export const company: Company = {
     phoneE164: '+16047104450',
     whatsappNumber: '16047104450',
     hours: null,
-    address: null,
+    address: {
+      streetAddress: 'Unit 10, 19695 – 96 Avenue',
+      locality: 'Langley',
+      region: 'BC',
+      postalCode: 'V1M 3E1',
+      country: 'CA',
+    },
   },
   social: {
     linkedin: null,

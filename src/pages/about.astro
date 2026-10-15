@@ -1,32 +1,43 @@
 ---
-import ContentLayout from '../components/templates/ContentLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import View from '../components/pages/AboutContent.astro';
+import team from '../assets/team/visionsure-founders.jpg';
+import { getImage } from 'astro:assets';
 import { getMessages } from '../i18n';
-import { routes } from '../data/company';
-import { buildHomeLinks } from '../lib/home';
-import { company } from '../data/company';
-const messages = getMessages();
-const copy = messages.about;
+import { company, routes } from '../data/company';
+const messages = getMessages(),
+  copy = messages.about;
+const social = await getImage({ src: team, width: 800, format: 'webp' });
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  '@id': company.canonicalUrl + '/about/#webpage',
+  url: company.canonicalUrl + '/about/',
+  name: copy.title,
+  description: copy.description,
+  mainEntity: { '@id': company.canonicalUrl + '/#organization' },
+  about: [
+    { '@id': company.canonicalUrl + '/about/#jacob' },
+    { '@id': company.canonicalUrl + '/about/#maria' },
+  ],
+};
 ---
 
-<ContentLayout
-  title={copy.title}
+<BaseLayout
+  title={copy.seoTitle}
   description={copy.description}
-  reference
-  copy={messages.contentLayout}
-  breadcrumbLabel={messages.common.breadcrumb}
-  crumbs={[
-    { label: messages.navigation.labels.home, href: routes.home },
-    { label: copy.title },
-  ]}
+  image={social.src}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}
+  />
   <View
     copy={copy}
-    paragraphs={messages.home.about.paragraphs}
-    categories={buildHomeLinks(messages).categories}
-    planningHref={`${routes.faq}#planning-your-project`}
     email={company.contact.email}
     quoteHref={routes.quote}
     quoteLabel={messages.common.quote}
   />
-</ContentLayout>
+</BaseLayout>
