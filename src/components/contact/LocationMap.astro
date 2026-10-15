@@ -1,0 +1,40 @@
+---
+import { company } from '../../data/company';
+import { buildLocation } from '../../lib/location';
+import type { Locale } from '../../i18n/config';
+import TablerIcon from '../ui/TablerIcon.astro';
+interface Props {
+  title: string;
+  directions: string;
+  locale?: Locale;
+}
+const { title, directions } = Astro.props;
+const location = buildLocation(company.contact.address);
+---
+
+{location && (
+  <div class="isolate overflow-hidden rounded-panel border border-line-light bg-white shadow-sm">
+    <div class="flex flex-wrap items-center justify-between gap-4 p-5">
+      <address class="max-w-sm text-sm not-italic leading-7 text-copy">
+        {location.label}
+      </address>
+      <a
+        href={location.directions}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex min-h-11 items-center gap-2 rounded-pill border border-line-brand bg-surface-brand px-5 py-2 text-sm font-bold text-brand-600 hover:bg-white"
+      >
+        {directions}
+        <TablerIcon name="chevronRight" class="h-4 w-4 shrink-0" />
+      </a>
+    </div>
+    <iframe
+      src={location.embed}
+      title={title}
+      class="h-80 w-full border-0 border-t border-line-light sm:h-96"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+)}

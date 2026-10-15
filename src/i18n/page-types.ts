@@ -9,8 +9,9 @@ export interface ResourcesCopy {
  title:string;description:string;cards:Record<ResourceId,SectionCopy>;regulations:SectionCopy;guide:SectionCopy & {label:string};downloads:SectionCopy;
 }
 export interface AboutCopy {
- title:string;description:string;introTitle:string;historyPending:string;location:SectionCopy;brands:SectionCopy;
- planning:{title:string;steps:readonly string[];label:string};contactTitle:string;
+ title:string;seoTitle:string;description:string;eyebrow:string;introTitle:string;introduction:string;teamAlt:string;teamLabel:string;
+ founders:Record<'jacob'|'maria',{role:string;heading:string;alt:string;paragraphs:readonly string[]}>;
+ location:SectionCopy;directions:string;mapTitle:string;contactTitle:string;
 }
 
 export interface ReferencePageCopy {title:string;description:string;sections:readonly {title:string;text:string}[];action:string;}

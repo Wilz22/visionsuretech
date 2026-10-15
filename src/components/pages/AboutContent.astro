@@ -1,96 +1,143 @@
 ---
-import TablerIcon from '../ui/TablerIcon.astro';
+import { Image } from 'astro:assets';
+import jacob from '../../assets/team/jacob-seutter.jpg';
+import maria from '../../assets/team/maria-seutter.jpg';
+import team from '../../assets/team/visionsure-founders.jpg';
+import { founders } from '../../data/founders';
 import type { AboutCopy } from '../../i18n/page-types';
+import type { Locale } from '../../i18n/config';
 import QuoteLink from '../ui/QuoteLink.astro';
 import CallLink from '../ui/CallLink.astro';
 import EmailLink from '../ui/EmailLink.astro';
-import type { HomeCategory } from '../../i18n/home-types';
+import TablerIcon from '../ui/TablerIcon.astro';
+import LocationMap from '../contact/LocationMap.astro';
 interface Props {
   copy: AboutCopy;
-  paragraphs: readonly string[];
-  categories: HomeCategory[];
-  planningHref: string;
   email: string | null;
   quoteHref: string;
   quoteLabel: string;
+  locale?: Locale;
 }
-const {
-  copy,
-  paragraphs,
-  categories,
-  planningHref,
-  email,
-  quoteHref,
-  quoteLabel,
-} = Astro.props;
+const { copy, email, quoteHref, quoteLabel, locale } = Astro.props;
+const portraits = { jacob, maria };
 ---
 
-<section>
-  <h2 class="text-3xl font-bold text-ink">{copy.introTitle}</h2>
-  {paragraphs.map((text) => (
-    <p class="mt-5 max-w-3xl leading-8 text-copy">{text}</p>
-  ))}
-  <p class="mt-5 max-w-3xl leading-8 text-copy">{copy.historyPending}</p>
+<section class="relative overflow-hidden border-b border-line-light bg-surface-soft">
+  <div class="container grid items-center gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-14">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
+        {copy.eyebrow}
+      </p>
+      <h1 class="mt-5 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+        {copy.introTitle}
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-8 text-copy">
+        {copy.introduction}
+      </p>
+      <a
+        href="#founders"
+        class="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand-600 hover:underline"
+      >
+        {copy.teamLabel}
+        <TablerIcon name="chevronRight" class="h-4 w-4" />
+      </a>
+    </div>
+    <figure class="mx-auto w-full max-w-sm overflow-hidden rounded-panel border border-line-light bg-white">
+      <Image
+        src={team}
+        width={900}
+        alt={copy.teamAlt}
+        widths={[400, 640, 900]}
+        sizes="(min-width:420px) 384px, calc(100vw - 48px)"
+        format="webp"
+        quality={85}
+        loading="eager"
+        fetchpriority="high"
+        class="aspect-2/3 h-auto w-full object-cover"
+      />
+    </figure>
+  </div>
 </section>
-<section>
-  <h2 class="text-2xl font-bold text-ink">{copy.location.title}</h2>
-  <p class="mt-4 leading-8 text-copy">{copy.location.text}</p>
-</section>
-<section>
-  <h2 class="text-2xl font-bold text-ink">{copy.brands.title}</h2>
-  <p class="mt-4 leading-8 text-copy">{copy.brands.text}</p>
-  <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {categories.map((category) => (
-      <li>
-        <a
-          href={category.href}
-          class="flex min-h-24 items-center rounded-card border border-line-light p-5 font-bold text-brand-600 gap-2"
+<div
+  id="founders"
+  class="container scroll-mt-28 space-y-16 py-14 sm:space-y-20 sm:py-20"
+>
+  {founders.map((founder, index) => {
+    const profile = copy.founders[founder.id];
+    return (
+      <section
+        id={founder.id}
+        aria-labelledby={`${founder.id}-name`}
+        class="grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
+      >
+        <figure
+          class:list={[
+            'mx-auto w-full max-w-md overflow-hidden rounded-panel bg-surface-soft',
+            index % 2 === 1 && 'lg:order-2',
+          ]}
         >
-          {category.name}{' '}
-          <TablerIcon
-            name="chevronRight"
-            class="inline-block h-4 w-4 shrink-0 align-middle"
+          <Image
+            src={portraits[founder.id]}
+            width={900}
+            alt={profile.alt}
+            widths={[360, 640, 900]}
+            sizes="(min-width:1024px) 440px, (min-width:640px) 448px, 100vw"
+            format="webp"
+            quality={85}
+            loading="lazy"
+            class="aspect-[2/3] h-auto w-full object-cover"
           />
-        </a>
-      </li>
-    ))}
-  </ul>
-</section>
-<section>
-  <h2 class="text-2xl font-bold text-ink">{copy.planning.title}</h2>
-  <ol class="mt-6 grid gap-4 md:grid-cols-3">
-    {copy.planning.steps.map((text, index) => (
-      <li class="rounded-card border border-line-light p-6">
-        <>
-          <p class="font-bold text-brand-600">0{index + 1}</p>
-          <p class="mt-3 leading-7 text-copy">{text}</p>
-        </>
-      </li>
-    ))}
-  </ol>
-  <a
-    href={planningHref}
-    class="mt-5 inline-flex min-h-11 items-center font-bold text-brand-600 gap-2"
-  >
-    {copy.planning.label}
-    <TablerIcon
-      name="chevronRight"
-      class="inline-block h-4 w-4 shrink-0 align-middle"
-    />
-  </a>
-</section>
-<section>
-  <h2 class="text-2xl font-bold text-ink">{copy.contactTitle}</h2>
-  <div class="mt-5 flex flex-wrap items-center gap-6">
-    <CallLink />
-    <EmailLink
-      email={email}
-      class="inline-flex min-h-11 font-bold text-brand-600 hover:text-brand-700"
-    />
-    <QuoteLink
-      href={quoteHref}
-      label={quoteLabel}
-      class="inline-flex min-h-12 items-center rounded-pill bg-brand-500 px-6 font-bold text-white"
+        </figure>
+        <div>
+          <p class="text-xs font-bold uppercase tracking-widest text-brand-600">
+            {profile.role}
+          </p>
+          <h2
+            id={`${founder.id}-name`}
+            class="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl"
+          >
+            {founder.name}
+          </h2>
+          <h3 class="mt-5 text-xl font-semibold text-brand-600">
+            {profile.heading}
+          </h3>
+          <div class="mt-5 space-y-4">
+            {profile.paragraphs.map((text) => (
+              <p class="max-w-2xl leading-8 text-copy">{text}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+</div>
+<section class="border-t border-line-light bg-surface-soft py-14 sm:py-16">
+  <div class="container grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-widest text-brand-600">
+        {copy.location.title}
+      </p>
+      <h2 class="mt-4 max-w-md text-3xl font-bold tracking-tight text-ink">
+        {copy.contactTitle}
+      </h2>
+      <p class="mt-5 max-w-lg leading-8 text-copy">{copy.location.text}</p>
+      <QuoteLink
+        href={quoteHref}
+        label={quoteLabel}
+        class="mt-6 inline-flex min-h-12 rounded-pill bg-brand-500 px-6 py-3 font-bold text-white hover:bg-brand-600"
+      />
+      <div class="mt-5 flex flex-col items-start gap-2">
+        <CallLink />
+        <EmailLink
+          email={email}
+          class="inline-flex min-h-11 items-center gap-2 font-bold text-brand-600"
+        />
+      </div>
+    </div>
+    <LocationMap
+      title={copy.mapTitle}
+      directions={copy.directions}
+      locale={locale}
     />
   </div>
 </section>

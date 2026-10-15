@@ -7,6 +7,9 @@ import EmailLink from '../ui/EmailLink.astro';
 import { getMessages } from '../../i18n';
 import type { Messages } from '../../i18n/types';
 import { defaultLocale, type Locale } from '../../i18n/config';
+import LocationMap from '../contact/LocationMap.astro';
+import { buildLocation } from '../../lib/location';
+const location = buildLocation(company.contact.address);
 interface Props {
   locale?: Locale;
   resolveHref?: (href: string) => string;
@@ -48,13 +51,29 @@ const {
         <h2 class="text-2xl font-bold text-ink">{copy.contactHeading}</h2>
         <CallLink phone={contact.phone} phoneE164={contact.phoneE164} />
         <EmailLink email={contact.email} />
-        <p class="mt-3 text-sm leading-7 text-copy">{copy.locality}</p>
-        <p class="mt-3 text-sm leading-7 text-copy">{copy.addressNotice}</p>
+        {location ? (
+          <address class="mt-3 text-sm not-italic leading-7 text-copy">
+            {location.label}
+          </address>
+        ) : (
+          <>
+            <p class="mt-3 text-sm leading-7 text-copy">{copy.locality}</p>
+            <p class="mt-3 text-sm leading-7 text-copy">{copy.addressNotice}</p>
+          </>
+        )}
       </section>
-      <section class="rounded-panel border border-dashed border-line-brand bg-white p-7">
-        <h2 class="text-xl font-bold text-ink">{copy.locationHeading}</h2>
-        <p class="mt-4 text-sm leading-7 text-copy">{copy.mapNotice}</p>
-      </section>
+      {location ? (
+        <LocationMap
+          title={copy.mapTitle}
+          directions={copy.directions}
+          locale={locale}
+        />
+      ) : (
+        <section class="rounded-panel border border-dashed border-line-brand bg-white p-7">
+          <h2 class="text-xl font-bold text-ink">{copy.locationHeading}</h2>
+          <p class="mt-4 text-sm leading-7 text-copy">{copy.mapNotice}</p>
+        </section>
+      )}
     </aside>
   </div>
 </ListingLayout>
