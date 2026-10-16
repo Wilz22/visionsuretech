@@ -1,4 +1,5 @@
 ---
+import {releaseScope} from '../../data/release-scope';
 import TablerIcon from '../ui/TablerIcon.astro';
 import type { ServicesCopy } from '../../i18n/page-types';
 import QuoteCta from '../ui/QuoteCta.astro';
@@ -30,11 +31,11 @@ const { copy, assessmentHref, messages, quoteHref } = Astro.props;
     />
   </a>
 </section>
-<section>
+{releaseScope.financing && <section>
   <h2 class="text-2xl font-bold text-ink">{copy.financing.title}</h2>
   <p class="mt-4 leading-8 text-copy">{copy.financing.text}</p>
-</section>
-<section>
+</section>}
+{releaseScope.relatedServices && <section>
   <h2 class="text-2xl font-bold text-ink">{copy.related.title}</h2>
   <ul class="mt-6 grid gap-4 sm:grid-cols-3">
     {copy.related.services.map((title) => (
@@ -46,7 +47,7 @@ const { copy, assessmentHref, messages, quoteHref } = Astro.props;
       </li>
     ))}
   </ul>
-</section>
+</section>}
 <QuoteCta
   copy={messages.quoteCta}
   label={messages.common.quote}

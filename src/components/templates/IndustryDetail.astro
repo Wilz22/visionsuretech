@@ -2,6 +2,7 @@
 import ListingLayout from './ListingLayout.astro';
 import ProductCard from '../products/ProductCard.astro';
 import IndustryIcon from '../industries/IndustryIcon.astro';
+import IndustryTestimonial from '../industries/IndustryTestimonial.astro';
 import QuoteCta from '../ui/QuoteCta.astro';
 import type { IndustryDetailModel } from '../../lib/detail-models';
 import type { Messages } from '../../i18n/types';
@@ -70,6 +71,7 @@ const copy = messages.industryDetail;
       <p class="mt-4 text-sm leading-7 text-copy">{copy.pendingGallery}</p>
     </div>
   </section>
+  <IndustryTestimonial industryId={industry.id} copy={messages.testimonialUi}/>
   <QuoteCta
     copy={messages.quoteCta}
     label={messages.common.quote}

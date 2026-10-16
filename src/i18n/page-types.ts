@@ -17,3 +17,8 @@ export interface AboutCopy {
 export interface ReferencePageCopy {title:string;description:string;sections:readonly {title:string;text:string}[];action:string;}
 export interface GlossaryCopy {title:string;description:string;navigationLabel:string;terms:Record<import('../data/glossary.ts').GlossaryId,{title:string;text:string}>;notice:string;}
 export interface NotFoundCopy {title:string;description:string;eyebrow:string;heading:readonly string[];text:string;home:string;products:string;navigationLabel:string;cards:Record<'industries'|'faq'|'quote',{title:string;text:string}>;}
+
+export interface RegulationCopy {
+ title:string;status:string;reviewed:string;currency:string;summary:string;requirementsTitle:string;requirements:readonly string[];preparation:string;notice:string;sourcesTitle:string;
+ sources:Record<'act'|'third-reading'|'amendments',string>;
+}

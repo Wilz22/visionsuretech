@@ -1,4 +1,9 @@
 import type {LegalEditorial} from '../legal-types.ts';
+import {company} from '../../data/company.ts';
+import {buildLocation} from '../../lib/location.ts';
+const address=buildLocation(company.contact.address)?.label;
+const contactLine=[company.name,address].filter(Boolean).join(' · ');
+const contactLinks=company.contact.email ? [{label:company.contact.email,href:`mailto:${company.contact.email}`}] : [];
 export const legalEditorial:LegalEditorial={
   "privacy": {
     "title": "Privacy Policy",
@@ -7,25 +12,27 @@ export const legalEditorial:LegalEditorial={
       "operator": {
         "title": "Who is responsible for your information",
         "paragraphs": [
-          "This draft describes the intended privacy notice for the VisionSure Technologies website. The legal operator and privacy contact must be completed before it becomes the final policy."
+          contactLine,
+          "This notice describes the website and enquiry channels. The registered operator and designated privacy contact still require confirmation."
         ],
         "pending": [
-          "Legal entity: [REGISTERED COMPANY NAME]",
-          "Business address: [REGISTERED OR CONTACT ADDRESS]",
-          "Privacy contact: [NAME OR ROLE AND EMAIL]"
-        ]
+          "Registered legal entity and any relationship to the VisionSure trading name: [CONFIRM]",
+          "Designated privacy contact or role, and confirmation that the business email routes privacy requests appropriately: [CONFIRM]"
+        ],
+        "links": contactLinks
       },
       "request-information": {
         "title": "Information in a request",
         "paragraphs": [
-          "The form asks for your name, company, email and a description of your requirements. You can also provide a phone number, industry, operating location, equipment model, number of machines, system of interest and preferred timeframe.",
-          "When the form says online sending is unavailable, preparing a summary keeps these entries on the page. They are not submitted to VisionSure. Copying a summary places that text on your device’s clipboard. The form does not upload photographs."
+          "The quote form asks for full name, company, an optional phone number, optional equipment type and the product of interest. It does not request an email address, payment information or file uploads.",
+          "While online sending is unavailable, entries stay on the page and are not submitted to VisionSure. Copying a summary places the text on your device’s clipboard. Leaving or reloading the page clears the entries.",
+          "If you contact VisionSure by email, phone or WhatsApp, the information you choose to share is sent through that channel. Product enquiry links can prefill the product name and page URL in WhatsApp; you decide whether to send the message."
         ]
       },
       "purpose": {
         "title": "How request information would be used",
         "paragraphs": [
-          "Reference wording: information submitted through the live form is used to understand your equipment needs, respond to your enquiry and prepare or follow up on a proposed configuration. Permission to respond to an enquiry is separate from permission to send marketing communications."
+          "Proposed business use: respond to enquiries, discuss equipment and product selection, and prepare or follow up on a requested quotation. Responding to an enquiry does not itself enrol you in a newsletter or marketing list."
         ],
         "pending": [
           "Confirm the exact business purposes, who may access requests and whether any additional use is planned."
@@ -34,7 +41,8 @@ export const legalEditorial:LegalEditorial={
       "providers": {
         "title": "Form processing and service providers",
         "paragraphs": [
-          "When online sending is enabled, the form uses Formspree to process the request for delivery to the configured VisionSure recipient. Hosting and email services may also handle technical or message data. This integration is prepared in the code but still requires a real form account and recipient."
+          "Online form delivery is currently disabled. Formspree support is prepared in the code, but the provider, account and recipient have not been confirmed. Preparing a summary does not send it to Formspree.",
+          "Email and WhatsApp enquiries use the services chosen by the sender and recipient. Hosting and email providers may process technical or message information. Confirm the actual providers and their practices before release."
         ],
         "pending": [
           "List the selected hosting, form and email providers.",
@@ -45,11 +53,18 @@ export const legalEditorial:LegalEditorial={
       "site-technology": {
         "title": "Website technology",
         "paragraphs": [
-          "The current site loads the Onest typeface through Google Fonts. Loading external resources involves requests to the relevant provider. No analytics or advertising tags are currently implemented in the site code.",
-          "The quote form does not use browser localStorage to save your entries. The final notice must also describe the cookies, security tools and logs used by the production hosting and any enabled third-party services."
+          "The site loads the Onest typeface from Google Fonts and embeds Google Maps to display the Langley location. Loading these resources connects your browser to Google and can disclose technical information such as your IP address and browser details. Google may use cookies or other identifiers under its own privacy policy and your settings.",
+          "WhatsApp links open an external service. There are currently no Matomo, Meta/Facebook Pixel, Google Analytics, newsletter subscriptions, online checkout or payment collection integrations in the site code.",
+          "The quote form does not save entries in localStorage or sessionStorage. This does not mean the website or its external providers are cookie-free. Production hosting logs, embedded-service cookies and any consent controls still need to be checked against the deployed configuration."
         ],
         "pending": [
           "Review production cookies, access logs, spam protection and third-party resources; update this section to match the deployed site."
+        ],
+        "links": [
+          {
+            "label": "Google Privacy Policy",
+            "href": "https://policies.google.com/privacy?hl=en"
+          }
         ]
       },
       "retention": {
@@ -66,12 +81,13 @@ export const legalEditorial:LegalEditorial={
       "privacy-requests": {
         "title": "Questions and privacy requests",
         "paragraphs": [
-          "The final notice should explain how to request access or corrections, ask about deletion or withdraw consent where applicable. Available rights and any response deadlines depend on the laws that apply to the business and the request."
+          "Use the business contact below to raise a privacy question or ask about access, corrections, deletion or withdrawing consent. The designated privacy contact and the procedures, exceptions and applicable response periods must be confirmed before this draft is approved."
         ],
         "pending": [
-          "Request channel: [PRIVACY EMAIL OR POSTAL ADDRESS]",
-          "Applicable jurisdiction and complaint route: [TO BE CONFIRMED]"
-        ]
+          "Confirm the designated privacy officer, request handling and identity-verification process.",
+          "Review applicable Canadian and British Columbia privacy requirements and the appropriate complaint route; do not assume the previous website’s EU GDPR clauses apply."
+        ],
+        "links": contactLinks
       },
       "updates": {
         "title": "Updates to this notice",
@@ -92,13 +108,14 @@ export const legalEditorial:LegalEditorial={
       "website-operator": {
         "title": "Website operator and scope",
         "paragraphs": [
-          "These reference terms concern the VisionSure Technologies website and its informational catalog. The company identity, jurisdiction and final conditions must be confirmed before publishing binding terms."
+          contactLine,
+          "These draft terms cover use of the informational website. A request or website visit does not by itself confirm an order, installation agreement or acceptance of separate sales conditions."
         ],
         "pending": [
-          "Website operator: [REGISTERED COMPANY NAME]",
-          "Address and contact: [BUSINESS ADDRESS AND EMAIL]",
+          "Registered website operator: [LEGAL ENTITY TO CONFIRM]",
           "Effective date: [DATE]"
-        ]
+        ],
+        "links": contactLinks
       },
       "catalog": {
         "title": "Product and application information",
@@ -120,16 +137,17 @@ export const legalEditorial:LegalEditorial={
       "equipment": {
         "title": "Equipment use and installation",
         "paragraphs": [
-          "Reference wording: system selection and installation should be assessed for the specific machine, power supply, mounting positions and operating environment. Website descriptions do not replace product manuals, installation requirements or the operating procedures applicable to the equipment."
+          "Camera, radar and visibility systems assist awareness; they do not replace trained operators, safe working procedures, applicable safety requirements or professional supervision.",
+          "Check that the selected system suits the machine and operating environment. Installation should be carried out by qualified personnel following the product instructions, equipment manufacturer guidance and applicable local requirements. Website material is general information and does not replace a site-specific assessment or professional safety advice."
         ],
         "pending": [
-          "Confirm approved installation guidance and any product-specific safety statements."
+          "Confirm the approved wording with the client and the relevant product instructions, including any product-specific limitations."
         ]
       },
       "permitted-use": {
         "title": "Use of the website and its content",
         "paragraphs": [
-          "Reference wording: use the website for legitimate enquiries and do not interfere with its operation or submit harmful or misleading material. Rights to text, logos, photographs and other materials remain with their respective rights holders."
+          "Use the website for legitimate enquiries and do not interfere with its operation or submit harmful or misleading material. Text, logos, photographs and other materials belong to their respective rights holders. Vantrue products and branding identify the manufacturer; VisionSure presents them as an authorized retailer."
         ],
         "pending": [
           "Confirm ownership, licensed assets and permitted reuse of catalog material."
@@ -138,16 +156,19 @@ export const legalEditorial:LegalEditorial={
       "external-services": {
         "title": "External links and services",
         "paragraphs": [
-          "The website may link to external resources or use third-party services. The final terms should identify relevant services and explain how their terms and privacy notices relate to the user’s interaction."
+          "This site embeds Google Maps, loads Google Fonts and links to WhatsApp and other external pages. These services have their own terms and privacy practices. The privacy notice describes the current integrations; any future form or booking provider must be added when selected."
         ],
-        "pending": [
-          "Confirm the selected form processor and other external services before release."
+        "links": [
+          {
+            "label": "Read the Privacy Policy",
+            "href": "/privacy-policy/"
+          }
         ]
       },
       "legal-conditions": {
         "title": "Liability, governing law and disputes",
         "paragraphs": [
-          "This draft intentionally leaves liability provisions, governing law and dispute resolution to be completed for the actual company and applicable jurisdiction. No blanket exclusion or jurisdiction has been assumed."
+          "Liability, governing law and dispute provisions remain pending client-approved wording for the actual company and its business practices. Product warranties, installation commitments and sales conditions must be confirmed separately; this draft does not establish or waive them."
         ],
         "pending": [
           "Liability provisions: [CLIENT-APPROVED WORDING]",
@@ -157,12 +178,12 @@ export const legalEditorial:LegalEditorial={
       "contact-changes": {
         "title": "Contact and changes",
         "paragraphs": [
-          "Questions about the final terms should be directed to the confirmed business contact. The approved version should state its effective date and explain how changes will be communicated."
+          "Use the business contact below for questions about these draft terms. The approved version must state its effective date and explain how changes will be communicated."
         ],
         "pending": [
-          "Contact: [BUSINESS EMAIL]",
-          "Change notification process: [PROCESS]"
-        ]
+          "Effective date and change notification process: [CONFIRM]"
+        ],
+        "links": contactLinks
       }
     }
   }

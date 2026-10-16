@@ -1,3 +1,5 @@
+import {regulation} from './en-regulations.ts';
+import {testimonialUi} from './en-testimonials.ts';
 import { dashCamEditorial } from './en-dash-cams.ts';
 import { vantrue } from './en-vantrue.ts';
 import { n5s } from './en-n5s.ts';
@@ -45,6 +47,8 @@ const introduction =
   'Use these questions to prepare a configuration review. This is reference guidance; final specifications and equipment compatibility await verified client information.';
 
 export const en: Messages = {
+  testimonialUi,
+  regulation,
   vantrue,
   vantrueProducts: {
     'VST-N5S': n5s,
