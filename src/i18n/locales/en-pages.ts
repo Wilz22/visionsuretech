@@ -12,7 +12,7 @@ export const contentLayout: ContentLayoutCopy = {
 export const services: ServicesCopy = {
   title: 'Services',
   description:
-    'Explore installation, support, assessment and related services with VisionSure.',
+    'Explore installation, support and assessment with VisionSure.',
   installation: {
     title: 'Installation & Support',
     text: 'Reference service outline: review the equipment, agree camera and monitor positions, plan power and cable routing, and verify the configured system. Service area, installation packages, labour rates and support arrangements await client confirmation.',
@@ -53,7 +53,7 @@ export const resources: ResourcesCopy = {
   },
   regulations: {
     title: 'Regulations',
-    text: 'Reference section for relevant CSA, WorkSafeBC and ISO guidance. Applicable documents, versions and approved explanations must be supplied or reviewed by the client. No product certification is claimed.',
+    text: 'Official sources and practical reading guidance for commercial vehicle camera regulations in British Columbia.',
   },
   guide: {
     title: 'Which system do I need?',

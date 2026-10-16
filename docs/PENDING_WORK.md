@@ -1,5 +1,19 @@
 # Pendientes VisionSure
 
+## Respuestas del cliente — 2026-10-15
+
+- M217 implementado en Resources con fuentes oficiales, fechas y distinción entre ley aprobada y entrada en vigor. El DOCX regulatorio no sustituye Privacy, Terms o Warranty finales.
+- Corregido About: **Quality Crane and Electronic repairs**. Financiación, promociones y servicios asociados aplazados; retirados de la presentación de lanzamiento. Autorización Vantrue ya confirmada conservada.
+- Testimonios asignados: Jacob → trucks-fleets; Kenneth → agriculture; sin nombre → construction. Tarjetas de referencia implementadas; enlaces preparados en `src/data/testimonials.ts` como `videoUrl: null` hasta que el usuario suba los videos a YouTube. No se inventaron citas ni casos de instalación.
+- Fuente industrial exclusiva confirmada: VisionSure Product Master. Archivo confirmado por el usuario: `Santiago Phase 2.2/VisionSure_Products_Sent.xlsx`. Falta contrastar las fichas; el PDF antiguo no es fuente definitiva y no se eliminan avisos sin comparación. Se identificaron siete sistemas en el Master, S4203 nuevo y ausencia de S4101/S4102 respecto al catálogo anterior; conciliación por modelo pendiente.
+- Alcance, verificación de fuentes y secuencia de implementación: [CLIENT_DECISIONS_2026-10-15.md](CLIENT_DECISIONS_2026-10-15.md). Este bloque prevalece sobre pendientes históricos contradictorios de marcas/servicios o PDF como fuente.
+
+## Revisión de páginas legales anteriores — 2026-10-15
+
+- Actualizados Privacy Policy y Terms of Use con contacto/dirección confirmados, campos reales del formulario, estado pendiente de Formspree, Google Maps/Fonts y contacto por WhatsApp.
+- Adaptada orientación de seguridad e instalación del aviso anterior. No se trasladaron exclusiones generales de garantías, bases jurídicas europeas ni integraciones inexistentes como hechos del sitio nuevo.
+- Ambos documentos continúan como borrador, sin fecha efectiva y noindex. Pendientes razón social, responsable de privacidad, proveedores/retención, condiciones comerciales y aprobación. Análisis y solicitudes detalladas: [LEGAL_MIGRATION_REVIEW.md](LEGAL_MIGRATION_REVIEW.md).
+
 ## Simplificación de About — 2026-10-15
 
 - Apertura más breve, fotografía conjunta y ambas biografías completas. Retirados la franja de cifras/credenciales y los tres bloques de compromisos que repetían información. Ubicación, contacto y cotización reunidos en un solo cierre.

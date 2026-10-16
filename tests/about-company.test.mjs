@@ -30,7 +30,7 @@ test('founder biographies preserve supplied history and attribute experience and
   assert.equal(about.founders.maria.paragraphs.length, 5);
   assert.ok(
     about.founders.jacob.paragraphs.some((p) =>
-      p.includes('In 2014, he founded Quality Crane and Electronics Repair'),
+      p.includes('In 2014, he founded Quality Crane and Electronic repairs'),
     ),
   );
   assert.ok(

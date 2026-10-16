@@ -18,7 +18,7 @@ export const about: AboutCopy = {
       alt: 'Jacob Seutter, Founder and CEO of VisionSure Technologies',
       paragraphs: [
         'Born in Alberta and raised in British Columbia, Jacob learned the value of hard work long before he started his first business. Growing up on a farm, he spent his childhood around heavy equipment, learning how machines work, why they fail, and how to get them running again.',
-        'That hands-on foundation became a career. With more than 25 years in the heavy equipment and crane industry, Jacob has earned multiple factory certifications and built deep expertise in crane systems. In 2014, he founded Quality Crane and Electronics Repair, which he continues to own and lead today.',
+        'That hands-on foundation became a career. With more than 25 years in the heavy equipment and crane industry, Jacob has earned multiple factory certifications and built deep expertise in crane systems. In 2014, he founded Quality Crane and Electronic repairs, which he continues to own and lead today.',
         'What sets Jacob apart is the way he solves problems. When the right tool doesn’t exist, he builds it. He has designed his own diagnostic devices and developed projects that make field work faster, safer and more efficient. That same mindset drives VisionSure: practical technology, designed by someone who understands the job site.',
         'Outside of work, Jacob is a proud husband and father of three young adults, and he brings the same commitment to his family that he brings to every customer.',
       ],

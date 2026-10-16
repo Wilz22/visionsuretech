@@ -21,6 +21,8 @@ export interface DecisionHelpCopy {
 }
 
 export interface Messages {
+  testimonialUi: {heading:string;comingSoon:string;watch:string;byId:Record<'jacob'|'kenneth'|'construction',{title:string;description:string}>};
+  regulation:import('./page-types.ts').RegulationCopy;
   vantrue:VantrueCopy;
   vantrueProducts:Record<string,VantrueProductCopy>;
   productVisual:{fallbackTitle:string;fallbackTags:readonly string[];byModel:Record<string,{title:string;tags:readonly string[]}>};
