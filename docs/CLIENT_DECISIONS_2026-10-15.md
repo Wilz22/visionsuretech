@@ -37,11 +37,11 @@ Nombre corregido literalmente según el cliente: **Quality Crane and Electronic 
 | --- | --- |
 | Video de Jacob | Trucks & Commercial Fleets (`trucks-fleets`) |
 | Kenneth | Agriculture & Forestry (`agriculture`) |
-| Testimonio sin nombre | Construction (`construction`) |
+| James (nombre confirmado 2026-10-17) | Construction (`construction`) |
 
 No se inventarán citas, apellidos, empresas ni proyectos a partir de esta asignación. Estos testimonios tampoco completan automáticamente tres casos de instalación: ubicación, equipos instalados, fotos y resultados siguen pendientes si se desea publicar estudios de caso.
 
-El usuario confirmó que los videos se subirán a YouTube más adelante y solicitó referencias preparadas. Se muestran tres tarjetas en las industrias asignadas, sin citas ni enlaces ficticios. Sustituir `videoUrl: null` por cada URL en `src/data/testimonials.ts`; el componente habilita entonces el botón YouTube. Antes de publicar videos: permiso de publicación, atribución y subtítulos/transcripción; conservar anónimo el tercero si no hay nombre autorizado.
+Decisión actualizada 2026-10-17: los videos están editados y aprobados, y se alojan directamente en WHC. Los tres enlaces MP4 ya están integrados con controles nativos y portadas, sin YouTube. Jacob se identifica como fundador de VisionSure, Kenneth corresponde a un tractor y James a una CAT 335F. Configuración: `src/data/testimonials.ts`. Detalles de reproducción y conservación durante despliegues: [WHC_DEPLOYMENT.md](WHC_DEPLOYMENT.md).
 
 ## Fuente definitiva del catálogo industrial
 

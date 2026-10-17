@@ -54,7 +54,7 @@ export const legalEditorial:LegalEditorial={
         "title": "Website technology",
         "paragraphs": [
           "The site loads the Onest typeface from Google Fonts and embeds Google Maps to display the Langley location. Loading these resources connects your browser to Google and can disclose technical information such as your IP address and browser details. Google may use cookies or other identifiers under its own privacy policy and your settings.",
-          "WhatsApp links open an external service. There are currently no Matomo, Meta/Facebook Pixel, Google Analytics, newsletter subscriptions, online checkout or payment collection integrations in the site code.",
+          "Industrial testimonial videos are served directly from VisionSure’s website hosting, without a YouTube player. WhatsApp links open an external service. There are currently no Matomo, Meta/Facebook Pixel, Google Analytics, newsletter subscriptions, online checkout or payment collection integrations in the site code.",
           "The quote form does not save entries in localStorage or sessionStorage. This does not mean the website or its external providers are cookie-free. Production hosting logs, embedded-service cookies and any consent controls still need to be checked against the deployed configuration."
         ],
         "pending": [

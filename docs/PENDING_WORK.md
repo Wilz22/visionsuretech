@@ -1,10 +1,17 @@
 # Pendientes VisionSure
 
+## Videos en WHC — 2026-10-17
+
+- El usuario descarta YouTube: tres MP4 editados/aprobados integrados directamente desde `visionsuretech.ca/media/testimonials/`. Jacob → trucks-fleets; Kenneth → agriculture/tractor; James → construction/CAT 335F. El tercer testimonio deja de ser anónimo.
+- Reproductor nativo responsive, sin autoplay, preload none y portadas extraídas de los videos aprobados. HTTP 206 y video/mp4 comprobados en los tres enlaces. Los MP4 permanecen en el hosting, fuera de Git; conservar `/media/` durante despliegues.
+- Jacob se identifica como Founder & CEO; no se presenta como cliente independiente. Subtítulos/transcripción pendientes de texto verificado si se incorporan.
+- Despliegue automático evaluado, aún sin activar: recomendado GitHub Actions para compilar con Node 24 y transferir el estático a WHC. Plan y requisitos: [WHC_DEPLOYMENT.md](WHC_DEPLOYMENT.md). No se modificó producción.
+
 ## Respuestas del cliente — 2026-10-15
 
 - M217 implementado en Resources con fuentes oficiales, fechas y distinción entre ley aprobada y entrada en vigor. El DOCX regulatorio no sustituye Privacy, Terms o Warranty finales.
 - Corregido About: **Quality Crane and Electronic repairs**. Financiación, promociones y servicios asociados aplazados; retirados de la presentación de lanzamiento. Autorización Vantrue ya confirmada conservada.
-- Testimonios asignados: Jacob → trucks-fleets; Kenneth → agriculture; sin nombre → construction. Tarjetas de referencia implementadas; enlaces preparados en `src/data/testimonials.ts` como `videoUrl: null` hasta que el usuario suba los videos a YouTube. No se inventaron citas ni casos de instalación.
+- Testimonios asignados: Jacob → trucks-fleets; Kenneth → agriculture; sin nombre → construction. Sustituido el 2026-10-17 por los MP4 aprobados en WHC; ver el bloque de videos anterior. No se inventaron citas ni casos de instalación.
 - Fuente industrial exclusiva confirmada: VisionSure Product Master. Archivo confirmado por el usuario: `Santiago Phase 2.2/VisionSure_Products_Sent.xlsx`. Falta contrastar las fichas; el PDF antiguo no es fuente definitiva y no se eliminan avisos sin comparación. Se identificaron siete sistemas en el Master, S4203 nuevo y ausencia de S4101/S4102 respecto al catálogo anterior; conciliación por modelo pendiente.
 - Alcance, verificación de fuentes y secuencia de implementación: [CLIENT_DECISIONS_2026-10-15.md](CLIENT_DECISIONS_2026-10-15.md). Este bloque prevalece sobre pendientes históricos contradictorios de marcas/servicios o PDF como fuente.
 
